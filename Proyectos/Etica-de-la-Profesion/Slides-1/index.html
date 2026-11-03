@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>La Ilusión de la Edad Dorada | Defensa de Ética de la Profesión</title>
   <link rel="icon" type="image/svg+xml" href="../../../Assets/Logo.svg">
-  <link rel="stylesheet" href="../../../Assets/css/slide-framework.css">
+  <link rel="stylesheet" href="../../../Assets/css/slide-framework.css?v=3">
   
   <!-- KaTeX para renderizado matemático formal (STOC 2024) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -19,17 +19,74 @@
     <div class="slide-stage-scaler" id="slide-stage-scaler">
       <div class="slide-canvas" id="slides-container">
 
-      <!-- Capa Reticular Ambiental / Glassmorphing sutil -->
+      <!-- Capa Reticular Ambiental / Glassmorphing con las 4 Gráficas Geométricas del Método VERA -->
       <div class="ambient-canvas-layer">
         <div class="ambient-shape-1"></div>
         <div class="ambient-shape-2"></div>
         <div class="ambient-grid-lines"></div>
+        <svg class="vera-ambient-svg" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Trazo Escalonado Diagonal (Mapa Visual 4 Fases - Pág. 15 PDF) -->
+          <path d="M 180 920 L 460 920 L 620 720 L 920 720 L 1080 480 L 1380 480 L 1540 240 L 1780 240" stroke="#0f2e5a" stroke-width="2" stroke-dasharray="6 6" opacity="0.06"/>
+
+          <!-- 01. Cuadrados Superpuestos en Diagonal (Valoración - Pág. 1 PDF) -->
+          <g class="vera-geo-group delay-1" transform="translate(1380, 110) scale(1.35)">
+            <rect x="0" y="0" width="90" height="90" stroke="#0f2e5a" stroke-width="2.5" fill="none"/>
+            <rect x="45" y="45" width="90" height="90" fill="#7c98b6" fill-opacity="0.55"/>
+            <rect x="90" y="90" width="90" height="90" stroke="#0f2e5a" stroke-width="2.5" fill="none"/>
+          </g>
+
+          <!-- 02. Lente / Semiosis Diagonal con Núcleo Ortogonal (Estrategia - Pág. 1 PDF) -->
+          <g class="vera-geo-group delay-2" transform="translate(150, 650) scale(1.35)">
+            <path d="M 0 180 C 0 60, 60 0, 180 0 C 180 120, 120 180, 0 180 Z" stroke="#0f2e5a" stroke-width="2.2" fill="none"/>
+            <rect x="62" y="62" width="56" height="56" fill="#0f2e5a"/>
+          </g>
+
+          <!-- 03. Árbol de Bifurcación con 4 Nodos Cuadrados (Resultados - Pág. 1 PDF) -->
+          <g class="vera-geo-group delay-3" transform="translate(1480, 640) scale(1.35)">
+            <path d="M 90 165 L 90 25" stroke="#64748b" stroke-width="2.2"/>
+            <path d="M 90 165 C 90 95, 65 55, 15 25" stroke="#94a3b8" stroke-width="2.2" fill="none"/>
+            <path d="M 90 165 C 90 95, 115 55, 165 25" stroke="#0f2e5a" stroke-width="2.2" fill="none"/>
+            <rect x="2" y="10" width="26" height="26" fill="#cbd5e1"/>
+            <rect x="77" y="10" width="26" height="26" fill="#7c98b6"/>
+            <rect x="152" y="10" width="26" height="26" fill="#0f2e5a"/>
+            <rect x="77" y="155" width="26" height="26" fill="#0f2e5a"/>
+          </g>
+
+          <!-- 04. Arcos Tangentes e Intersección Ortogonal (Activación - Pág. 1 PDF) -->
+          <g class="vera-geo-group delay-4" transform="translate(220, 110) scale(1.3)">
+            <path d="M 0 105 A 105 105 0 0 0 105 0" stroke="#0f2e5a" stroke-width="2.5" fill="none"/>
+            <path d="M 190 85 A 105 105 0 0 0 85 190" stroke="#64748b" stroke-width="2.2" fill="none"/>
+            <rect x="77" y="77" width="36" height="36" fill="#0f2e5a"/>
+          </g>
+        </svg>
       </div>
 
       <!-- ===================================================================
            ESTACIÓN 01: LA DECLARACIÓN DE SOBERANÍA (PORTADA EN AZUL OFICIAL)
            =================================================================== -->
       <section class="slide cover-slide-blue active">
+        <!-- Gráficas Geométricas del Método VERA en versión negativa para la Portada Azul -->
+        <svg class="cover-vera-ambient" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 980 960 L 1180 960 L 1320 760 L 1520 760 L 1660 540 L 1840 540" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.12"/>
+          <g class="vera-geo-group delay-1" transform="translate(1420, 120) scale(1.45)">
+            <rect x="0" y="0" width="90" height="90" stroke="#93c5fd" stroke-width="2.2" fill="none"/>
+            <rect x="45" y="45" width="90" height="90" fill="#60a5fa" fill-opacity="0.35"/>
+            <rect x="90" y="90" width="90" height="90" stroke="#ffffff" stroke-width="2.2" fill="none"/>
+          </g>
+          <g class="vera-geo-group delay-2" transform="translate(1150, 620) scale(1.35)">
+            <path d="M 0 180 C 0 60, 60 0, 180 0 C 180 120, 120 180, 0 180 Z" stroke="#93c5fd" stroke-width="2.2" fill="none"/>
+            <rect x="62" y="62" width="56" height="56" fill="#60a5fa" fill-opacity="0.5"/>
+          </g>
+          <g class="vera-geo-group delay-3" transform="translate(1540, 640) scale(1.35)">
+            <path d="M 90 165 L 90 25" stroke="#93c5fd" stroke-width="2"/>
+            <path d="M 90 165 C 90 95, 65 55, 15 25" stroke="#60a5fa" stroke-width="2" fill="none"/>
+            <path d="M 90 165 C 90 95, 115 55, 165 25" stroke="#ffffff" stroke-width="2" fill="none"/>
+            <rect x="2" y="10" width="26" height="26" fill="#60a5fa" fill-opacity="0.5"/>
+            <rect x="77" y="10" width="26" height="26" fill="#93c5fd" fill-opacity="0.7"/>
+            <rect x="152" y="10" width="26" height="26" fill="#ffffff" fill-opacity="0.85"/>
+            <rect x="77" y="155" width="26" height="26" fill="#ffffff" fill-opacity="0.85"/>
+          </g>
+        </svg>
         <!-- Cabecera institucional -->
         <header class="cover-header">
           <div class="cover-logo-wrapper">
@@ -195,12 +252,12 @@
             </div>
           </div>
 
-          <div style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+          <div style="margin-top: 24px; display: flex; align-items: center; justify-content: space-between;">
             <button class="btn-orthogonal-primary" onclick="openModal('modal-cortina')">
-              <i data-lucide="sliders-horizontal" style="width: 16px; height: 16px;"></i>
+              <i data-lucide="sliders-horizontal" style="width: 18px; height: 18px;"></i>
               <span>Laboratorio: Auditar Quiebre de Mínimos</span>
             </button>
-            <span style="font-size: 0.8rem; color: var(--color-text-light); font-weight: 600;">
+            <span style="font-size: 17px; color: var(--color-text-light); font-weight: 600;">
               * No es pedir generosidad; es exigir el cumplimiento estricto del suelo de justicia.
             </span>
           </div>
@@ -470,7 +527,7 @@
                 <div class="funnel-progress-fill gap-color" data-width="19.5" style="width: 0%;"></div>
               </div>
             </div>
-            <div style="font-size: 0.8rem; color: var(--color-primary-navy); font-weight: 600;">
+            <div style="font-size: 17px; color: var(--color-primary-navy); font-weight: 600;">
               Cuello de Botella Estructural: 13.5% de graduados son expulsados hacia el desajuste horizontal o la precarización.
             </div>
           </div>
@@ -522,12 +579,12 @@
             </div>
           </div>
 
-          <div style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+          <div style="margin-top: 24px; display: flex; align-items: center; justify-content: space-between;">
             <button class="btn-orthogonal-primary" onclick="openModal('modal-bpe')">
-              <i data-lucide="binary" style="width: 16px; height: 16px;"></i>
+              <i data-lucide="binary" style="width: 18px; height: 18px;"></i>
               <span>Laboratorio: Simular Filtrado y Tokenización BPE</span>
             </button>
-            <span style="font-size: 0.8rem; color: var(--color-text-light); font-weight: 600;">
+            <span style="font-size: 17px; color: var(--color-text-light); font-weight: 600;">
               * Demostración basada en Yekun Chai, Qiwei Peng y Xuhong Li (2024).
             </span>
           </div>
@@ -568,8 +625,8 @@
             <div class="grid-orthogonal-2">
               <div>
                 <span class="timeline-node-tag">Axioma 1</span>
-                <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--color-primary-navy); margin-bottom: 0.35rem;">Ausencia de Ontología</h4>
-                <p style="font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.5;">
+                <h4 style="font-size: 24px; font-weight: 700; color: var(--color-primary-navy); margin-bottom: 8px;">Ausencia de Ontología</h4>
+                <p style="font-size: 18px; color: var(--color-text-muted); line-height: 1.55;">
                   El modelo no razona sobre la verdad fáctica; predice secuencias de texto a partir de frecuencias de distribución estadística. Carece de noción del mundo real.
                 </p>
                 <div class="card-source-tag">Fuente: Kalai & Vempala, ACM STOC 2024.</div>
@@ -577,8 +634,8 @@
 
               <div>
                 <span class="timeline-node-tag">Axioma 2</span>
-                <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--color-primary-navy); margin-bottom: 0.35rem;">Mandato Deontológico</h4>
-                <p style="font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.5;">
+                <h4 style="font-size: 24px; font-weight: 700; color: var(--color-primary-navy); margin-bottom: 8px;">Mandato Deontológico</h4>
+                <p style="font-size: 18px; color: var(--color-text-muted); line-height: 1.55;">
                   Delegar la admisión, carrera o despido de una persona en un motor probabilístico constituye una <strong>negligencia ética grave</strong> de la dirección corporativa.
                 </p>
                 <div class="card-source-tag">Fuente: Deontología de la Decisión Humana.</div>
@@ -696,12 +753,12 @@
             </div>
           </div>
 
-          <div style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+          <div style="margin-top: 24px; display: flex; align-items: center; justify-content: space-between;">
             <button class="btn-orthogonal-primary" onclick="openModal('modal-bossware')">
-              <i data-lucide="activity" style="width: 16px; height: 16px;"></i>
+              <i data-lucide="activity" style="width: 18px; height: 18px;"></i>
               <span>Experimento en Vivo: Medir Telemetría Laboral</span>
             </button>
-            <span style="font-size: 0.8rem; color: var(--color-text-light); font-weight: 600;">
+            <span style="font-size: 17px; color: var(--color-text-light); font-weight: 600;">
               * Detecta dinámicamente si transmites desde PC o dispositivo móvil.
             </span>
           </div>
@@ -800,6 +857,17 @@
            ESTACIÓN 13: CIERRE MAGISTRAL (FONDO AZUL OFICIAL Y MÁXIMA DIRECTA)
            =================================================================== -->
       <section class="slide closing-slide-blue">
+        <svg class="cover-vera-ambient" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="vera-geo-group delay-2" transform="translate(1420, 140) scale(1.4)">
+            <path d="M 0 180 C 0 60, 60 0, 180 0 C 180 120, 120 180, 0 180 Z" stroke="#93c5fd" stroke-width="2.2" fill="none"/>
+            <rect x="62" y="62" width="56" height="56" fill="#60a5fa" fill-opacity="0.45"/>
+          </g>
+          <g class="vera-geo-group delay-4" transform="translate(1480, 620) scale(1.4)">
+            <path d="M 0 105 A 105 105 0 0 0 105 0" stroke="#93c5fd" stroke-width="2.5" fill="none"/>
+            <path d="M 190 85 A 105 105 0 0 0 85 190" stroke="#60a5fa" stroke-width="2.2" fill="none"/>
+            <rect x="77" y="77" width="36" height="36" fill="#ffffff" fill-opacity="0.7"/>
+          </g>
+        </svg>
         <header class="running-header">
           <span class="running-header-left">Ética de la Profesión</span>
           <span class="running-header-right">12. Síntesis Final</span>
@@ -1002,7 +1070,7 @@
   </div>
 
   <!-- Motor de Diapositivas y Funciones Interactivas -->
-  <script src="../../../Assets/js/slide-engine.js"></script>
+  <script src="../../../Assets/js/slide-engine.js?v=3"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
