@@ -4,10 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>La Ilusión de la Edad Dorada | Ética de la Profesión — UNESR</title>
-  <link rel="icon" type="image/svg+xml" href="../../Assets/Logo.svg">
-  <link rel="stylesheet" href="../../Assets/css/slide-framework.css">
+  <link rel="icon" type="image/svg+xml" href="../../../Assets/Logo.svg">
+  <link rel="stylesheet" href="../../../Assets/css/slide-framework.css">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Efecto plexus de fondo desenfocado */
+    .plexus-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.4;
+      filter: blur(1.5px);
+      z-index: 0;
+    }
+    .slide-body, .slide-header, .slide-progress-track {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
 
@@ -16,13 +33,18 @@
 
       <!-- SLIDE 1: PORTADA OFICIAL UNESR -->
       <section class="slide active">
+        <!-- Canvas plexus interactivo desenfocado en el fondo -->
+        <canvas id="plexus-bg" class="plexus-canvas"></canvas>
+
         <div class="slide-header">
           <div class="slide-header-brand">
-            <img src="../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
+            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
             <div class="slide-institution-meta">
               <h3>REPÚBLICA BOLIVARIANA DE VENEZUELA</h3>
               <p>UNIVERSIDAD NACIONAL EXPERIMENTAL SIMÓN RODRÍGUEZ</p>
               <p>DECANATO DE POSTGRADO Y EDUCACIÓN AVANZADA — NÚCLEO APURE</p>
+              <p>MAESTRÍA EN CIENCIAS ADMINISTRATIVAS: GERENCIA DEL TALENTO HUMANO</p>
+              <p><strong>CURSO: ÉTICA DE LA PROFESIÓN</strong></p>
             </div>
           </div>
           <div class="slide-context-badge">
@@ -32,31 +54,28 @@
 
         <div class="slide-body cover-layout">
           <div>
-            <span style="font-size: 0.85rem; font-weight: 700; color: var(--slide-accent); letter-spacing: 0.05em; text-transform: uppercase;">
-              Maestría en Ciencias Administrativas: Gerencia del Talento Humano
-            </span>
-            <h1 class="cover-title" style="margin-top: 0.5rem;">
-              La ilusión de la edad dorada
+            <h1 class="cover-title" style="margin-top: 0.25rem;">
+              La ilusión de la edad dorada:
             </h1>
-            <p class="cover-subtitle">
-              Técnica, juicio ético y los nuevos dilemas algorítmicos en la gestión del trabajo
+            <p class="cover-subtitle" style="font-size: clamp(1.2rem, 2.2vw, 1.8rem); font-weight: 600; color: var(--slide-text-muted);">
+              técnica, juicio ético y los nuevos dilemas algorítmicos en la gestión del trabajo
             </p>
           </div>
 
           <div class="cover-credits-grid">
             <div class="credit-box">
               <h4>Facilitadora</h4>
-              <p>Dra. Yennis Sarmiento</p>
+              <p>DRA. YENNIS SARMIENTO</p>
               <small>Docente Investigadora</small>
             </div>
             <div class="credit-box">
               <h4>Participante</h4>
-              <p>Julio Vera</p>
-              <small>C.I: V-26.889.534</small>
+              <p>JULIO VERA | V-26.889.534</p>
+              <small>Maestría en Gerencia del Talento Humano</small>
             </div>
             <div class="credit-box">
               <h4>Lugar y Fecha</h4>
-              <p>Biruaca, Noviembre 2026</p>
+              <p>BIRUACA, NOVIEMBRE DE 2026</p>
               <small>Estado Apure, Venezuela</small>
             </div>
           </div>
@@ -71,7 +90,7 @@
       <section class="slide">
         <div class="slide-header">
           <div class="slide-header-brand">
-            <img src="../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
+            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
             <div class="slide-institution-meta">
               <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
               <p>Ética de la Profesión — Módulo Central</p>
@@ -115,7 +134,7 @@
       <section class="slide">
         <div class="slide-header">
           <div class="slide-header-brand">
-            <img src="../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
+            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
             <div class="slide-institution-meta">
               <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
               <p>Ética de la Profesión — Análisis Crítico</p>
@@ -170,7 +189,7 @@
       <section class="slide">
         <div class="slide-header">
           <div class="slide-header-brand">
-            <img src="../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
+            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
             <div class="slide-institution-meta">
               <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
               <p>Ética de la Profesión — Tensiones Fundamentales</p>
@@ -220,7 +239,7 @@
       <section class="slide">
         <div class="slide-header">
           <div class="slide-header-brand">
-            <img src="../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
+            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
             <div class="slide-institution-meta">
               <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
               <p>Ética de la Profesión — Dinámica Interactiva</p>
@@ -268,7 +287,7 @@
       <section class="slide">
         <div class="slide-header">
           <div class="slide-header-brand">
-            <img src="../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
+            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
             <div class="slide-institution-meta">
               <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
               <p>Ética de la Profesión — El Núcleo Deontológico</p>
@@ -313,7 +332,7 @@
       <section class="slide">
         <div class="slide-header">
           <div class="slide-header-brand">
-            <img src="../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
+            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
             <div class="slide-institution-meta">
               <h3>REPÚBLICA BOLIVARIANA DE VENEZUELA</h3>
               <p>UNIVERSIDAD NACIONAL EXPERIMENTAL SIMÓN RODRÍGUEZ</p>
@@ -341,7 +360,7 @@
           </div>
 
           <div style="display: flex; justify-content: center; gap: 1rem;">
-            <a href="../../index.html" class="ctrl-btn" style="background: var(--slide-accent); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <a href="../../../index.html" class="ctrl-btn" style="background: var(--slide-accent); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
               <i data-lucide="home" style="width: 18px; height: 18px;"></i>
               Volver al Catálogo Principal
             </a>
@@ -358,7 +377,7 @@
 
   <!-- Barra de Controles Flotante -->
   <nav class="presentation-controls">
-    <a href="../../index.html" class="ctrl-btn" title="Volver al Hub de Presentaciones">
+    <a href="../../../index.html" class="ctrl-btn" title="Volver al Hub de Presentaciones">
       <i data-lucide="arrow-left"></i>
     </a>
     <div class="ctrl-separator"></div>
@@ -432,13 +451,83 @@
   </div>
 
   <!-- Scripts -->
-  <script src="../../Assets/js/slide-engine.js"></script>
+  <script src="../../../Assets/js/slide-engine.js"></script>
   <script>
     let engine;
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       engine = new SlideEngine({ container: '#slides-container' });
+      initPlexus();
     });
+
+    // Animación interactiva de ondas Plexus desenfocadas
+    function initPlexus() {
+      const canvas = document.getElementById('plexus-bg');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = canvas.parentElement.offsetWidth;
+      let height = canvas.height = canvas.parentElement.offsetHeight;
+
+      const particles = [];
+      const particleCount = 45;
+      const maxDistance = 140;
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.7,
+          vy: (Math.random() - 0.5) * 0.7,
+          radius: Math.random() * 2 + 1.5
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        
+        // Dibujar líneas
+        for (let i = 0; i < particleCount; i++) {
+          for (let j = i + 1; j < particleCount; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < maxDistance) {
+              const alpha = (1 - dist / maxDistance) * 0.35;
+              ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Dibujar partículas
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+
+          ctx.fillStyle = 'rgba(37, 99, 235, 0.5)';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = canvas.parentElement.offsetWidth;
+        height = canvas.height = canvas.parentElement.offsetHeight;
+      });
+
+      animate();
+    }
 
     // Lógica del dilema interactivo
     function handleDilemma(btn, option) {

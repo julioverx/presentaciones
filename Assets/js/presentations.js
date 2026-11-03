@@ -16,7 +16,7 @@ const PRESENTATIONS = [
     date: "Noviembre 2026",
     location: "Biruaca, Venezuela",
     tags: ["Ética", "Algoritmos", "Talento Humano", "Inteligencia Artificial", "Gestión Laboral"],
-    url: "Proyectos/Etica-de-la-Profesion/index.html",
+    url: "Proyectos/Etica-de-la-Profesion/Slides-1/index.html",
     pdfUrl: "Assets/Ejemplo.pdf",
     slidesCount: 7,
     status: "Disponible",
