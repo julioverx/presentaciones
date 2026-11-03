@@ -16,7 +16,8 @@
 <body>
 
   <div class="presentation-viewport">
-    <div class="slide-canvas" id="slides-container">
+    <div class="slide-stage-scaler" id="slide-stage-scaler">
+      <div class="slide-canvas" id="slides-container">
 
       <!-- Capa Reticular Ambiental / Glassmorphing sutil -->
       <div class="ambient-canvas-layer">
@@ -835,6 +836,7 @@
         </footer>
       </section>
 
+      </div>
     </div>
   </div>
 
@@ -985,17 +987,29 @@
 
     <div class="ctrl-separator"></div>
 
+    <button id="toggle-rotate" class="ctrl-btn" title="Girar 16:9 (Móvil)">
+      <i data-lucide="rotate-cw" style="width: 16px; height: 16px;"></i>
+    </button>
     <button id="toggle-fullscreen" class="ctrl-btn" title="Pantalla Completa (F)">
       <i data-lucide="maximize" style="width: 16px; height: 16px;"></i>
     </button>
   </nav>
+
+  <!-- Píldora de Giro para Móvil (Opcional en Vertical) -->
+  <div id="mobile-rotate-pill" class="mobile-rotate-pill" onclick="window.engine.toggleMobileRotate()">
+    <i data-lucide="smartphone" style="width: 16px; height: 16px;"></i>
+    <span>Ver en 16:9 Completo</span>
+  </div>
 
   <!-- Motor de Diapositivas y Funciones Interactivas -->
   <script src="../../../Assets/js/slide-engine.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      window.engine = new SlideEngine({ container: '#slides-container' });
+      window.engine = new SlideEngine({
+        container: '#slides-container',
+        scaler: '#slide-stage-scaler'
+      });
     });
   </script>
 </body>

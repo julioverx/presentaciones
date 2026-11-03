@@ -1,25 +1,30 @@
 /**
- * SlideEngine - Motor Editorial y de Presentación Interactiva (Estilo Julio Vera)
- * Control de navegación directa, renderizado matemático KaTeX y laboratorios en modal.
+ * SlideEngine - Motor Editorial y de Presentación 16:9 Universal (Estilo Julio Vera)
+ * Control de escala proporcional 1920x1080, navegación fluida, KaTeX y laboratorios en modal.
  */
 class SlideEngine {
   constructor(options = {}) {
     this.container = document.querySelector(options.container || '#slides-container');
+    this.scaler = document.querySelector(options.scaler || '#slide-stage-scaler');
     this.slides = Array.from(document.querySelectorAll('.slide'));
     this.currentIndex = 0;
     this.totalSlides = this.slides.length;
+    this.isRotatedMobile = false;
 
     this.progressBar = document.querySelector('#slide-progress');
     this.counterEl = document.querySelector('#slide-counter');
     this.prevBtn = document.querySelector('#prev-slide');
     this.nextBtn = document.querySelector('#next-slide');
     this.fullscreenBtn = document.querySelector('#toggle-fullscreen');
+    this.rotateBtn = document.querySelector('#toggle-rotate');
 
     this.init();
   }
 
   init() {
     if (!this.slides.length) return;
+
+    this.fitStage();
 
     // Leer slide desde URL hash (#slide-3)
     const hash = window.location.hash;
@@ -39,7 +44,39 @@ class SlideEngine {
     this.initModalListeners();
   }
 
+  fitStage() {
+    if (!this.scaler) return;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    // Si el usuario forzó la rotación a 16:9 en móvil vertical
+    if (this.isRotatedMobile && w < h) {
+      const scale = Math.min(h / 1920, w / 1080);
+      this.scaler.style.transform = `rotate(90deg) scale(${scale})`;
+      return;
+    }
+
+    // Escala matemática proporcional exacta 16:9 para resolución canónica 1920x1080
+    const scale = Math.min(w / 1920, h / 1080);
+    this.scaler.style.transform = `scale(${scale})`;
+  }
+
+  toggleMobileRotate() {
+    this.isRotatedMobile = !this.isRotatedMobile;
+    this.fitStage();
+    const pill = document.getElementById('mobile-rotate-pill');
+    if (pill) {
+      pill.style.display = this.isRotatedMobile ? 'none' : 'flex';
+    }
+  }
+
   bindEvents() {
+    window.addEventListener('resize', () => this.fitStage());
+    window.addEventListener('orientationchange', () => {
+      this.isRotatedMobile = false;
+      setTimeout(() => this.fitStage(), 150);
+    });
+
     // Navegación por teclado
     window.addEventListener('keydown', (e) => {
       // Ignorar si el usuario está interactuando con un campo de texto dentro de un modal
@@ -81,7 +118,7 @@ class SlideEngine {
       }
     });
 
-    // Avance por clic directo en la lámina (rápido, 1 clic = 1 diapositiva)
+    // Avance por clic directo en la lámina
     if (this.container) {
       this.container.addEventListener('click', (e) => {
         if (e.target.closest('button, a, input, select, textarea, .editorial-modal-backdrop, .editorial-modal-window')) {
@@ -94,6 +131,7 @@ class SlideEngine {
     if (this.prevBtn) this.prevBtn.addEventListener('click', (e) => { e.stopPropagation(); this.prev(); });
     if (this.nextBtn) this.nextBtn.addEventListener('click', (e) => { e.stopPropagation(); this.next(); });
     if (this.fullscreenBtn) this.fullscreenBtn.addEventListener('click', (e) => { e.stopPropagation(); this.toggleFullscreen(); });
+    if (this.rotateBtn) this.rotateBtn.addEventListener('click', (e) => { e.stopPropagation(); this.toggleMobileRotate(); });
 
     // Swipe táctil
     let touchStartX = 0;
@@ -208,7 +246,7 @@ class SlideEngine {
   }
 
   renderMath() {
-    // Renderizado estándar y seguro con KaTeX
+    // Renderizado estándar KaTeX sin acentos problemáticos
     if (typeof katex !== 'undefined') {
       const formulaEl = document.getElementById('stoc-math-formula');
       if (formulaEl && !formulaEl.dataset.rendered) {
@@ -241,7 +279,11 @@ class SlideEngine {
 
   toggleFullscreen() {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(err => console.log(err));
+      document.documentElement.requestFullscreen().then(() => {
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(() => {});
+        }
+      }).catch(err => console.log(err));
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -259,7 +301,6 @@ function openModal(id) {
   if (modal) {
     modal.classList.add('active');
 
-    // Inicializaciones específicas por modal
     if (id === 'modal-bpe') {
       initBpeModal();
     } else if (id === 'modal-bossware') {
@@ -324,12 +365,10 @@ function runBpeAnalysis(text) {
     return;
   }
 
-  // Detección de caracteres de ruptura sintáctica (guiones, barras, etc.)
   const hasHyphen = raw.includes('-');
   const hasSlash = raw.includes('/');
 
   if (hasHyphen || hasSlash) {
-    // Simular fragmentación BPE rota
     const parts = raw.split(/([-\/])/);
     let chipsHtml = '';
     parts.forEach(p => {
@@ -353,7 +392,6 @@ function runBpeAnalysis(text) {
       </div>
     `;
   } else {
-    // Tokenización regular
     const words = raw.split(/\s+/);
     let chipsHtml = '';
     words.forEach(w => {
@@ -381,7 +419,6 @@ function initBosswareModal() {
   const testInput = document.getElementById('bossware-test-input');
   const mobileSensorBox = document.getElementById('bossware-mobile-sensor');
 
-  // Detectar si es dispositivo móvil
   const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
 
   if (isMobile && mobileSensorBox) {
