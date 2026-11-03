@@ -3,7 +3,7 @@
 :root {
   --font-family: 'Figtree', system-ui, -apple-system, sans-serif;
   --color-bg: #ffffff;
-  --color-viewport-bg: #0f172a;
+  --color-viewport-bg: #0b1120;
   --color-primary-navy: #0f2e5a;
   --color-secondary-navy: #1e3a8a;
   --color-text-main: #0f172a;
@@ -71,26 +71,35 @@ html, body {
 }
 
 /* ==========================================================================
-   PORTADA ESTÁNDAR EXACTA (Referencia: Assets/Ejemplo.svg)
+   PORTADA ESTÁNDAR EXACTA (ESTILO JULIO VERA - RITMO HOMOGÉNEO)
    ========================================================================== */
 .cover-slide {
-  padding: 6.2% 7.4% 5% 7.4%; /* Proporción exacta al viewBox 1920x1080 */
+  padding: 5.5% 7.4%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; /* Distribución matemática idéntica de los 3 espacios */
+  height: 100%;
 }
 
-/* Cabecera institucional */
+/* Bloque 1: Cabecera institucional */
 .cover-header {
   display: flex;
   align-items: flex-start;
   gap: 3.5%;
+  flex-shrink: 0;
 }
 
-.cover-logo {
-  height: clamp(65px, 10.5vh, 115px);
+.cover-logo-wrapper {
+  color: var(--color-primary-navy);
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.cover-logo-svg {
+  height: clamp(80px, 12vh, 130px);
   width: auto;
-  object-fit: contain;
+  fill: currentColor;
 }
 
 .cover-letterhead {
@@ -100,9 +109,9 @@ html, body {
 }
 
 .cover-letterhead p {
-  font-size: clamp(0.72rem, 1.85vh, 1.15rem);
+  font-size: clamp(0.85rem, 2.2vh, 1.35rem);
   color: var(--color-text-main);
-  line-height: 1.25;
+  line-height: 1.35;
   letter-spacing: -0.01em;
   font-weight: 500;
   text-transform: uppercase;
@@ -113,43 +122,51 @@ html, body {
   font-weight: 700;
 }
 
-/* Título de portada */
-.cover-center {
-  margin: auto 0;
-  padding: 2vh 0;
+/* Bloque 2: Título en exactamente 2 líneas */
+.cover-title-block {
+  flex-shrink: 0;
 }
 
 .cover-main-title {
-  font-size: clamp(1.6rem, 3.5vw, 3.5rem);
-  line-height: 1.2;
+  font-size: clamp(1.4rem, 2.6vw, 2.5rem);
+  line-height: 1.3;
   letter-spacing: -0.02em;
   color: var(--color-text-main);
+  max-width: 95%;
 }
 
 .cover-main-title strong {
   font-weight: 700;
+  display: block; /* Asegura línea 1 */
 }
 
 .cover-main-title span {
   font-weight: 500;
+  display: block; /* Asegura línea 2 */
 }
 
-/* Créditos académicos */
-.cover-credits-row {
+/* Bloque 3: Créditos con separador en el medio */
+.cover-credits-block {
   display: flex;
-  align-items: flex-start;
-  gap: 15%;
-  margin-bottom: 3.5vh;
+  align-items: stretch;
+  gap: 3rem;
+  flex-shrink: 0;
 }
 
 .cover-credit-col {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.35rem;
+}
+
+.cover-credits-separator {
+  width: 1px;
+  background-color: var(--color-border-subtle);
+  align-self: stretch;
 }
 
 .cover-credit-label {
-  font-size: clamp(0.75rem, 1.85vh, 1.15rem);
+  font-size: clamp(0.95rem, 2.2vh, 1.35rem);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--color-text-main);
@@ -157,20 +174,30 @@ html, body {
 }
 
 .cover-credit-value {
-  font-size: clamp(0.75rem, 1.85vh, 1.15rem);
+  font-size: clamp(0.95rem, 2.2vh, 1.35rem);
   font-weight: 500;
   text-transform: uppercase;
   color: var(--color-text-main);
   letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Pie de portada */
-.cover-footer {
-  font-size: clamp(0.85rem, 2.15vh, 1.35rem);
+.credit-bolo {
+  font-size: 1.25em;
+  line-height: 1;
+  color: var(--color-primary-navy);
+}
+
+/* Bloque 4: Pie de portada */
+.cover-footer-block {
+  font-size: clamp(0.9rem, 2.2vh, 1.35rem);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--color-text-main);
   letter-spacing: -0.01em;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -194,10 +221,7 @@ html, body {
   margin-bottom: 2.5vh;
 }
 
-.running-header-left {
-  text-transform: none;
-}
-
+.running-header-left,
 .running-header-right {
   text-transform: none;
 }
@@ -226,7 +250,7 @@ html, body {
   max-width: 90%;
 }
 
-/* Componente de Caja Ortogonal (Como en las páginas 18-36 de su manual) */
+/* Componente de Caja Ortogonal (Páginas 18-36 del manual de Julio Vera) */
 .orthogonal-box {
   border: 1px solid var(--color-border);
   background: var(--color-bg);
@@ -288,7 +312,7 @@ html, body {
   line-height: 1.5;
 }
 
-/* Tabla Maestra / Listados Ortogonales (Estilo páginas 40-46) */
+/* Tablas Ortogonales (Estilo páginas 40-46) */
 .table-orthogonal {
   width: 100%;
   border: 1.5px solid var(--color-primary-navy);
@@ -309,14 +333,7 @@ html, body {
   font-weight: 700;
 }
 
-.table-orthogonal td.highlight-col {
-  background: var(--color-primary-navy);
-  color: #ffffff;
-  font-weight: 700;
-  width: 25%;
-}
-
-/* Footer de Diapositiva Interior (Logo y Paginación idéntica a su PDF) */
+/* Footer de Diapositiva Interior (Logo con color sincronizado y Paginación) */
 .inner-footer {
   display: flex;
   justify-content: space-between;
@@ -325,13 +342,19 @@ html, body {
   padding-top: 2vh;
 }
 
-.inner-footer-logo {
-  height: 24px;
-  width: auto;
-  opacity: 0.85;
+.inner-footer-logo-wrapper {
+  color: var(--color-primary-navy);
+  display: flex;
+  align-items: center;
 }
 
-/* Paginación minimalista idéntica al PDF de Julio [ 5 | 46 ] */
+.inner-footer-logo-wrapper svg {
+  height: 24px;
+  width: auto;
+  fill: currentColor;
+}
+
+/* Paginación minimalista tipo [ N | Total ] */
 .pagination-badge {
   display: inline-flex;
   align-items: center;
@@ -358,7 +381,7 @@ html, body {
   text-align: center;
 }
 
-/* Barra Flotante de Control (Minimalista y Discreta) */
+/* Barra Flotante de Controles */
 .presentation-controls {
   position: fixed;
   bottom: 1.25rem;
@@ -406,53 +429,4 @@ html, body {
   width: 1px;
   height: 14px;
   background: #334155;
-}
-
-/* Modales */
-.slide-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.8);
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.slide-modal.hidden {
-  display: none !important;
-}
-
-.modal-content {
-  background: #ffffff;
-  border: 1px solid var(--color-primary-navy);
-  max-width: 750px;
-  width: 100%;
-  max-height: 85vh;
-  overflow-y: auto;
-  padding: 2rem;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--color-border-subtle);
-  padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.modal-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-primary-navy);
-}
-
-.modal-close-btn {
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--color-text-muted);
 }

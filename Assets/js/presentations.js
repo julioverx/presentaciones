@@ -17,7 +17,7 @@ const PRESENTATIONS = [
     location: "Biruaca, Venezuela",
     tags: ["Ética", "Algoritmos", "Talento Humano", "Inteligencia Artificial", "Gestión Laboral"],
     url: "Proyectos/Etica-de-la-Profesion/Slides-1/index.html",
-    pdfUrl: "Assets/Ejemplo.pdf",
+    pdfUrl: null,
     slidesCount: 7,
     status: "Disponible",
     featured: true,

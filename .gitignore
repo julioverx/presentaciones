@@ -9,14 +9,16 @@ desktop.ini
 *.swp
 *.swo
 
-# Dependencias (si en el futuro se usa npm o bundlers)
+# Archivos de contexto y notas internas (solo locales)
+gemini.md
+Transcripciones/
+Assets/PDF/
+Assets/Ejemplo.*
+**/croquis.md
+**/ensayo.md
+**/evaluacion.md
+
+# Dependencias y temporales
 node_modules/
 dist/
-.env
-.env.local
-
-# Logs y temporales
 *.log
-npm-debug.log*
-yarn-debug.log*
-pnpm-debug.log*
