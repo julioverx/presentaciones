@@ -18,7 +18,7 @@ Para publicar este portal y todas sus diapositivas en internet:
 3. Conecta este directorio local con tu repositorio remoto ejecutando en tu terminal:
 
 ```bash
-git remote add origin https://github.com/julioverx/diapositivas.git
+git remote add origin https://github.com/julioverx/presentaciones.git
 git branch -M main
 git push -u origin main
 ```
@@ -31,7 +31,7 @@ git push -u origin main
    - **Branch**: `main` / `/ (root)`
 4. Haz clic en **Save** (Guardar).
 5. ¡Listo! En 1-2 minutos tu sitio estará en vivo en:
-   👉 **`https://julioverx.github.io/diapositivas/`**
+   👉 **`https://julioverx.github.io/presentaciones/`**
 
 ---
 
