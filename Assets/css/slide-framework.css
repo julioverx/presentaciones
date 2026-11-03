@@ -1,0 +1,506 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+  --slide-font: 'Figtree', system-ui, -apple-system, sans-serif;
+  --slide-bg: #ffffff;
+  --slide-text: #0f172a;
+  --slide-text-muted: #475569;
+  --slide-primary: #1e3a8a;
+  --slide-accent: #2563eb;
+  --slide-border: #e2e8f0;
+  --slide-surface: #f8fafc;
+}
+
+[data-theme="dark"] {
+  --slide-bg: #0b0f19;
+  --slide-text: #f8fafc;
+  --slide-text-muted: #94a3b8;
+  --slide-border: #1e293b;
+  --slide-surface: #111827;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--slide-font);
+  background: #020617;
+  color: var(--slide-text);
+  user-select: none;
+}
+
+/* App Wrapper */
+.presentation-viewport {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
+}
+
+/* Slide Canvas (Aspect Ratio 16:9) */
+.slide-canvas {
+  width: min(96vw, calc(94vh * 16 / 9));
+  height: min(94vh, calc(96vw * 9 / 16));
+  background: var(--slide-bg);
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Slide Layout */
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: clamp(2rem, 4.5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(30px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  user-select: text;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  z-index: 2;
+}
+
+.slide.prev {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.slide.next {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* Slide Header (UNESR Standard) */
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid var(--slide-border);
+  padding-bottom: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.slide-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.slide-logo {
+  height: 44px;
+  width: auto;
+}
+
+.slide-institution-meta h3 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--slide-text);
+  line-height: 1.25;
+}
+
+.slide-institution-meta p {
+  font-size: 0.7rem;
+  color: var(--slide-text-muted);
+  font-weight: 500;
+}
+
+.slide-context-badge {
+  text-align: right;
+}
+
+.slide-context-badge .badge {
+  display: inline-block;
+  background: var(--slide-surface);
+  border: 1px solid var(--slide-border);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--slide-accent);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Slide Body */
+.slide-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Cover Slide Specifics */
+.cover-layout {
+  justify-content: space-between;
+  padding: 2rem 0;
+}
+
+.cover-title {
+  font-size: clamp(2rem, 3.8vw, 3.25rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--slide-text);
+  margin-bottom: 1rem;
+}
+
+.cover-subtitle {
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  color: var(--slide-text-muted);
+  font-weight: 500;
+  max-width: 900px;
+  line-height: 1.4;
+}
+
+.cover-credits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--slide-border);
+}
+
+.credit-box h4 {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--slide-accent);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.credit-box p {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--slide-text);
+}
+
+.credit-box small {
+  font-size: 0.8rem;
+  color: var(--slide-text-muted);
+}
+
+/* Content Elements */
+.slide-title {
+  font-size: clamp(1.75rem, 2.8vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.slide-lead {
+  font-size: 1.15rem;
+  color: var(--slide-text-muted);
+  margin-bottom: 2rem;
+  max-width: 850px;
+}
+
+.content-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.concept-card {
+  background: var(--slide-surface);
+  border: 1px solid var(--slide-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.concept-card:hover {
+  border-color: var(--slide-accent);
+  transform: translateY(-2px);
+}
+
+.concept-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--slide-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.concept-card h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.concept-card p {
+  font-size: 0.92rem;
+  color: var(--slide-text-muted);
+  line-height: 1.5;
+}
+
+/* Interactive Dilemma Component */
+.dilemma-container {
+  background: var(--slide-surface);
+  border: 1px solid var(--slide-border);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.dilemma-question {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--slide-text);
+}
+
+.dilemma-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dilemma-btn {
+  background: var(--slide-bg);
+  border: 1px solid var(--slide-border);
+  border-radius: 8px;
+  padding: 0.85rem 1.15rem;
+  text-align: left;
+  font-size: 0.92rem;
+  font-family: inherit;
+  color: var(--slide-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.2s;
+}
+
+.dilemma-btn:hover {
+  border-color: var(--slide-accent);
+  background: rgba(37, 99, 235, 0.04);
+}
+
+.dilemma-btn.selected {
+  border-color: var(--slide-accent);
+  background: rgba(37, 99, 235, 0.1);
+  font-weight: 600;
+}
+
+.dilemma-feedback {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  background: #eff6ff;
+  border-left: 4px solid var(--slide-accent);
+  color: #1e3a8a;
+  display: none;
+}
+
+.dilemma-feedback.visible {
+  display: block;
+}
+
+/* Bottom Control Deck */
+.presentation-controls {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(12px);
+  padding: 0.5rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  z-index: 50;
+  color: #ffffff;
+}
+
+.ctrl-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.ctrl-btn:hover:not(:disabled) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ctrl-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.ctrl-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.slide-counter-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  padding: 0 0.5rem;
+  min-width: 65px;
+  text-align: center;
+}
+
+.ctrl-separator {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Progress bar inside slide */
+.slide-progress-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.slide-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--slide-accent);
+  transition: width 0.3s ease;
+}
+
+/* Modals */
+.slide-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.slide-modal.hidden {
+  display: none !important;
+}
+
+.modal-content {
+  background: var(--slide-bg);
+  border-radius: 16px;
+  max-width: 750px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--slide-text-muted);
+}
+
+.shortcuts-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shortcuts-table td {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--slide-border);
+  font-size: 0.95rem;
+}
+
+kbd {
+  background: var(--slide-surface);
+  border: 1px solid var(--slide-border);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.85rem;
+  font-family: monospace;
+  box-shadow: 0 2px 0 var(--slide-border);
+}
+
+.overview-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.overview-thumb {
+  background: var(--slide-surface);
+  border: 1px solid var(--slide-border);
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.overview-thumb:hover {
+  border-color: var(--slide-accent);
+  transform: translateY(-2px);
+}
+
+.overview-thumb.active-thumb {
+  border-color: var(--slide-accent);
+  background: rgba(37, 99, 235, 0.08);
+  font-weight: 700;
+}
