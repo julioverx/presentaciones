@@ -1,559 +1,362 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Ilusión de la Edad Dorada | Ética de la Profesión — UNESR</title>
+  <title>Ética de la Profesión | Presentación</title>
   <link rel="icon" type="image/svg+xml" href="../../../Assets/Logo.svg">
   <link rel="stylesheet" href="../../../Assets/css/slide-framework.css">
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    /* Efecto plexus de fondo desenfocado */
-    .plexus-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      opacity: 0.4;
-      filter: blur(1.5px);
-      z-index: 0;
-    }
-    .slide-body, .slide-header, .slide-progress-track {
-      position: relative;
-      z-index: 1;
-    }
-  </style>
 </head>
 <body>
 
   <div class="presentation-viewport">
     <div class="slide-canvas" id="slides-container">
 
-      <!-- SLIDE 1: PORTADA OFICIAL UNESR -->
-      <section class="slide active">
-        <!-- Canvas plexus interactivo desenfocado en el fondo -->
-        <canvas id="plexus-bg" class="plexus-canvas"></canvas>
+      <!-- SLIDE 1: PORTADA OFICIAL (CALCADA DE ASSETS/EJEMPLO.SVG) -->
+      <section class="slide cover-slide active">
+        <!-- Cabecera institucional: Logo + Membrete alineado -->
+        <header class="cover-header">
+          <img src="../../../Assets/Logo.svg" alt="UNESR" class="cover-logo">
+          <div class="cover-letterhead">
+            <p>REPÚBLICA BOLIVARIANA DE VENEZUELA</p>
+            <p class="bold">UNIVERSIDAD NACIONAL EXPERIMENTAL SIMÓN RODRÍGUEZ</p>
+            <p>DECANATO DE POSTGRADO Y EDUCACIÓN AVANZADA <span class="bold">— NÚCLEO APURE</span></p>
+            <p>MAESTRÍA EN CIENCIAS ADMINISTRATIVAS: GERENCIA DEL TALENTO HUMANO</p>
+            <p class="bold">CURSO: ÉTICA DE LA PROFESIÓN</p>
+          </div>
+        </header>
 
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>REPÚBLICA BOLIVARIANA DE VENEZUELA</h3>
-              <p>UNIVERSIDAD NACIONAL EXPERIMENTAL SIMÓN RODRÍGUEZ</p>
-              <p>DECANATO DE POSTGRADO Y EDUCACIÓN AVANZADA — NÚCLEO APURE</p>
-              <p>MAESTRÍA EN CIENCIAS ADMINISTRATIVAS: GERENCIA DEL TALENTO HUMANO</p>
-              <p><strong>CURSO: ÉTICA DE LA PROFESIÓN</strong></p>
-            </div>
-          </div>
-          <div class="slide-context-badge">
-            <span class="badge">Ética de la Profesión</span>
-          </div>
+        <!-- Título centrado con peso tipográfico Figtree Bold + Medium -->
+        <div class="cover-center">
+          <h1 class="cover-main-title">
+            <strong>La ilusión de la edad dorada:</strong>
+            <span>técnica, juicio ético y los nuevos dilemas algorítmicos en la gestión del trabajo</span>
+          </h1>
         </div>
 
-        <div class="slide-body cover-layout">
-          <div>
-            <h1 class="cover-title" style="margin-top: 0.25rem;">
-              La ilusión de la edad dorada:
-            </h1>
-            <p class="cover-subtitle" style="font-size: clamp(1.2rem, 2.2vw, 1.8rem); font-weight: 600; color: var(--slide-text-muted);">
-              técnica, juicio ético y los nuevos dilemas algorítmicos en la gestión del trabajo
-            </p>
-          </div>
-
-          <div class="cover-credits-grid">
-            <div class="credit-box">
-              <h4>Facilitadora</h4>
-              <p>DRA. YENNIS SARMIENTO</p>
-              <small>Docente Investigadora</small>
+        <!-- Bloque inferior: Créditos en 2 columnas + Fecha al pie -->
+        <div>
+          <div class="cover-credits-row">
+            <div class="cover-credit-col">
+              <span class="cover-credit-label">FACILITADORA</span>
+              <span class="cover-credit-value">DRA. YENNIS SARMIENTO</span>
             </div>
-            <div class="credit-box">
-              <h4>Participante</h4>
-              <p>JULIO VERA | V-26.889.534</p>
-              <small>Maestría en Gerencia del Talento Humano</small>
-            </div>
-            <div class="credit-box">
-              <h4>Lugar y Fecha</h4>
-              <p>BIRUACA, NOVIEMBRE DE 2026</p>
-              <small>Estado Apure, Venezuela</small>
+            <div class="cover-credit-col">
+              <span class="cover-credit-label">PARTICIPANTE</span>
+              <span class="cover-credit-value">JULIO VERA | V-26.889.534</span>
             </div>
           </div>
-        </div>
 
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill" id="slide-progress"></div>
+          <div class="cover-footer">
+            BIRUACA, NOVIEMBRE DE 2026
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 2: INTRODUCCIÓN -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
-              <p>Ética de la Profesión — Módulo Central</p>
-            </div>
-          </div>
-          <div class="slide-context-badge">
-            <span class="badge">01. Contexto</span>
-          </div>
-        </div>
+      <!-- SLIDE 2: INTRODUCCIÓN Y CONTEXTO -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Ética de la Profesión</span>
+          <span class="running-header-right">01. Fundamentos y Contexto</span>
+        </header>
 
-        <div class="slide-body">
-          <h2 class="slide-title">El Mito del Espejo Tecnológico Neutro</h2>
-          <p class="slide-lead">
-            La modernización de la gestión humana promete eficiencia impecable mediante sistemas de decisión automatizada. No obstante, ¿estamos delegando la justicia en un algoritmo?
+        <div class="inner-body">
+          <h2 class="slide-heading">El Mito de la Neutralidad Tecnológica</h2>
+          <p class="slide-description">
+            La automatización en la gestión laboral promete precisión matemática y objetividad libre de pasiones humanas. No obstante, la técnica nunca es axiológicamente neutra: codifica intereses, visiones de mundo y asimetrías de poder preexistentes.
           </p>
 
-          <div class="content-grid-2">
-            <div class="concept-card">
-              <div class="concept-icon"><i data-lucide="cpu"></i></div>
-              <h4>La Ilusión Tecnocéntrica</h4>
-              <p>
-                Creer que los modelos predictivos y algoritmos de selección o evaluación carecen de ideología, prejuicios históricos o asimetrías de poder.
+          <div class="grid-orthogonal-2">
+            <div class="card-orthogonal featured">
+              <h3 class="card-orthogonal-title">La Ilusión Tecnocéntrica</h3>
+              <p class="card-orthogonal-text">
+                Asumir acríticamente que el procesamiento algorítmico y los modelos predictivos sustituyen con ventaja la deliberación humana, convirtiendo decisiones cualitativas y éticas en meras operaciones de optimización numérica.
               </p>
             </div>
-            <div class="concept-card">
-              <div class="concept-icon"><i data-lucide="shield-alert"></i></div>
-              <h4>El Juicio Ético en Disputa</h4>
-              <p>
-                El peligro latente de que la gerencia abdique de su responsabilidad deontológica, escudándose tras la supuesta "infalibilidad" de la máquina.
+
+            <div class="card-orthogonal">
+              <h3 class="card-orthogonal-title">El Conflicto Deontológico</h3>
+              <p class="card-orthogonal-text">
+                El riesgo de abdicación moral: cuando el gerente o profesional del talento humano transfiere su criterio ético indelegable a un sistema automatizado, diluyendo la responsabilidad personal tras la supuesta "infalibilidad" del software.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill"></div>
-        </div>
+        <footer class="inner-footer">
+          <img src="../../../Assets/Logo.svg" alt="UNESR" class="inner-footer-logo">
+          <div class="pagination-badge">
+            <span class="pagination-current">2</span>
+            <span class="pagination-total">7</span>
+          </div>
+        </footer>
       </section>
 
-      <!-- SLIDE 3: LA EDAD DORADA ALGORÍTMICA -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
-              <p>Ética de la Profesión — Análisis Crítico</p>
-            </div>
-          </div>
-          <div class="slide-context-badge">
-            <span class="badge">02. Promesa vs Realidad</span>
-          </div>
-        </div>
+      <!-- SLIDE 3: LA EDAD DORADA ALGORÍTMICA (PROMESA VS REALIDAD) -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Ética de la Profesión</span>
+          <span class="running-header-right">02. Crítica de la Razón Algorítmica</span>
+        </header>
 
-        <div class="slide-body">
-          <h2 class="slide-title">Promesas y Falacias de la "Edad Dorada"</h2>
-          <p class="slide-lead">
-            Comparativa entre el discurso corporativo de la automatización y las implicaciones éticas reales en la fuerza laboral.
+        <div class="inner-body">
+          <h2 class="slide-heading">La Promesa Corporativa vs. La Realidad Ética</h2>
+          <p class="slide-description">
+            La retórica de la eficiencia técnica frente a los impactos reales sobre los derechos, la dignidad y el bienestar de las personas en las organizaciones.
           </p>
 
-          <div class="content-grid-2">
-            <div class="concept-card" style="border-left: 4px solid #059669;">
-              <h4 style="color: #059669; display: flex; align-items: center; gap: 0.5rem;">
-                <i data-lucide="check-circle" style="width: 20px;"></i>
-                La Promesa (Discurso)
-              </h4>
-              <ul style="margin-left: 1.25rem; font-size: 0.92rem; color: var(--slide-text-muted); display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
-                <li>Eliminación de la subjetividad y sesgos humanos en reclutamiento.</li>
-                <li>Monitoreo en tiempo real para optimizar la productividad.</li>
-                <li>Medición matemática justa del desempeño individual.</li>
-                <li>Decisiones "óptimas" basadas en macrodatos (Big Data).</li>
-              </ul>
-            </div>
+          <table class="table-orthogonal">
+            <thead>
+              <tr>
+                <th style="width: 50%;">El Discurso Técnico (La Promesa)</th>
+                <th style="width: 50%;">La Dimensión Deontológica (La Realidad)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Supresión del sesgo humano:</strong> Selección y evaluación desprovista de prejuicios subjetivos.</td>
+                <td><strong>Reproducción sistemática:</strong> Algoritmos entrenados con data histórica que perpetúan discriminaciones veladas.</td>
+              </tr>
+              <tr>
+                <td><strong>Medición objetiva del rendimiento:</strong> Telemetría continua para premiar la productividad en tiempo real.</td>
+                <td><strong>Panóptico y estrés crónico:</strong> Monitoreo biométrico e invasivo que socava la confianza y la privacidad.</td>
+              </tr>
+              <tr>
+                <td><strong>Decisiones veloces e inapelables:</strong> Eficiencia máxima en reestructuración y despidos.</td>
+                <td><strong>Opacidad e indefensión:</strong> Decisiones automatizadas donde el trabajador carece de derecho a réplica explicable.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-            <div class="concept-card" style="border-left: 4px solid #dc2626;">
-              <h4 style="color: #dc2626; display: flex; align-items: center; gap: 0.5rem;">
-                <i data-lucide="alert-triangle" style="width: 20px;"></i>
-                La Realidad Ética (Impacto)
-              </h4>
-              <ul style="margin-left: 1.25rem; font-size: 0.92rem; color: var(--slide-text-muted); display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
-                <li>Reproducción y amplificación encubierta de discriminaciones históricas.</li>
-                <li>Panóptico digital: estrés crónico, vigilancia invasiva y pérdida de privacidad.</li>
-                <li>Reducción de la dignidad del trabajador a métricas estandarizadas.</li>
-                <li>Opacidad algorítmica: nadie comprende ni puede apelar el veredicto.</li>
-              </ul>
-            </div>
+        <footer class="inner-footer">
+          <img src="../../../Assets/Logo.svg" alt="UNESR" class="inner-footer-logo">
+          <div class="pagination-badge">
+            <span class="pagination-current">3</span>
+            <span class="pagination-total">7</span>
           </div>
-        </div>
-
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill"></div>
-        </div>
+        </footer>
       </section>
 
-      <!-- SLIDE 4: DILEMAS ÉTICOS CLAVE -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
-              <p>Ética de la Profesión — Tensiones Fundamentales</p>
-            </div>
-          </div>
-          <div class="slide-context-badge">
-            <span class="badge">03. Dilemas</span>
-          </div>
-        </div>
+      <!-- SLIDE 4: CUATRO EJES DE TENSIÓN ÉTICA -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Ética de la Profesión</span>
+          <span class="running-header-right">03. Nudos Críticos</span>
+        </header>
 
-        <div class="slide-body">
-          <h2 class="slide-title">4 Ejes de Tensión en la Gestión Algorítmica</h2>
-          <p class="slide-lead">
-            Los nudos críticos que demandan intervención ética urgente por parte del gerente de talento humano:
+        <div class="inner-body">
+          <h2 class="slide-heading">Cuatro Ejes de Tensión en la Gestión Laboral</h2>
+          <p class="slide-description">
+            Factores estructurales que demandan juicio ético riguroso por parte de la Gerencia del Talento Humano:
           </p>
 
-          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
-            <div class="concept-card">
-              <div class="concept-icon"><i data-lucide="lock"></i></div>
-              <h4 style="font-size: 1rem;">Caja Negra</h4>
-              <p style="font-size: 0.85rem;">Falta de trazabilidad e inteligibilidad en cómo un modelo decide a quién contratar o despedir.</p>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+            <div class="orthogonal-box" style="margin-top: 1rem;">
+              <div class="orthogonal-box-header">Opacidad / Caja Negra</div>
+              <div class="orthogonal-box-content">
+                Incapacidad de auditar y explicar de forma comprensible los factores causales que determinaron una contratación, sanción o desvinculación laboral.
+              </div>
             </div>
-            <div class="concept-card">
-              <div class="concept-icon"><i data-lucide="eye"></i></div>
-              <h4 style="font-size: 1rem;">Hipervigilancia</h4>
-              <p style="font-size: 0.85rem;">Control biométrico y de pulsaciones que socava la confianza y vulnera derechos fundamentales.</p>
+
+            <div class="orthogonal-box" style="margin-top: 1rem;">
+              <div class="orthogonal-box-header">Hipervigilancia Disciplinaria</div>
+              <div class="orthogonal-box-content">
+                Sistemas de seguimiento que cuantifican pulsaciones, descansos y miradas, transformando la relación laboral de confianza en una de fiscalización coercitiva.
+              </div>
             </div>
-            <div class="concept-card">
-              <div class="concept-icon"><i data-lucide="scale"></i></div>
-              <h4 style="font-size: 1rem;">Sesgo Heredado</h4>
-              <p style="font-size: 0.85rem;">Datos de entrenamiento viciados que perpetúan exclusión de género, edad o procedencia socioeconómica.</p>
+
+            <div class="orthogonal-box" style="margin-top: 1rem;">
+              <div class="orthogonal-box-header">Sesgo Predictivo Heredado</div>
+              <div class="orthogonal-box-content">
+                Modelos de machine learning que castigan perfiles diversos al optimizar únicamente sobre patrones de éxito de un pasado no representativo.
+              </div>
             </div>
-            <div class="concept-card">
-              <div class="concept-icon"><i data-lucide="user-x"></i></div>
-              <h4 style="font-size: 1rem;">Despersonalización</h4>
-              <p style="font-size: 0.85rem;">Pérdida de empatía y contextualización individual frente al imperativo cuantitativo.</p>
+
+            <div class="orthogonal-box" style="margin-top: 1rem;">
+              <div class="orthogonal-box-header">Cosificación del Trabajador</div>
+              <div class="orthogonal-box-content">
+                Reducción de la trayectoria, vocación y potencial de una persona a un vector estandarizado de riesgo y rentabilidad cuantitativa.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill"></div>
-        </div>
+        <footer class="inner-footer">
+          <img src="../../../Assets/Logo.svg" alt="UNESR" class="inner-footer-logo">
+          <div class="pagination-badge">
+            <span class="pagination-current">4</span>
+            <span class="pagination-total">7</span>
+          </div>
+        </footer>
       </section>
 
-      <!-- SLIDE 5: CASO INTERACTIVO -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
-              <p>Ética de la Profesión — Dinámica Interactiva</p>
+      <!-- SLIDE 5: CASO PRÁCTICO / DILEMA DE APLICACIÓN -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Ética de la Profesión</span>
+          <span class="running-header-right">04. Estudio de Caso</span>
+        </header>
+
+        <div class="inner-body">
+          <h2 class="slide-heading">Dilema Aplicado: El Modelo Predictivo de Retiro</h2>
+          <p class="slide-description">
+            Caso para la deliberación gerencial y el análisis ético profesional:
+          </p>
+
+          <div class="orthogonal-box" style="margin-top: 0.5rem; margin-bottom: 1.5rem;">
+            <div class="orthogonal-box-header">Situación de Análisis</div>
+            <div class="orthogonal-box-content">
+              Un software de analítica predictiva recomienda desvincular a una profesional con 10 años de solvencia probada en la institución, al proyectar una supuesta caída del 18% en su rendimiento futuro según correlaciones biométricas y de actividad de correo.
             </div>
           </div>
-          <div class="slide-context-badge">
-            <span class="badge" style="background: rgba(37, 99, 235, 0.15); color: var(--slide-accent);">
-              <i data-lucide="sparkles" style="width: 12px; height: 12px; display: inline;"></i> Caso Interactivo
-            </span>
+
+          <table class="table-orthogonal">
+            <thead>
+              <tr>
+                <th style="width: 35%;">Postura Evaluada</th>
+                <th style="width: 65%;">Juicio Deontológico y Consecuencias</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Acatamiento Mecánico:</strong> Ejecutar el despido amparándose en el informe del sistema.</td>
+                <td><em>Vulneración ética:</em> Se transfiere la soberanía moral a la máquina y se descarta la dignidad y el debido proceso de la persona.</td>
+              </tr>
+              <tr>
+                <td><strong>Auditoría Crítica & Diálogo:</strong> Suspender la acción, auditar el algoritmo y evaluar integralmente.</td>
+                <td><em>Criterio ético correcto:</em> El profesional asume la responsabilidad final, exige explicabilidad y defiende la centralidad humana.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <footer class="inner-footer">
+          <img src="../../../Assets/Logo.svg" alt="UNESR" class="inner-footer-logo">
+          <div class="pagination-badge">
+            <span class="pagination-current">5</span>
+            <span class="pagination-total">7</span>
           </div>
-        </div>
-
-        <div class="slide-body">
-          <h2 class="slide-title">Dilema en Vivo: El Algoritmo de Despido Predictivo</h2>
-          
-          <div class="dilemma-container">
-            <p class="dilemma-question">
-              <strong>Situación:</strong> Una corporación instala un software de IA que califica a una colaboradora con 12 años de trayectoria intachable como "perfil de alto riesgo de baja productividad futura", sugiriendo prescindir de sus servicios de inmediato. ¿Qué postura debe asumir la Gerencia de Talento Humano?
-            </p>
-
-            <div class="dilemma-options">
-              <button class="dilemma-btn" onclick="handleDilemma(this, 'A')">
-                <strong>Opción A:</strong> Acatar la recomendación del sistema para proteger los indicadores de eficiencia trimestral.
-              </button>
-              <button class="dilemma-btn" onclick="handleDilemma(this, 'B')">
-                <strong>Opción B:</strong> Auditar los parámetros del algoritmo, suspender la medida y realizar una evaluación integral humanista y dialógica.
-              </button>
-              <button class="dilemma-btn" onclick="handleDilemma(this, 'C')">
-                <strong>Opción C:</strong> Desechar permanentemente cualquier herramienta digital en la organización.
-              </button>
-            </div>
-
-            <div id="dilemma-feedback" class="dilemma-feedback">
-              <!-- Mensaje dinámico -->
-            </div>
-          </div>
-        </div>
-
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill"></div>
-        </div>
+        </footer>
       </section>
 
       <!-- SLIDE 6: EL JUICIO ÉTICO INDELEGABLE -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
-              <p>Ética de la Profesión — El Núcleo Deontológico</p>
-            </div>
-          </div>
-          <div class="slide-context-badge">
-            <span class="badge">04. Juicio Ético</span>
-          </div>
-        </div>
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Ética de la Profesión</span>
+          <span class="running-header-right">05. Principios Deontológicos</span>
+        </header>
 
-        <div class="slide-body">
-          <h2 class="slide-title">El Juicio Ético Profesional: Una Dimensión Indelegable</h2>
-          <p class="slide-lead">
-            La técnica suministra insumos cuantitativos; la ética juzga el sentido y la justicia de la acción directiva.
+        <div class="inner-body">
+          <h2 class="slide-heading">La Indelegabilidad del Juicio Ético Profesional</h2>
+          <p class="slide-description">
+            La técnica suministra insumos instrumentales; el juicio ético determina el sentido, la justicia y el horizonte moral de las decisiones.
           </p>
 
-          <div class="content-grid-2">
-            <div class="concept-card">
-              <div class="concept-icon"><i data-lucide="heart-handshake"></i></div>
-              <h4>El Enfoque Antropocéntrico</h4>
-              <p>
-                La persona humana es fin en sí misma, nunca mero instrumento de cálculo o variable de optimización matemática (Kant). La gerencia del talento humano debe velar por la dignidad y el bienestar integral.
+          <div class="grid-orthogonal-2">
+            <div class="card-orthogonal featured">
+              <h3 class="card-orthogonal-title">El Ser Humano como Fin en Sí Mismo</h3>
+              <p class="card-orthogonal-text">
+                En concordancia con el imperativo categórico kantiano, ninguna persona en una organización puede ser degradada a mero medio transitorio de cálculo estadístico o ajuste presupuestario. La gerencia del talento humano tiene el deber primario de resguardar esa dignidad.
               </p>
             </div>
 
-            <div class="concept-card">
-              <div class="concept-icon"><i data-lucide="file-check-2"></i></div>
-              <h4>Responsabilidad Moral & Legal</h4>
-              <p>
-                Ante la ley y ante la sociedad, un algoritmo no rinde cuentas; quien responde moral y jurídicamente es la persona y la institución que toma la decisión final.
+            <div class="card-orthogonal featured">
+              <h3 class="card-orthogonal-title">Corresponsabilidad Moral y Legal</h3>
+              <p class="card-orthogonal-text">
+                Los sistemas computacionales carecen de personería moral y no rinden cuentas ante la sociedad ni ante los tribunales. Quien responde civil, profesional y éticamente es el directivo que estampa su firma y valida la decisión.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill"></div>
-        </div>
+        <footer class="inner-footer">
+          <img src="../../../Assets/Logo.svg" alt="UNESR" class="inner-footer-logo">
+          <div class="pagination-badge">
+            <span class="pagination-current">6</span>
+            <span class="pagination-total">7</span>
+          </div>
+        </footer>
       </section>
 
-      <!-- SLIDE 7: CONCLUSIONES Y CIERRE -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>REPÚBLICA BOLIVARIANA DE VENEZUELA</h3>
-              <p>UNIVERSIDAD NACIONAL EXPERIMENTAL SIMÓN RODRÍGUEZ</p>
+      <!-- SLIDE 7: CONCLUSIONES Y PROPUESTAS -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Ética de la Profesión</span>
+          <span class="running-header-right">06. Conclusiones</span>
+        </header>
+
+        <div class="inner-body">
+          <h2 class="slide-heading">Directrices para una Gerencia Ética del Talento Humano</h2>
+          <p class="slide-description">
+            Orientaciones fundamentales para articular innovación tecnológica con responsabilidad humana innegociable:
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="orthogonal-box" style="margin-top: 0.5rem;">
+              <div class="orthogonal-box-header">1. Principio de Explicabilidad y Gobernanza</div>
+              <div class="orthogonal-box-content">
+                Ninguna herramienta digital debe implementarse si sus criterios de ponderación y toma de decisión no pueden ser comprendidos, auditados y rebatidos por las partes involucradas.
+              </div>
+            </div>
+
+            <div class="orthogonal-box" style="margin-top: 0.75rem;">
+              <div class="orthogonal-box-header">2. La Tecnología como Asistente, Nunca como Juez</div>
+              <div class="orthogonal-box-content">
+                La analítica debe servir para detectar necesidades de formación, salud laboral y mejora continua, jamás como dispositivo ejecutor de castigos o despidos automáticos.
+              </div>
+            </div>
+
+            <div class="orthogonal-box" style="margin-top: 0.75rem;">
+              <div class="orthogonal-box-header">3. Salvaguarda de la Dignidad y el Juicio Crítico</div>
+              <div class="orthogonal-box-content">
+                La formación continua en ética y discernimiento crítico es el único blindaje efectivo frente a la fascinación tecnológica ingenua en la administración pública y privada.
+              </div>
             </div>
           </div>
-          <div class="slide-context-badge">
-            <span class="badge">Conclusiones</span>
-          </div>
         </div>
 
-        <div class="slide-body" style="text-align: center; max-width: 850px; margin: 0 auto;">
-          <h2 class="slide-title" style="margin-bottom: 1.5rem;">
-            "La tecnología debe estar al servicio de la emancipación humana, no de su sometimiento algorítmico."
-          </h2>
-
-          <div style="background: var(--slide-surface); border: 1px solid var(--slide-border); border-radius: 14px; padding: 1.75rem; text-align: left; margin-bottom: 2rem;">
-            <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--slide-accent); margin-bottom: 0.75rem;">
-              Principios Clave para el Gerente de Talento Humano del Siglo XXI:
-            </h4>
-            <ol style="margin-left: 1.5rem; font-size: 0.95rem; color: var(--slide-text-muted); display: flex; flex-direction: column; gap: 0.6rem;">
-              <li><strong>Gobernanza Ética:</strong> Toda automatización debe ser auditable, explicable y revisable por humanos.</li>
-              <li><strong>Centralidad Humana:</strong> Priorizar la dignidad, la equidad y el desarrollo continuo del trabajador.</li>
-              <li><strong>Corresponsabilidad Crítica:</strong> Formar a los equipos gerenciales en discernimiento ético y alfabetización digital crítica.</li>
-            </ol>
+        <footer class="inner-footer">
+          <img src="../../../Assets/Logo.svg" alt="UNESR" class="inner-footer-logo">
+          <div class="pagination-badge">
+            <span class="pagination-current">7</span>
+            <span class="pagination-total">7</span>
           </div>
-
-          <div style="display: flex; justify-content: center; gap: 1rem;">
-            <a href="../../../index.html" class="ctrl-btn" style="background: var(--slide-accent); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
-              <i data-lucide="home" style="width: 18px; height: 18px;"></i>
-              Volver al Catálogo Principal
-            </a>
-          </div>
-        </div>
-
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill"></div>
-        </div>
+        </footer>
       </section>
 
     </div>
   </div>
 
-  <!-- Barra de Controles Flotante -->
+  <!-- Barra de Controles (Discreta y Minimalista) -->
   <nav class="presentation-controls">
-    <a href="../../../index.html" class="ctrl-btn" title="Volver al Hub de Presentaciones">
-      <i data-lucide="arrow-left"></i>
+    <a href="../../../index.html" class="ctrl-btn" title="Volver al Catálogo">
+      <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
     </a>
     <div class="ctrl-separator"></div>
 
-    <button id="prev-slide" class="ctrl-btn" title="Anterior (Flecha Izquierda / Espacio)">
-      <i data-lucide="chevron-left"></i>
+    <button id="prev-slide" class="ctrl-btn" title="Anterior (← / Espacio)">
+      <i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i>
     </button>
-    <div class="slide-counter-badge" id="slide-counter">1 / 7</div>
-    <button id="next-slide" class="ctrl-btn" title="Siguiente (Flecha Derecha / Espacio)">
-      <i data-lucide="chevron-right"></i>
+    <button id="next-slide" class="ctrl-btn" title="Siguiente (→ / Espacio)">
+      <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i>
     </button>
 
     <div class="ctrl-separator"></div>
 
-    <button id="toggle-overview" class="ctrl-btn" title="Vista de Mosaico (O / Esc)">
-      <i data-lucide="grid"></i>
-    </button>
     <button id="toggle-fullscreen" class="ctrl-btn" title="Pantalla Completa (F)">
-      <i data-lucide="maximize"></i>
-    </button>
-    <button id="toggle-help" class="ctrl-btn" title="Atajos de Teclado (?)">
-      <i data-lucide="help-circle"></i>
+      <i data-lucide="maximize" style="width: 16px; height: 16px;"></i>
     </button>
   </nav>
 
-  <!-- Modal de Atajos de Teclado -->
-  <div id="help-modal" class="slide-modal hidden">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Atajos de Teclado</h3>
-        <button class="modal-close-btn" onclick="engine.toggleHelp(false)">&times;</button>
-      </div>
-      <table class="shortcuts-table">
-        <tr>
-          <td><kbd>&rarr;</kbd> / <kbd>Espacio</kbd> / <kbd>AvPág</kbd></td>
-          <td>Avanzar a la siguiente diapositiva</td>
-        </tr>
-        <tr>
-          <td><kbd>&larr;</kbd> / <kbd>RePág</kbd></td>
-          <td>Retroceder a la diapositiva anterior</td>
-        </tr>
-        <tr>
-          <td><kbd>Home</kbd> / <kbd>End</kbd></td>
-          <td>Ir a la primera / última diapositiva</td>
-        </tr>
-        <tr>
-          <td><kbd>F</kbd></td>
-          <td>Alternar pantalla completa</td>
-        </tr>
-        <tr>
-          <td><kbd>O</kbd> / <kbd>Esc</kbd></td>
-          <td>Alternar vista de cuadrícula (resumen)</td>
-        </tr>
-        <tr>
-          <td><kbd>?</kbd></td>
-          <td>Abrir / cerrar esta ayuda</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- Modal de Vista Resumen (Overview) -->
-  <div id="overview-grid" class="slide-modal hidden">
-    <div class="modal-content" style="max-width: 900px;">
-      <div class="modal-header">
-        <h3 class="modal-title">Navegación de Diapositivas</h3>
-        <button class="modal-close-btn" onclick="engine.toggleOverview(false)">&times;</button>
-      </div>
-      <div class="overview-grid-layout" id="overview-grid-content"></div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
+  <!-- Motor de Diapositivas -->
   <script src="../../../Assets/js/slide-engine.js"></script>
   <script>
-    let engine;
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      engine = new SlideEngine({ container: '#slides-container' });
-      initPlexus();
+      new SlideEngine({ container: '#slides-container' });
     });
-
-    // Animación interactiva de ondas Plexus desenfocadas
-    function initPlexus() {
-      const canvas = document.getElementById('plexus-bg');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let width = canvas.width = canvas.parentElement.offsetWidth;
-      let height = canvas.height = canvas.parentElement.offsetHeight;
-
-      const particles = [];
-      const particleCount = 45;
-      const maxDistance = 140;
-
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.7,
-          vy: (Math.random() - 0.5) * 0.7,
-          radius: Math.random() * 2 + 1.5
-        });
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, width, height);
-        
-        // Dibujar líneas
-        for (let i = 0; i < particleCount; i++) {
-          for (let j = i + 1; j < particleCount; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < maxDistance) {
-              const alpha = (1 - dist / maxDistance) * 0.35;
-              ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
-              ctx.lineWidth = 1;
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.stroke();
-            }
-          }
-        }
-
-        // Dibujar partículas
-        particles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-
-          if (p.x < 0 || p.x > width) p.vx *= -1;
-          if (p.y < 0 || p.y > height) p.vy *= -1;
-
-          ctx.fillStyle = 'rgba(37, 99, 235, 0.5)';
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
-        requestAnimationFrame(animate);
-      }
-
-      window.addEventListener('resize', () => {
-        width = canvas.width = canvas.parentElement.offsetWidth;
-        height = canvas.height = canvas.parentElement.offsetHeight;
-      });
-
-      animate();
-    }
-
-    // Lógica del dilema interactivo
-    function handleDilemma(btn, option) {
-      document.querySelectorAll('.dilemma-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-
-      const feedback = document.getElementById('dilemma-feedback');
-      feedback.classList.add('visible');
-
-      if (option === 'A') {
-        feedback.style.borderLeftColor = '#dc2626';
-        feedback.style.color = '#991b1b';
-        feedback.style.background = '#fef2f2';
-        feedback.innerHTML = `<strong>Riesgo Crítico:</strong> Delegar la decisión únicamente en el algoritmo incurre en deshumanización y vulnera el principio ético de justicia distributiva. La experiencia, el contexto socioemocional y la fidelidad institucional no son capturables enteramente por un modelo algorítmico.`;
-      } else if (option === 'B') {
-        feedback.style.borderLeftColor = '#059669';
-        feedback.style.color = '#065f46';
-        feedback.style.background = '#f0fdf4';
-        feedback.innerHTML = `<strong>Postura Ética y Gerencial Acertada:</strong> ¡Excelente! El juicio ético profesional impone la obligación de auditar el sistema (principio de explicabilidad), valorar la dimensión cualitativa del ser humano y asegurar el derecho a réplica y evaluación justa.`;
-      } else {
-        feedback.style.borderLeftColor = '#d97706';
-        feedback.style.color = '#92400e';
-        feedback.style.background = '#fffbeb';
-        feedback.innerHTML = `<strong>Postura Ludista / Inviable:</strong> Rechazar por completo la tecnología aísla a la organización de avances competitivos. El desafío no es suprimir la herramienta, sino someterla rigurosamente al gobierno y juicio ético humano.`;
-      }
-    }
   </script>
 </body>
 </html>

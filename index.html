@@ -1,240 +1,120 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal de Diapositivas Educativas | Julio Vera — UNESR</title>
-  <meta name="description" content="Repositorio interactivo de diapositivas y presentaciones educativas para postgrado UNESR. Creado por Julio Vera.">
+  <title>Presentaciones</title>
   <link rel="icon" type="image/svg+xml" href="Assets/Logo.svg">
   <link rel="stylesheet" href="Assets/css/main.css">
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
   <!-- Header -->
-  <header class="portal-header">
-    <div class="header-container">
-      <a href="index.html" class="brand-wrapper">
-        <img src="Assets/Logo.svg" alt="Logo UNESR" class="brand-logo">
-        <div class="brand-info">
-          <h1>Julio Vera</h1>
-          <p>Postgrado UNESR • Gerencia del Talento Humano</p>
+  <header class="hub-header">
+    <div class="hub-header-container">
+      <a href="index.html" class="hub-brand">
+        <img src="Assets/Logo.svg" alt="Logo" class="hub-logo">
+        <div>
+          <div class="hub-title">Presentaciones</div>
+          <div class="hub-subtitle">Plataforma de Diapositivas Académicas</div>
         </div>
       </a>
-
-      <div class="header-actions">
-        <button id="toggle-theme" class="btn-icon" title="Cambiar tema">
-          <i data-lucide="moon" id="theme-icon"></i>
-        </button>
-        <a href="https://github.com/julioverx/presentaciones" target="_blank" rel="noopener noreferrer" class="btn-icon" title="Ver en GitHub">
-          <i data-lucide="github"></i>
-        </a>
-      </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-content">
-      <div class="badge-pill">
-        <i data-lucide="presentation" style="width: 14px; height: 14px;"></i>
-        <span>Plataforma Educativa Interactiva</span>
-      </div>
-      <h2 class="hero-title">Diapositivas y Presentaciones Interactivas</h2>
-      <p class="hero-subtitle">
-        Catálogo interactivo de contenidos de postgrado, ponencias académicas y recursos de aprendizaje alojados en GitHub Pages con renderizado web en tiempo real.
-      </p>
+  <!-- Filtros y Búsqueda -->
+  <section class="hub-top-bar">
+    <input type="text" id="search-input" class="search-input-box" placeholder="Buscar presentación por título, tema o asignatura...">
 
-      <!-- Search & Filters -->
-      <div class="search-filter-bar">
-        <div class="search-box">
-          <i data-lucide="search" class="search-icon" style="width: 18px; height: 18px;"></i>
-          <input type="text" id="search-input" class="search-input" placeholder="Buscar por tema, materia, etiqueta o facilitador...">
-        </div>
-
-        <div class="filter-pills" id="filter-container">
-          <button class="filter-btn active" data-filter="all">Todas</button>
-          <!-- Dynamic category pills will be populated here -->
-        </div>
-      </div>
+    <div class="filter-row" id="filter-container">
+      <button class="filter-btn-orthogonal active" data-filter="all">Todas</button>
+      <!-- Categorías dinámicas -->
     </div>
   </section>
 
-  <!-- Main Content -->
-  <main class="main-container">
-    <div class="section-header">
-      <div class="section-title">
-        <i data-lucide="layout-grid" style="width: 22px; height: 22px; color: var(--accent);"></i>
-        <span>Presentaciones Disponibles</span>
-      </div>
-      <div class="deck-count" id="deck-counter">Cargando presentaciones...</div>
-    </div>
-
-    <!-- Cards Grid -->
-    <div class="cards-grid" id="presentations-grid">
-      <!-- Cards populated dynamically via JavaScript -->
+  <!-- Grilla de Diapositivas -->
+  <main class="hub-container">
+    <div class="hub-grid" id="presentations-grid">
+      <!-- Se puebla dinámicamente con JS -->
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="portal-footer">
-    <div class="footer-container">
-      <img src="Assets/Logo.svg" alt="Logo UNESR" style="height: 38px; opacity: 0.85;">
-      <div class="footer-credits">
-        <p><strong>Universidad Nacional Experimental Simón Rodríguez (UNESR)</strong></p>
-        <p>Decanato de Postgrado y Educación Avanzada — Núcleo Apure</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem;">
-          Desarrollado por <strong>Julio Vera</strong> (V-26.889.534) • Diseñado para visualización en proyectores, navegadores y dispositivos móviles.
-        </p>
-      </div>
-    </div>
+  <!-- Footer discreto -->
+  <footer class="hub-footer">
+    <p>Universidad Nacional Experimental Simón Rodríguez • Decanato de Postgrado y Educación Avanzada</p>
   </footer>
 
   <!-- Scripts -->
   <script src="Assets/js/presentations.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Inicializar iconos
       lucide.createIcons();
 
       const gridEl = document.getElementById('presentations-grid');
-      const counterEl = document.getElementById('deck-counter');
       const searchInput = document.getElementById('search-input');
       const filterContainer = document.getElementById('filter-container');
-      const themeToggle = document.getElementById('toggle-theme');
-      const themeIcon = document.getElementById('theme-icon');
 
       let currentFilter = 'all';
       let currentQuery = '';
 
-      // Modo Oscuro / Claro
-      const savedTheme = localStorage.getItem('diapositivas_theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateThemeIcon(savedTheme);
-
-      themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const nextTheme = isDark ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', nextTheme);
-        localStorage.setItem('diapositivas_theme', nextTheme);
-        updateThemeIcon(nextTheme);
-      });
-
-      function updateThemeIcon(theme) {
-        if (theme === 'dark') {
-          themeIcon.setAttribute('data-lucide', 'sun');
-        } else {
-          themeIcon.setAttribute('data-lucide', 'moon');
-        }
-        lucide.createIcons();
-      }
-
-      // Extraer materias únicas para los filtros
+      // Generar botones de filtro según materias
       const subjects = Array.from(new Set(PRESENTATIONS.map(p => p.subject)));
       subjects.forEach(subject => {
         const btn = document.createElement('button');
-        btn.className = 'filter-btn';
+        btn.className = 'filter-btn-orthogonal';
         btn.dataset.filter = subject;
         btn.textContent = subject;
         btn.addEventListener('click', () => {
-          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.filter-btn-orthogonal').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           currentFilter = subject;
-          renderPresentations();
+          render();
         });
         filterContainer.appendChild(btn);
       });
 
-      // Filtro "Todas"
       document.querySelector('[data-filter="all"]').addEventListener('click', function() {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.filter-btn-orthogonal').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         currentFilter = 'all';
-        renderPresentations();
+        render();
       });
 
-      // Búsqueda en tiempo real
       searchInput.addEventListener('input', (e) => {
         currentQuery = e.target.value.toLowerCase().trim();
-        renderPresentations();
+        render();
       });
 
-      // Función de Renderizado
-      function renderPresentations() {
+      function render() {
         const filtered = PRESENTATIONS.filter(item => {
           const matchesFilter = currentFilter === 'all' || item.subject === currentFilter;
-          const searchTargets = [
-            item.title,
-            item.subtitle,
-            item.subject,
-            item.degree,
-            item.facilitator,
-            ...(item.tags || [])
-          ].join(' ').toLowerCase();
-
+          const searchTargets = [item.title, item.subtitle, item.subject, ...(item.tags || [])].join(' ').toLowerCase();
           const matchesQuery = !currentQuery || searchTargets.includes(currentQuery);
           return matchesFilter && matchesQuery;
         });
 
-        counterEl.textContent = `${filtered.length} de ${PRESENTATIONS.length} presentaciones`;
-
         if (filtered.length === 0) {
-          gridEl.innerHTML = `
-            <div class="empty-state">
-              <i data-lucide="folder-search" class="empty-state-icon"></i>
-              <h3>No se encontraron diapositivas</h3>
-              <p>Prueba con otros términos de búsqueda o selecciona otra categoría.</p>
-            </div>
-          `;
-          lucide.createIcons();
+          gridEl.innerHTML = `<p style="color: var(--text-light); grid-column: 1 / -1; padding: 2rem 0;">No se encontraron presentaciones para los criterios seleccionados.</p>`;
           return;
         }
 
         gridEl.innerHTML = filtered.map(item => `
-          <article class="deck-card">
-            <div class="card-top-bar" style="background: ${item.accentColor || 'var(--accent)'};"></div>
-            <div class="card-body">
-              <div class="card-meta-top">
-                <span class="card-subject-tag">${item.subject}</span>
-                <span class="card-slides-badge">
-                  <i data-lucide="layers" style="width: 14px; height: 14px;"></i>
-                  ${item.slidesCount} diapositivas
-                </span>
-              </div>
+          <article class="hub-card">
+            <div class="hub-card-header">
+              <span>${item.subject.toUpperCase()}</span>
+              <span>${item.slidesCount} SLIDES</span>
+            </div>
+            <div class="hub-card-body">
+              <h2 class="hub-card-title">${item.title}</h2>
+              <p class="hub-card-desc">${item.subtitle}</p>
 
-              <h3 class="card-title">${item.title}</h3>
-              <p class="card-subtitle">${item.subtitle}</p>
-
-              <div class="card-academic-info">
-                <div class="academic-row">
-                  <span>Facilitadora:</span>
-                  <strong>${item.facilitator}</strong>
-                </div>
-                <div class="academic-row">
-                  <span>Participante:</span>
-                  <strong>${item.author}</strong>
-                </div>
-                <div class="academic-row">
-                  <span>Fecha:</span>
-                  <span>${item.date}</span>
-                </div>
-              </div>
-
-              <div class="card-tags">
-                ${(item.tags || []).map(tag => `<span class="tag-badge">#${tag}</span>`).join('')}
-              </div>
-
-              <div class="card-footer">
-                <a href="${item.url}" class="btn-launch" style="background: ${item.accentColor || 'var(--accent)'};">
-                  <i data-lucide="play" style="width: 16px; height: 16px;"></i>
-                  <span>Ver Diapositivas</span>
+              <div class="hub-card-meta">
+                <span style="font-size: 0.8rem; color: var(--text-light); font-weight: 500;">${item.date}</span>
+                <a href="${item.url}" class="hub-card-btn">
+                  <span>Abrir Diapositivas</span>
+                  <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
                 </a>
-                ${item.pdfUrl ? `
-                  <a href="${item.pdfUrl}" target="_blank" class="btn-secondary-action" title="Descargar PDF">
-                    <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
-                  </a>
-                ` : ''}
               </div>
             </div>
           </article>
@@ -243,8 +123,7 @@
         lucide.createIcons();
       }
 
-      // Render inicial
-      renderPresentations();
+      render();
     });
   </script>
 </body>

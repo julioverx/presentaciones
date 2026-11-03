@@ -1,22 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
 
 :root {
-  --slide-font: 'Figtree', system-ui, -apple-system, sans-serif;
-  --slide-bg: #ffffff;
-  --slide-text: #0f172a;
-  --slide-text-muted: #475569;
-  --slide-primary: #1e3a8a;
-  --slide-accent: #2563eb;
-  --slide-border: #e2e8f0;
-  --slide-surface: #f8fafc;
-}
-
-[data-theme="dark"] {
-  --slide-bg: #0b0f19;
-  --slide-text: #f8fafc;
-  --slide-text-muted: #94a3b8;
-  --slide-border: #1e293b;
-  --slide-surface: #111827;
+  --font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+  --color-bg: #ffffff;
+  --color-viewport-bg: #0f172a;
+  --color-primary-navy: #0f2e5a;
+  --color-secondary-navy: #1e3a8a;
+  --color-text-main: #0f172a;
+  --color-text-muted: #334155;
+  --color-text-light: #64748b;
+  --color-border: #0f2e5a;
+  --color-border-subtle: #cbd5e1;
 }
 
 * {
@@ -29,307 +23,342 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: var(--slide-font);
-  background: #020617;
-  color: var(--slide-text);
+  font-family: var(--font-family);
+  background-color: var(--color-viewport-bg);
+  color: var(--color-text-main);
   user-select: none;
 }
 
-/* App Wrapper */
+/* Contenedor del Visor */
 .presentation-viewport {
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
+  background-color: #0b1120;
 }
 
-/* Slide Canvas (Aspect Ratio 16:9) */
+/* Lienzo de Diapositiva 16:9 */
 .slide-canvas {
   width: min(96vw, calc(94vh * 16 / 9));
   height: min(94vh, calc(96vw * 9 / 16));
-  background: var(--slide-bg);
-  border-radius: 16px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  background: var(--color-bg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-/* Slide Layout */
+/* Diapositivas */
 .slide {
   position: absolute;
   inset: 0;
-  padding: clamp(2rem, 4.5vw, 3.5rem);
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg);
   opacity: 0;
   pointer-events: none;
-  transform: translateX(30px);
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow-y: auto;
+  transition: opacity 0.25s ease;
   user-select: text;
 }
 
 .slide.active {
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(0);
   z-index: 2;
 }
 
-.slide.prev {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-
-.slide.next {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-/* Slide Header (UNESR Standard) */
-.slide-header {
+/* ==========================================================================
+   PORTADA ESTÁNDAR EXACTA (Referencia: Assets/Ejemplo.svg)
+   ========================================================================== */
+.cover-slide {
+  padding: 6.2% 7.4% 5% 7.4%; /* Proporción exacta al viewBox 1920x1080 */
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
-  border-bottom: 2px solid var(--slide-border);
-  padding-bottom: 1.25rem;
-  margin-bottom: 2rem;
 }
 
-.slide-header-brand {
+/* Cabecera institucional */
+.cover-header {
   display: flex;
-  align-items: center;
-  gap: 1.25rem;
+  align-items: flex-start;
+  gap: 3.5%;
 }
 
-.slide-logo {
-  height: 44px;
+.cover-logo {
+  height: clamp(65px, 10.5vh, 115px);
   width: auto;
+  object-fit: contain;
 }
 
-.slide-institution-meta h3 {
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--slide-text);
+.cover-letterhead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cover-letterhead p {
+  font-size: clamp(0.72rem, 1.85vh, 1.15rem);
+  color: var(--color-text-main);
   line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
-.slide-institution-meta p {
-  font-size: 0.7rem;
-  color: var(--slide-text-muted);
+.cover-letterhead p.bold,
+.cover-letterhead p strong {
+  font-weight: 700;
+}
+
+/* Título de portada */
+.cover-center {
+  margin: auto 0;
+  padding: 2vh 0;
+}
+
+.cover-main-title {
+  font-size: clamp(1.6rem, 3.5vw, 3.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-text-main);
+}
+
+.cover-main-title strong {
+  font-weight: 700;
+}
+
+.cover-main-title span {
   font-weight: 500;
 }
 
-.slide-context-badge {
-  text-align: right;
+/* Créditos académicos */
+.cover-credits-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 15%;
+  margin-bottom: 3.5vh;
 }
 
-.slide-context-badge .badge {
-  display: inline-block;
-  background: var(--slide-surface);
-  border: 1px solid var(--slide-border);
-  font-size: 0.72rem;
+.cover-credit-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.cover-credit-label {
+  font-size: clamp(0.75rem, 1.85vh, 1.15rem);
   font-weight: 700;
-  color: var(--slide-accent);
-  padding: 0.25rem 0.65rem;
-  border-radius: 9999px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--color-text-main);
+  letter-spacing: -0.01em;
 }
 
-/* Slide Body */
-.slide-body {
+.cover-credit-value {
+  font-size: clamp(0.75rem, 1.85vh, 1.15rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+  letter-spacing: -0.01em;
+}
+
+/* Pie de portada */
+.cover-footer {
+  font-size: clamp(0.85rem, 2.15vh, 1.35rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   DIAPOSITIVAS INTERIORES (ESTILO EDITORIAL Y ORTOGONAL - PDF JULIO VERA)
+   ========================================================================== */
+.inner-slide {
+  padding: 4.5% 7.4% 4.5% 7.4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Running Header Superior */
+.running-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(0.75rem, 1.5vh, 0.95rem);
+  color: var(--color-primary-navy);
+  font-weight: 600;
+  margin-bottom: 2.5vh;
+}
+
+.running-header-left {
+  text-transform: none;
+}
+
+.running-header-right {
+  text-transform: none;
+}
+
+/* Cuerpo de Diapositiva */
+.inner-body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
-/* Cover Slide Specifics */
-.cover-layout {
-  justify-content: space-between;
-  padding: 2rem 0;
-}
-
-.cover-title {
-  font-size: clamp(2rem, 3.8vw, 3.25rem);
-  font-weight: 900;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: var(--slide-text);
-  margin-bottom: 1rem;
-}
-
-.cover-subtitle {
-  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
-  color: var(--slide-text-muted);
-  font-weight: 500;
-  max-width: 900px;
-  line-height: 1.4;
-}
-
-.cover-credits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--slide-border);
-}
-
-.credit-box h4 {
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  color: var(--slide-accent);
-  text-transform: uppercase;
-  margin-bottom: 0.35rem;
-}
-
-.credit-box p {
-  font-size: 1rem;
+.slide-heading {
+  font-size: clamp(1.5rem, 2.8vw, 2.6rem);
   font-weight: 700;
-  color: var(--slide-text);
-}
-
-.credit-box small {
-  font-size: 0.8rem;
-  color: var(--slide-text-muted);
-}
-
-/* Content Elements */
-.slide-title {
-  font-size: clamp(1.75rem, 2.8vw, 2.4rem);
-  font-weight: 800;
+  color: var(--color-primary-navy);
   letter-spacing: -0.02em;
+  margin-bottom: 1.5vh;
   line-height: 1.2;
-  margin-bottom: 0.75rem;
 }
 
-.slide-lead {
-  font-size: 1.15rem;
-  color: var(--slide-text-muted);
-  margin-bottom: 2rem;
-  max-width: 850px;
+.slide-description {
+  font-size: clamp(0.9rem, 1.6vh, 1.1rem);
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin-bottom: 3.5vh;
+  max-width: 90%;
 }
 
-.content-grid-2 {
+/* Componente de Caja Ortogonal (Como en las páginas 18-36 de su manual) */
+.orthogonal-box {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  position: relative;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+}
+
+.orthogonal-box-header {
+  position: absolute;
+  top: -1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary-navy);
+  color: #ffffff;
+  font-size: clamp(0.75rem, 1.4vh, 0.9rem);
+  font-weight: 700;
+  padding: 0.35rem 1.25rem;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.orthogonal-box-content {
+  font-size: clamp(0.85rem, 1.5vh, 1.05rem);
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+/* Grilla ortogonal para 2 columnas */
+.grid-orthogonal-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: stretch;
 }
 
-.concept-card {
-  background: var(--slide-surface);
-  border: 1px solid var(--slide-border);
-  border-radius: 12px;
+.card-orthogonal {
+  border: 1px solid var(--color-border-subtle);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, border-color 0.2s;
 }
 
-.concept-card:hover {
-  border-color: var(--slide-accent);
-  transform: translateY(-2px);
+.card-orthogonal.featured {
+  border-color: var(--color-primary-navy);
+  border-width: 1.5px;
 }
 
-.concept-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  background: rgba(37, 99, 235, 0.12);
-  color: var(--slide-accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-}
-
-.concept-card h4 {
+.card-orthogonal-title {
   font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  color: var(--color-primary-navy);
+  margin-bottom: 0.6rem;
 }
 
-.concept-card p {
+.card-orthogonal-text {
   font-size: 0.92rem;
-  color: var(--slide-text-muted);
+  color: var(--color-text-muted);
   line-height: 1.5;
 }
 
-/* Interactive Dilemma Component */
-.dilemma-container {
-  background: var(--slide-surface);
-  border: 1px solid var(--slide-border);
-  border-radius: 14px;
-  padding: 1.5rem;
+/* Tabla Maestra / Listados Ortogonales (Estilo páginas 40-46) */
+.table-orthogonal {
+  width: 100%;
+  border: 1.5px solid var(--color-primary-navy);
+  border-collapse: collapse;
 }
 
-.dilemma-question {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--slide-text);
-}
-
-.dilemma-options {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.dilemma-btn {
-  background: var(--slide-bg);
-  border: 1px solid var(--slide-border);
-  border-radius: 8px;
-  padding: 0.85rem 1.15rem;
+.table-orthogonal th,
+.table-orthogonal td {
+  border: 1px solid var(--color-border-subtle);
+  padding: 0.85rem 1.2rem;
   text-align: left;
-  font-size: 0.92rem;
-  font-family: inherit;
-  color: var(--slide-text);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  transition: all 0.2s;
-}
-
-.dilemma-btn:hover {
-  border-color: var(--slide-accent);
-  background: rgba(37, 99, 235, 0.04);
-}
-
-.dilemma-btn.selected {
-  border-color: var(--slide-accent);
-  background: rgba(37, 99, 235, 0.1);
-  font-weight: 600;
-}
-
-.dilemma-feedback {
-  margin-top: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
   font-size: 0.9rem;
-  line-height: 1.5;
-  background: #eff6ff;
-  border-left: 4px solid var(--slide-accent);
-  color: #1e3a8a;
-  display: none;
 }
 
-.dilemma-feedback.visible {
-  display: block;
+.table-orthogonal th {
+  background: var(--color-primary-navy);
+  color: #ffffff;
+  font-weight: 700;
 }
 
-/* Bottom Control Deck */
+.table-orthogonal td.highlight-col {
+  background: var(--color-primary-navy);
+  color: #ffffff;
+  font-weight: 700;
+  width: 25%;
+}
+
+/* Footer de Diapositiva Interior (Logo y Paginación idéntica a su PDF) */
+.inner-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+  padding-top: 2vh;
+}
+
+.inner-footer-logo {
+  height: 24px;
+  width: auto;
+  opacity: 0.85;
+}
+
+/* Paginación minimalista idéntica al PDF de Julio [ 5 | 46 ] */
+.pagination-badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-primary-navy);
+  border-radius: 3px;
+  overflow: hidden;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.pagination-current {
+  background: var(--color-primary-navy);
+  color: #ffffff;
+  padding: 0.2rem 0.55rem;
+  min-width: 28px;
+  text-align: center;
+}
+
+.pagination-total {
+  background: #ffffff;
+  color: var(--color-text-muted);
+  padding: 0.2rem 0.55rem;
+  min-width: 28px;
+  text-align: center;
+}
+
+/* Barra Flotante de Control (Minimalista y Discreta) */
 .presentation-controls {
   position: fixed;
   bottom: 1.25rem;
@@ -337,15 +366,19 @@ html, body {
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(12px);
-  padding: 0.5rem 0.85rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  gap: 0.5rem;
+  background: #0f172a;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #334155;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 50;
-  color: #ffffff;
+  opacity: 0.2;
+  transition: opacity 0.2s;
+}
+
+.presentation-controls:hover {
+  opacity: 1;
 }
 
 .ctrl-btn {
@@ -353,68 +386,33 @@ html, body {
   border: none;
   color: #94a3b8;
   cursor: pointer;
-  padding: 0.4rem;
-  border-radius: 9999px;
+  padding: 0.35rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
-  font-family: inherit;
+  transition: color 0.15s;
 }
 
 .ctrl-btn:hover:not(:disabled) {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
 }
 
 .ctrl-btn:disabled {
-  opacity: 0.3;
+  opacity: 0.25;
   cursor: not-allowed;
-}
-
-.ctrl-btn svg {
-  width: 18px;
-  height: 18px;
-}
-
-.slide-counter-badge {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #e2e8f0;
-  padding: 0 0.5rem;
-  min-width: 65px;
-  text-align: center;
 }
 
 .ctrl-separator {
   width: 1px;
-  height: 16px;
-  background: rgba(255, 255, 255, 0.2);
+  height: 14px;
+  background: #334155;
 }
 
-/* Progress bar inside slide */
-.slide-progress-track {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.slide-progress-fill {
-  height: 100%;
-  width: 0%;
-  background: var(--slide-accent);
-  transition: width 0.3s ease;
-}
-
-/* Modals */
+/* Modales */
 .slide-modal {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.8);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -427,27 +425,28 @@ html, body {
 }
 
 .modal-content {
-  background: var(--slide-bg);
-  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid var(--color-primary-navy);
   max-width: 750px;
   width: 100%;
   max-height: 85vh;
   overflow-y: auto;
   padding: 2rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  position: relative;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .modal-title {
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary-navy);
 }
 
 .modal-close-btn {
@@ -455,52 +454,5 @@ html, body {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--slide-text-muted);
-}
-
-.shortcuts-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.shortcuts-table td {
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--slide-border);
-  font-size: 0.95rem;
-}
-
-kbd {
-  background: var(--slide-surface);
-  border: 1px solid var(--slide-border);
-  border-radius: 4px;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.85rem;
-  font-family: monospace;
-  box-shadow: 0 2px 0 var(--slide-border);
-}
-
-.overview-grid-layout {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1rem;
-}
-
-.overview-thumb {
-  background: var(--slide-surface);
-  border: 1px solid var(--slide-border);
-  border-radius: 8px;
-  padding: 1rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.overview-thumb:hover {
-  border-color: var(--slide-accent);
-  transform: translateY(-2px);
-}
-
-.overview-thumb.active-thumb {
-  border-color: var(--slide-accent);
-  background: rgba(37, 99, 235, 0.08);
-  font-weight: 700;
+  color: var(--color-text-muted);
 }
