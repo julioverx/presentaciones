@@ -185,9 +185,10 @@ html, body {
 }
 
 .credit-bolo {
-  font-size: 1.25em;
+  font-size: 1.1em;
   line-height: 1;
   color: var(--color-primary-navy);
+  margin: 0 0.45rem;
 }
 
 /* Bloque 4: Pie de portada */
@@ -204,10 +205,11 @@ html, body {
    DIAPOSITIVAS INTERIORES (ESTILO EDITORIAL Y ORTOGONAL - PDF JULIO VERA)
    ========================================================================== */
 .inner-slide {
-  padding: 4.5% 7.4% 4.5% 7.4%;
+  padding: 4.5% 7.4%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
 }
 
 /* Running Header Superior */
@@ -218,7 +220,8 @@ html, body {
   font-size: clamp(0.75rem, 1.5vh, 0.95rem);
   color: var(--color-primary-navy);
   font-weight: 600;
-  margin-bottom: 2.5vh;
+  flex-shrink: 0;
+  margin-bottom: 1vh;
 }
 
 .running-header-left,
@@ -226,11 +229,13 @@ html, body {
   text-transform: none;
 }
 
-/* Cuerpo de Diapositiva */
+/* Cuerpo de Diapositiva (Siempre centrado verticalmente) */
 .inner-body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center; /* Busca el centro vertical de la lámina */
+  padding: 1.5vh 0;
 }
 
 .slide-heading {
@@ -338,8 +343,8 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: auto;
-  padding-top: 2vh;
+  flex-shrink: 0;
+  padding-top: 1vh;
 }
 
 .inner-footer-logo-wrapper {
