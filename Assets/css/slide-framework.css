@@ -718,3 +718,239 @@ html, body {
   height: 14px;
   background: #334155;
 }
+
+/* ==========================================================================
+   STORYTELLING CINÉTICO (BEATS SECUENCIALES - ESTILO REEL/VIDEO)
+   ========================================================================== */
+.story-beat {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.story-beat.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fondo Cinético de Flujo de Código (Slides Técnicas) */
+.code-stream-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  opacity: 0.055;
+}
+
+.code-stream-text {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--color-primary-navy);
+  white-space: pre;
+  user-select: none;
+  animation: codeFlowScroll 38s linear infinite;
+}
+
+@keyframes codeFlowScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* HUD de Telemetría Bossware en Vivo (Slide 11) */
+.bossware-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 0.55rem 1rem;
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
+  border-left: 4px solid #ef4444;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.hud-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hud-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+.hud-dot.pulsing {
+  animation: hudPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes hudPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.25); }
+}
+
+.hud-label {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fca5a5;
+}
+
+.hud-metrics {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.hud-metric {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.hud-metric-label {
+  color: #94a3b8;
+}
+
+.hud-metric-val {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.hud-metric-val.active-green {
+  color: #4ade80;
+}
+
+.hud-metric-val.alert-red {
+  color: #f87171;
+}
+
+/* ==========================================================================
+   ESTACIÓN 13: CIERRE MAGISTRAL CON FONDO AZUL PROFUNDO (#0f2e5a)
+   ========================================================================== */
+.closing-slide-blue {
+  background: var(--color-primary-navy) !important;
+  color: #ffffff !important;
+  padding: 4.5% 7.4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.closing-slide-blue .running-header {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.closing-header-tag {
+  margin-bottom: 1rem;
+}
+
+.closing-tag-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #93c5fd;
+}
+
+.closing-quote-box {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2.2rem 2.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.closing-quote-text {
+  font-size: clamp(1.25rem, 2.3vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.5rem;
+}
+
+.closing-quote-text strong {
+  font-weight: 700;
+  color: #bfdbfe;
+}
+
+.closing-quote-author {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  padding-top: 1rem;
+}
+
+.closing-quote-author strong {
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.06em;
+}
+
+.closing-quote-author span {
+  font-weight: 400;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.closing-verdict-banner {
+  border-left: 3px solid #60a5fa;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1rem 1.4rem;
+}
+
+.closing-verdict-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 0.35rem;
+}
+
+.closing-verdict-text {
+  font-size: clamp(0.88rem, 1.6vh, 1.05rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.closing-slide-blue .inner-footer {
+  border-top-color: rgba(255, 255, 255, 0.18);
+}
+
+.closing-slide-blue .inner-footer-logo-wrapper {
+  color: #ffffff;
+}
+
+.closing-slide-blue .pagination-badge {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+
+.closing-slide-blue .pagination-current {
+  background: #ffffff;
+  color: var(--color-primary-navy);
+}
+
+/* Renderizado KaTeX afinado */
+.katex-display {
+  margin: 0.5rem 0 !important;
+}
+
+.math-formula-display .katex {
+  font-size: 1.5rem !important;
+  color: var(--color-primary-navy);
+}

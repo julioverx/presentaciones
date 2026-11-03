@@ -1,6 +1,6 @@
 /**
- * SlideEngine - Motor interactivo ligero y potente para diapositivas web
- * Compatible con GitHub Pages, sin dependencias externas pesadas.
+ * SlideEngine - Motor de Storytelling y Presentación Interactiva (Estilo Julio Vera)
+ * Soporta navegación por fragmentos (story-beats), renderizado KaTeX, telemetría y animaciones editoriales.
  */
 class SlideEngine {
   constructor(options = {}) {
@@ -9,16 +9,14 @@ class SlideEngine {
     this.currentIndex = 0;
     this.totalSlides = this.slides.length;
     this.isOverview = false;
-    this.autoPlayInterval = null;
+    this.bosswareTimer = null;
+    this.pauseTimer = null;
 
     this.progressBar = document.querySelector('#slide-progress');
     this.counterEl = document.querySelector('#slide-counter');
     this.prevBtn = document.querySelector('#prev-slide');
     this.nextBtn = document.querySelector('#next-slide');
     this.fullscreenBtn = document.querySelector('#toggle-fullscreen');
-    this.overviewBtn = document.querySelector('#toggle-overview');
-    this.helpBtn = document.querySelector('#toggle-help');
-    this.helpModal = document.querySelector('#help-modal');
 
     this.init();
   }
@@ -26,7 +24,7 @@ class SlideEngine {
   init() {
     if (!this.slides.length) return;
 
-    // Leer slide desde URL hash si existe (#3 o #slide-3)
+    // Leer slide desde URL hash (#slide-3)
     const hash = window.location.hash;
     if (hash) {
       const match = hash.match(/\d+/);
@@ -38,15 +36,15 @@ class SlideEngine {
       }
     }
 
+    this.initCodeStreams();
     this.bindEvents();
     this.updateSlides();
-    this.buildSlideThumbnails();
+    this.renderMath();
   }
 
   bindEvents() {
     // Teclado
     window.addEventListener('keydown', (e) => {
-      // Ignorar si el foco está en un input o textarea
       if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
 
       switch (e.key) {
@@ -74,39 +72,31 @@ class SlideEngine {
           e.preventDefault();
           this.toggleFullscreen();
           break;
-        case 'o':
-        case 'O':
-        case 'Escape':
-          e.preventDefault();
-          if (this.helpModal && !this.helpModal.classList.contains('hidden')) {
-            this.toggleHelp(false);
-          } else {
-            this.toggleOverview();
-          }
-          break;
-        case '?':
-          e.preventDefault();
-          this.toggleHelp();
-          break;
       }
     });
 
-    // Botones de navegación
-    if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prev());
-    if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.next());
-    if (this.fullscreenBtn) this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
-    if (this.overviewBtn) this.overviewBtn.addEventListener('click', () => this.toggleOverview());
-    if (this.helpBtn) this.helpBtn.addEventListener('click', () => this.toggleHelp());
+    // Avance por clic directo en la lámina (estilo keynote/reel)
+    if (this.container) {
+      this.container.addEventListener('click', (e) => {
+        if (e.target.closest('button, a, input, select, textarea, .bpe-tab-btn, .timeline-step-card, .cortina-toggle-btn')) {
+          return;
+        }
+        this.next();
+      });
+    }
+
+    if (this.prevBtn) this.prevBtn.addEventListener('click', (e) => { e.stopPropagation(); this.prev(); });
+    if (this.nextBtn) this.nextBtn.addEventListener('click', (e) => { e.stopPropagation(); this.next(); });
+    if (this.fullscreenBtn) this.fullscreenBtn.addEventListener('click', (e) => { e.stopPropagation(); this.toggleFullscreen(); });
 
     // Soporte táctil / swipe
     let touchStartX = 0;
-    let touchEndX = 0;
     document.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
 
     document.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
+      const touchEndX = e.changedTouches[0].screenX;
       const diff = touchEndX - touchStartX;
       if (Math.abs(diff) > 50) {
         if (diff < 0) this.next();
@@ -114,7 +104,6 @@ class SlideEngine {
       }
     }, { passive: true });
 
-    // Hash change
     window.addEventListener('hashchange', () => {
       const match = window.location.hash.match(/\d+/);
       if (match) {
@@ -126,6 +115,38 @@ class SlideEngine {
     });
   }
 
+  next() {
+    const currentSlide = this.slides[this.currentIndex];
+    const unrevealedBeats = currentSlide.querySelectorAll('.story-beat:not(.revealed)');
+
+    // Si la diapositiva actual tiene fragmentos pendientes, revela el siguiente paso del relato
+    if (unrevealedBeats.length > 0) {
+      unrevealedBeats[0].classList.add('revealed');
+      return;
+    }
+
+    // Si ya no quedan fragmentos, avanza a la siguiente diapositiva
+    if (this.currentIndex < this.totalSlides - 1) {
+      this.goTo(this.currentIndex + 1);
+    }
+  }
+
+  prev() {
+    const currentSlide = this.slides[this.currentIndex];
+    const revealedBeats = currentSlide.querySelectorAll('.story-beat.revealed');
+
+    // Si hay fragmentos revelados en esta lámina, oculta el último
+    if (revealedBeats.length > 0) {
+      revealedBeats[revealedBeats.length - 1].classList.remove('revealed');
+      return;
+    }
+
+    // Si no, retrocede a la diapositiva anterior
+    if (this.currentIndex > 0) {
+      this.goTo(this.currentIndex - 1);
+    }
+  }
+
   goTo(index, updateHash = true) {
     if (index < 0 || index >= this.totalSlides) return;
     this.currentIndex = index;
@@ -134,22 +155,6 @@ class SlideEngine {
     if (updateHash) {
       window.location.hash = `slide-${index + 1}`;
     }
-
-    if (this.isOverview) {
-      this.toggleOverview(false);
-    }
-  }
-
-  next() {
-    if (this.currentIndex < this.totalSlides - 1) {
-      this.goTo(this.currentIndex + 1);
-    }
-  }
-
-  prev() {
-    if (this.currentIndex > 0) {
-      this.goTo(this.currentIndex - 1);
-    }
   }
 
   updateSlides() {
@@ -157,36 +162,171 @@ class SlideEngine {
       slide.classList.remove('active', 'prev', 'next');
       if (idx === this.currentIndex) {
         slide.classList.add('active');
-        // Ejecutar animaciones o resets de slide si existen
-        slide.querySelectorAll('.reveal-item').forEach(el => el.classList.add('revealed'));
+        this.triggerSlideAnimations(slide, idx);
       } else if (idx < this.currentIndex) {
         slide.classList.add('prev');
       } else {
         slide.classList.add('next');
+        // Resetear fragmentos futuros
+        slide.querySelectorAll('.story-beat').forEach(b => b.classList.remove('revealed'));
       }
     });
 
-    // Actualizar barra de progreso
     if (this.progressBar) {
       const progress = ((this.currentIndex + 1) / this.totalSlides) * 100;
       this.progressBar.style.width = `${progress}%`;
     }
 
-    // Actualizar contador
     if (this.counterEl) {
       this.counterEl.textContent = `${this.currentIndex + 1} / ${this.totalSlides}`;
     }
 
-    // Actualizar estado de botones
     if (this.prevBtn) this.prevBtn.disabled = this.currentIndex === 0;
     if (this.nextBtn) this.nextBtn.disabled = this.currentIndex === this.totalSlides - 1;
+  }
 
-    // Resaltar en overview
-    const thumbs = document.querySelectorAll('.overview-thumb');
-    thumbs.forEach((thumb, i) => {
-      if (i === this.currentIndex) thumb.classList.add('active-thumb');
-      else thumb.classList.remove('active-thumb');
+  triggerSlideAnimations(slide, index) {
+    // 1. Renderizar KaTeX
+    this.renderMath();
+
+    // 2. Animar contadores CEPAL y barras (Lámina 7)
+    if (slide.querySelector('.stat-number[data-target]')) {
+      slide.querySelectorAll('.stat-number[data-target]').forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target'));
+        const suffix = counter.getAttribute('data-suffix') || '%';
+        let current = 0;
+        const steps = 30;
+        const stepVal = target / steps;
+        let count = 0;
+        const timer = setInterval(() => {
+          count++;
+          current += stepVal;
+          if (count >= steps) {
+            counter.textContent = target.toFixed(1) + suffix;
+            clearInterval(timer);
+          } else {
+            counter.textContent = current.toFixed(1) + suffix;
+          }
+        }, 25);
+      });
+
+      slide.querySelectorAll('.funnel-progress-fill').forEach(bar => {
+        const targetW = bar.getAttribute('data-width');
+        if (targetW) {
+          bar.style.width = '0%';
+          setTimeout(() => {
+            bar.style.transition = 'width 1s cubic-bezier(0.16, 1, 0.3, 1)';
+            bar.style.width = `${targetW}%`;
+          }, 150);
+        }
+      });
+    }
+
+    // 3. Simulación en tiempo real de telemetría Bossware (Lámina 11)
+    if (slide.querySelector('#live-kpm-counter')) {
+      this.startBosswareSimulation();
+    } else {
+      this.stopBosswareSimulation();
+    }
+  }
+
+  startBosswareSimulation() {
+    this.stopBosswareSimulation();
+
+    const kpmEl = document.querySelector('#live-kpm-counter');
+    const camEl = document.querySelector('#live-cam-indicator');
+    const pauseEl = document.querySelector('#live-pause-tracker');
+
+    let baseKpm = 282;
+    let pauseSeconds = 2;
+
+    this.bosswareTimer = setInterval(() => {
+      if (kpmEl) {
+        const fluctuation = Math.floor(Math.random() * 30) - 15;
+        kpmEl.textContent = (baseKpm + fluctuation) + ' KPM';
+      }
+
+      if (camEl && Math.random() > 0.6) {
+        camEl.textContent = 'CAPTURANDO...';
+        camEl.classList.remove('active-green');
+        camEl.classList.add('alert-red');
+        setTimeout(() => {
+          if (camEl) {
+            camEl.textContent = 'SINCRONIZADA';
+            camEl.classList.remove('alert-red');
+            camEl.classList.add('active-green');
+          }
+        }, 600);
+      }
+    }, 1200);
+
+    this.pauseTimer = setInterval(() => {
+      if (pauseEl) {
+        pauseSeconds++;
+        if (pauseSeconds > 5) pauseSeconds = 1;
+        pauseEl.textContent = `00:0${pauseSeconds}s (ALERTA)`;
+      }
+    }, 1000);
+  }
+
+  stopBosswareSimulation() {
+    if (this.bosswareTimer) clearInterval(this.bosswareTimer);
+    if (this.pauseTimer) clearInterval(this.pauseTimer);
+  }
+
+  initCodeStreams() {
+    const streams = document.querySelectorAll('.code-stream-text');
+    if (!streams.length) return;
+
+    const codeSample = `
+# Algoritmo de Ponderación Deontológica vs Eficiencia BPE
+import torch
+import torch.nn as nn
+
+class CandidateEvaluation(nn.Module):
+    def __init__(self, vocab_dim=4096, hidden_dim=512):
+        super().__init__()
+        self.embedding = nn.Embedding(vocab_dim, hidden_dim)
+        self.attention = nn.MultiheadAttention(hidden_dim, 8)
+        self.classifier = nn.Linear(hidden_dim, 1)
+
+    def forward(self, token_seq):
+        # BPE fragmentation: [Lic.] [Gest] [ión] [-] [Tal] [ento]
+        x = self.embedding(token_seq)
+        attn_out, _ = self.attention(x, x, x)
+        score = torch.sigmoid(self.classifier(attn_out.mean(dim=1)))
+        return score # Fallo epistemológico: carece de juicio sobre la dignidad
+
+# Kalai & Vempala (STOC 2024): Calibrated Language Models Must Hallucinate
+def check_hallucination_probability(p_calibrated):
+    assert p_calibrated > 0.0
+    return "Pr[Falsehood] > 0 (Ineludible)"
+`.repeat(3);
+
+    streams.forEach(stream => {
+      if (!stream.textContent.trim()) {
+        stream.textContent = codeSample;
+      }
     });
+  }
+
+  renderMath() {
+    if (typeof katex !== 'undefined') {
+      document.querySelectorAll('.math-formula-display').forEach(el => {
+        if (!el.dataset.rendered) {
+          const raw = el.getAttribute('data-tex') || el.textContent.trim();
+          try {
+            katex.render(raw, el, {
+              throwOnError: false,
+              displayMode: true
+            });
+            el.dataset.rendered = 'true';
+          } catch (err) {
+            console.error('KaTeX rendering error:', err);
+          }
+        }
+      });
+    }
   }
 
   toggleFullscreen() {
@@ -198,53 +338,6 @@ class SlideEngine {
       }
     }
   }
-
-  toggleOverview(forceState) {
-    this.isOverview = typeof forceState === 'boolean' ? forceState : !this.isOverview;
-    const overviewEl = document.querySelector('#overview-grid');
-    if (overviewEl) {
-      if (this.isOverview) {
-        overviewEl.classList.remove('hidden');
-      } else {
-        overviewEl.classList.add('hidden');
-      }
-    }
-  }
-
-  toggleHelp(forceState) {
-    if (!this.helpModal) return;
-    const isHidden = this.helpModal.classList.contains('hidden');
-    const show = typeof forceState === 'boolean' ? forceState : isHidden;
-    if (show) {
-      this.helpModal.classList.remove('hidden');
-    } else {
-      this.helpModal.classList.add('hidden');
-    }
-  }
-
-  buildSlideThumbnails() {
-    const overviewGrid = document.querySelector('#overview-grid-content');
-    if (!overviewGrid) return;
-    overviewGrid.innerHTML = '';
-
-    this.slides.forEach((slide, idx) => {
-      const thumb = document.createElement('div');
-      thumb.className = `overview-thumb p-4 rounded-xl border transition-all cursor-pointer ${idx === this.currentIndex ? 'active-thumb ring-2 ring-blue-500' : 'hover:border-blue-400'}`;
-      
-      const title = slide.querySelector('h1, h2, h3')?.textContent || `Diapositiva ${idx + 1}`;
-      thumb.innerHTML = `
-        <div class="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-1">Slide ${idx + 1}</div>
-        <div class="text-sm font-medium line-clamp-2">${title}</div>
-      `;
-
-      thumb.addEventListener('click', () => {
-        this.goTo(idx);
-      });
-
-      overviewGrid.appendChild(thumb);
-    });
-  }
 }
 
-// Inicialización global para usar en cualquier diapositiva
 window.SlideEngine = SlideEngine;
