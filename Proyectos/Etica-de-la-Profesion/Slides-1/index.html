@@ -18,10 +18,17 @@
   <div class="presentation-viewport">
     <div class="slide-canvas" id="slides-container">
 
+      <!-- Capa Reticular Ambiental / Glassmorphing sutil -->
+      <div class="ambient-canvas-layer">
+        <div class="ambient-shape-1"></div>
+        <div class="ambient-shape-2"></div>
+        <div class="ambient-grid-lines"></div>
+      </div>
+
       <!-- ===================================================================
-           ESTACIÓN 01: LA DECLARACIÓN DE SOBERANÍA (PORTADA OFICIAL)
+           ESTACIÓN 01: LA DECLARACIÓN DE SOBERANÍA (PORTADA EN AZUL OFICIAL)
            =================================================================== -->
-      <section class="slide cover-slide active">
+      <section class="slide cover-slide-blue active">
         <!-- Cabecera institucional -->
         <header class="cover-header">
           <div class="cover-logo-wrapper">
@@ -75,7 +82,7 @@
       </section>
 
       <!-- ===================================================================
-           ESTACIÓN 02: LA DEMARCACIÓN EPISTÉMICA (TRES ÓRDENES)
+           ESTACIÓN 02: LA DEMARCACIÓN EPISTÉMICA (TRES ÓRDENES CONECTADOS)
            =================================================================== -->
       <section class="slide inner-slide">
         <header class="running-header">
@@ -89,34 +96,55 @@
             Saludar con educación es cortesía; acatar la tradición es moral comunitaria; interrogar la justicia de una orden es juicio ético sobre la dignidad humana.
           </p>
 
-          <div class="timeline-stepper">
-            <div class="timeline-step-card active story-beat" onclick="highlightEpistemic(this, 'urbanidad')">
-              <span class="timeline-step-tag">Orden A · Formas</span>
-              <h3 class="card-orthogonal-title">Urbanidad</h3>
-              <p class="card-orthogonal-text">
-                Regula la etiqueta social y el trato exterior formal (saludar, sonreír, vestir bien). Convención necesaria para la convivencia cotidiana, pero <strong>impotente para juzgar la justicia o auditar el abuso de poder</strong>.
-              </p>
-            </div>
+          <div class="orthogonal-timeline">
+            <div class="orthogonal-timeline-track">
+              <!-- Nodo 01 -->
+              <div class="timeline-node-card">
+                <div class="timeline-node-point">01</div>
+                <div class="timeline-node-content">
+                  <span class="timeline-node-tag">Orden A · Formas</span>
+                  <h3 class="timeline-node-title">Urbanidad</h3>
+                  <p class="timeline-node-text">
+                    Regula la etiqueta social y el trato exterior formal (saludar, sonreír, vestir). Convención necesaria para la convivencia, pero <strong>impotente para juzgar la justicia o auditar el abuso</strong>.
+                  </p>
+                  <div class="timeline-node-source">Fuente: Normas de convivencia social.</div>
+                </div>
+              </div>
 
-            <div class="timeline-step-card story-beat" onclick="highlightEpistemic(this, 'moral')">
-              <span class="timeline-step-tag">Orden B · Hábito</span>
-              <h3 class="card-orthogonal-title">Moral</h3>
-              <p class="card-orthogonal-text">
-                Conjunto de preceptos, valores y costumbres que una comunidad hereda y practica en una época. Responde acríticamente a <em>«cómo se acostumbra a actuar aquí»</em>, perpetuando tradiciones sin cuestionarlas.
-              </p>
-            </div>
+              <!-- Nodo 02 -->
+              <div class="timeline-node-card">
+                <div class="timeline-node-point">02</div>
+                <div class="timeline-node-content">
+                  <span class="timeline-node-tag">Orden B · Hábito</span>
+                  <h3 class="timeline-node-title">Moral</h3>
+                  <p class="timeline-node-text">
+                    Preceptos y costumbres que una comunidad hereda y practica acríticamente. Responde a <em>«cómo se acostumbra a actuar aquí»</em>, reproduciendo tradiciones sin cuestionarlas.
+                  </p>
+                  <div class="timeline-node-source">Fuente: Adela Cortina (2000), Ética de la empresa.</div>
+                </div>
+              </div>
 
-            <div class="timeline-step-card story-beat" onclick="highlightEpistemic(this, 'etica')">
-              <span class="timeline-step-tag">Orden C · Crítica</span>
-              <h3 class="card-orthogonal-title">Ética</h3>
-              <p class="card-orthogonal-text">
-                Filosofía moral reflexiva (Adela Cortina / Kant). Somete las costumbres al juicio de la razón universal e interroga si la práctica respeta la <strong>dignidad innegociable de la persona</strong>.
-              </p>
+              <!-- Nodo 03 -->
+              <div class="timeline-node-card">
+                <div class="timeline-node-point active">03</div>
+                <div class="timeline-node-content">
+                  <span class="timeline-node-tag">Orden C · Juicio Crítico</span>
+                  <h3 class="timeline-node-title">Ética</h3>
+                  <p class="timeline-node-text">
+                    Filosofía moral reflexiva (Cortina / Kant). Somete las costumbres al juicio de la razón universal e interroga si la práctica respeta la <strong>dignidad innegociable de la persona</strong>.
+                  </p>
+                  <div class="timeline-node-source">Fuente: Immanuel Kant / Adela Cortina (2000).</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div id="epistemic-detail" class="bpe-verdict-box story-beat" style="margin-top: 1.25rem;">
-            <strong>Dictamen Epistémico:</strong> Confundir la ética con la etiqueta equivale a evaluar la justicia de una institución a partir de la amabilidad de su recepción.
+          <div class="orthogonal-box" style="margin-top: 1.25rem;">
+            <div class="orthogonal-box-header">Dictamen Epistémico</div>
+            <div class="orthogonal-box-content">
+              No es un problema de cortesía exterior; es la capacidad crítica de someter el mandato jerárquico a juicio reflexivo fundado en la dignidad humana.
+              <div class="box-source-note">Fuente: Adela Cortina (2000), Ética mínima.</div>
+            </div>
           </div>
         </div>
 
@@ -132,7 +160,7 @@
       </section>
 
       <!-- ===================================================================
-           ESTACIÓN 03: ADELA CORTINA (MÍNIMOS VS MÁXIMOS)
+           ESTACIÓN 03: ADELA CORTINA (MÍNIMOS VS MÁXIMOS + MODAL LÚDICO)
            =================================================================== -->
       <section class="slide inner-slide">
         <header class="running-header">
@@ -147,41 +175,33 @@
           </p>
 
           <div class="grid-orthogonal-2">
-            <div class="card-orthogonal featured story-beat">
-              <h3 class="card-orthogonal-title">Ética de Mínimos (Suelo Innegociable)</h3>
-              <ul style="margin-left: 1.25rem; font-size: 0.9rem; line-height: 1.6; color: var(--color-text-muted);">
-                <li>Salario digno y cobertura de necesidades biológicas.</li>
-                <li>Delimitación estricta y respetada de la jornada laboral.</li>
-                <li>Provisión institucional de herramientas y equipos.</li>
-                <li>Reconocimiento de la voz técnica del trabajador.</li>
-              </ul>
-              <div style="margin-top: 1rem; font-size: 0.8rem; font-weight: 700; color: var(--color-primary-navy);">
-                ESTATUS: OBLIGACIÓN CONTRACTUAL Y MORAL
-              </div>
+            <div class="card-orthogonal featured">
+              <span class="timeline-node-tag">Suelo Innegociable · Obligación</span>
+              <h3 class="card-orthogonal-title">Ética de Mínimos</h3>
+              <p class="card-orthogonal-text">
+                Condiciones indispensables de justicia: salario digno, jornada delimitada, herramientas institucionales y respeto irrestricto a la voz técnica del trabajador.
+              </p>
+              <div class="card-source-tag">Fuente: Adela Cortina (2000), Ética de la empresa.</div>
             </div>
 
-            <div class="card-orthogonal story-beat">
-              <h3 class="card-orthogonal-title">Ética de Máximos (Horizonte Libre)</h3>
-              <ul style="margin-left: 1.25rem; font-size: 0.9rem; line-height: 1.6; color: var(--color-text-muted);">
-                <li>Vocación íntima y pasión personal por el oficio.</li>
-                <li>Modelos de autorrealización y proyectos de vida.</li>
-                <li>Adhesión filosófica o política voluntaria.</li>
-                <li>Entrega generosa más allá del deber contractual.</li>
-              </ul>
-              <div style="margin-top: 1rem; font-size: 0.8rem; font-weight: 700; color: var(--color-text-light);">
-                ESTATUS: INVITACIÓN LIBRE (NO COERCIBLE)
-              </div>
+            <div class="card-orthogonal">
+              <span class="timeline-node-tag">Horizonte Libre · No Coercible</span>
+              <h3 class="card-orthogonal-title">Ética de Máximos</h3>
+              <p class="card-orthogonal-text">
+                Ideales de autorrealización, vocación íntima y proyectos personales de vida. Constituyen una invitación generosa, jamás una exigencia coactiva de la empresa.
+              </p>
+              <div class="card-source-tag">Fuente: Adela Cortina (2000), Ética mínima.</div>
             </div>
           </div>
 
-          <div class="story-beat" style="margin-top: 1.25rem; display: flex; align-items: center; gap: 1rem;">
-            <button class="cortina-toggle-btn" onclick="toggleCortinaAudit()">
-              <i data-lucide="shield-alert" style="width: 16px; height: 16px;"></i>
-              <span>Simular Quiebre de Mínimos</span>
+          <div style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+            <button class="btn-orthogonal-primary" onclick="openModal('modal-cortina')">
+              <i data-lucide="sliders-horizontal" style="width: 16px; height: 16px;"></i>
+              <span>Laboratorio: Auditar Quiebre de Mínimos</span>
             </button>
-            <div id="cortina-alert" class="cortina-alert-banner" style="margin-top: 0; flex: 1;">
-              <strong>Dictamen de Adela Cortina:</strong> Si se suprimen las herramientas o el salario justo, la institución entra automáticamente en <strong>«Fraude Estructural y Organización Desmoralizada»</strong>.
-            </div>
+            <span style="font-size: 0.8rem; color: var(--color-text-light); font-weight: 600;">
+              * No es pedir generosidad; es exigir el cumplimiento estricto del suelo de justicia.
+            </span>
           </div>
         </div>
 
@@ -211,36 +231,54 @@
             La lealtad incondicional de antaño no era un milagro moral; respondía a la <strong>circunscripción material (Robert Carneiro, 1970)</strong>: la ausencia de vías de escape forzaba la subordinación para sobrevivir.
           </p>
 
-          <div class="timeline-stepper">
-            <div class="timeline-step-card active story-beat">
-              <span class="timeline-step-tag">Fase I · Siglos XIX - XX</span>
-              <h3 class="card-orthogonal-title">Silencio Forzado</h3>
-              <p class="card-orthogonal-text">
-                Disciplina fabril-prusiana. El abuso permanecía ofuscado por la clausura geográfica y el monopolio de los recursos. Resignación ante el desamparo material.
-              </p>
-            </div>
+          <div class="orthogonal-timeline">
+            <div class="orthogonal-timeline-track">
+              <!-- Fase I -->
+              <div class="timeline-node-card">
+                <div class="timeline-node-point">01</div>
+                <div class="timeline-node-content">
+                  <span class="timeline-node-tag">Fase I · S. XIX - XX</span>
+                  <h3 class="timeline-node-title">Silencio Fabril</h3>
+                  <p class="timeline-node-text">
+                    Disciplina fabril prusiana. El abuso permanecía ofuscado por la clausura territorial y el monopolio patronal. Resignación ante el desamparo material.
+                  </p>
+                  <div class="timeline-node-source">Fuente: Robert Carneiro (1970), Science.</div>
+                </div>
+              </div>
 
-            <div class="timeline-step-card story-beat">
-              <span class="timeline-step-tag">Fase II · Mediados S. XX</span>
-              <h3 class="card-orthogonal-title">Conquista Institucional</h3>
-              <p class="card-orthogonal-text">
-                Consolidación de la jornada de ocho horas, marcos de protección legal y representación colectiva. Surgimiento de límites normativos al poder patronal.
-              </p>
-            </div>
+              <!-- Fase II -->
+              <div class="timeline-node-card">
+                <div class="timeline-node-point">02</div>
+                <div class="timeline-node-content">
+                  <span class="timeline-node-tag">Fase II · Mediados S. XX</span>
+                  <h3 class="timeline-node-title">Pacto Institucional</h3>
+                  <p class="timeline-node-text">
+                    Consolidación de la jornada de ocho horas, marcos de protección legal y representación colectiva. Surgimiento de límites normativos al poder patronal.
+                  </p>
+                  <div class="timeline-node-source">Fuente: Convenios Fundamentales OIT.</div>
+                </div>
+              </div>
 
-            <div class="timeline-step-card story-beat">
-              <span class="timeline-step-tag">Fase III · Siglo XXI</span>
-              <h3 class="card-orthogonal-title">Hipervisibilidad Digital</h3>
-              <p class="card-orthogonal-text">
-                Quiebre del velo de impunidad. Registro audiovisual instantáneo y democratización del reclamo en redes frente a cualquier arbitrariedad de la jerarquía.
-              </p>
+              <!-- Fase III -->
+              <div class="timeline-node-card">
+                <div class="timeline-node-point active">03</div>
+                <div class="timeline-node-content">
+                  <span class="timeline-node-tag">Fase III · Siglo XXI</span>
+                  <h3 class="timeline-node-title">Hipervisibilidad</h3>
+                  <p class="timeline-node-text">
+                    Quiebre del velo de impunidad. Registro audiovisual instantáneo y democratización del reclamo en redes frente a cualquier arbitrariedad directiva.
+                  </p>
+                  <div class="timeline-node-source">Fuente: Sociología de las redes laborales.</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="orthogonal-box story-beat" style="margin-top: 1.5rem;">
+          <div class="orthogonal-box" style="margin-top: 1.25rem;">
             <div class="orthogonal-box-header">Tesis Carneiro (Science, 1970)</div>
             <div class="orthogonal-box-content">
-              Cuando los márgenes de escape se cierran, el ser humano se ve obligado a tolerar la dominación. El silencio del pasado no demostraba ausencia de abusos; demostraba falta de canales públicos de denuncia.
+              No era virtud espontánea ni compromiso voluntario; era falta de canales públicos de escape y denuncia ante el monopolio de los medios de subsistencia.
+              <div class="box-source-note">Fuente: Robert L. Carneiro (1970), A Theory of the Origin of the State.</div>
             </div>
           </div>
         </div>
@@ -271,35 +309,31 @@
             Lo que el discurso corporativo descalifica como «fragilidad» es, en rigor material, la pérdida del monopolio sobre la información legal y la caída de la impunidad.
           </p>
 
-          <div class="story-beat">
-            <table class="table-orthogonal">
-              <thead>
-                <tr>
-                  <th style="width: 50%;">El Juicio Reactivo (Prejuicio Generacional)</th>
-                  <th style="width: 50%;">La Realidad Material (Economía del Conocimiento)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><em>«La juventud actual carece de temple y se queja por todo».</em></td>
-                  <td><strong>Acceso ubicuo a la ley:</strong> Cualquier bachiller consulta la normativa laboral en su teléfono móvil en 5 segundos.</td>
-                </tr>
-                <tr>
-                  <td><em>«En mis tiempos aguantábamos sin decir una sola palabra».</em></td>
-                  <td><strong>Asimetría histórica superada:</strong> Antes la ley era un privilegio de intermediarios; hoy el conocimiento es un bien público.</td>
-                </tr>
-                <tr>
-                  <td><em>«El maltrato forma el carácter y enseña disciplina».</em></td>
-                  <td><strong>Disonancia y resentimiento:</strong> Quien debió soportar abusos pasados justifica su sufrimiento llamándolo virtud.</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="dichotomy-container">
+            <div class="dichotomy-card negative">
+              <span class="dichotomy-badge neg">Prejuicio Corporativo</span>
+              <div class="dichotomy-statement">«La juventud actual carece de temple y se queja por todo».</div>
+              <div class="dichotomy-details">
+                Nostalgia reaccionaria del sufrimiento acrítico. Se confunde la docilidad forzada con virtud profesional.
+              </div>
+              <div class="dichotomy-source">Fuente: Retórica gerencial tradicional.</div>
+            </div>
+
+            <div class="dichotomy-card positive">
+              <span class="dichotomy-badge pos">Realidad Material</span>
+              <div class="dichotomy-statement">No es debilidad generacional; es fin de la asimetría informativa y acceso ubicuo al derecho laboral.</div>
+              <div class="dichotomy-details">
+                Cualquier trabajador consulta la ley en su teléfono en cinco segundos: el abuso ya no puede camuflarse tras la ignorancia.
+              </div>
+              <div class="dichotomy-source">Fuente: Sociología del Trabajo / OIT.</div>
+            </div>
           </div>
 
-          <div class="orthogonal-box story-beat" style="margin-top: 1.25rem;">
+          <div class="orthogonal-box" style="margin-top: 1.25rem;">
             <div class="orthogonal-box-header">Conclusión Sociológica</div>
             <div class="orthogonal-box-content">
-              Exigir respeto a la dignidad y a la ley no es debilidad de cristal; es conciencia de derechos frente a la naturalización del maltrato.
+              No es virtud haber tolerado maltrato en el pasado; es disonancia cognitiva y resentimiento retrospectivo frente a quienes hoy defienden su dignidad.
+              <div class="box-source-note">Fuente: Psicología Social del Trabajo.</div>
             </div>
           </div>
         </div>
@@ -319,52 +353,47 @@
            ESTACIÓN 06: LA FALACIA DE LA FACILIDAD (MICHA KAUFMAN)
            =================================================================== -->
       <section class="slide inner-slide">
-        <!-- Fondo cinético con flujo de código animado -->
-        <div class="code-stream-container">
-          <div class="code-stream-text"></div>
-        </div>
-
-        <header class="running-header" style="position: relative; z-index: 1;">
+        <header class="running-header">
           <span class="running-header-left">Ética de la Profesión</span>
           <span class="running-header-right">05. Umbral de la Complejidad</span>
         </header>
 
-        <div class="inner-body" style="position: relative; z-index: 1;">
+        <div class="inner-body">
           <h2 class="slide-heading">La Falacia de la Facilidad: El Desplazamiento del Umbral</h2>
           <p class="slide-description">
             Micha Kaufman (Fiverr, 2023): La tecnología no anula el esfuerzo humano; <strong>elimina la fricción mecánica</strong> y traslada la dificultad hacia el discernimiento conceptual y la gobernanza ética.
           </p>
 
-          <div class="grid-orthogonal-2">
-            <div class="card-orthogonal story-beat">
-              <span class="timeline-step-tag">Ayer · Carga Mecánica</span>
-              <h3 class="card-orthogonal-title">Fricción Física y Rutinaria</h3>
-              <ul style="margin-left: 1.25rem; font-size: 0.88rem; line-height: 1.6; color: var(--color-text-muted);">
-                <li>Transcripción manual a máquina y libros diarios en papel.</li>
-                <li>Archivo físico y traslado manual de documentos.</li>
-                <li>Dificultad centrada en la resistencia muscular y la monotonía.</li>
-                <li>Baja complejidad de discernimiento / Alta inversión horaria.</li>
-              </ul>
+          <div class="dichotomy-container">
+            <div class="dichotomy-card negative">
+              <span class="dichotomy-badge neg">Ayer · Fricción Mecánica</span>
+              <div class="dichotomy-statement">Carga física y rutinaria (máquinas de escribir, libros contables en papel).</div>
+              <div class="dichotomy-details">
+                La dificultad residía en la resistencia muscular y la monotonía repetitiva. Baja exigencia de gobernanza sistémica / Alta inversión horaria.
+              </div>
+              <div class="dichotomy-source">Fuente: Organización Científica del Trabajo (Taylor).</div>
             </div>
 
-            <div class="card-orthogonal featured story-beat">
-              <span class="timeline-step-tag">Hoy · Caso Vibe Coding</span>
-              <h3 class="card-orthogonal-title">Carga Cognitiva y Arquitectura</h3>
-              <ul style="margin-left: 1.25rem; font-size: 0.88rem; line-height: 1.6; color: var(--color-text-muted);">
-                <li>La IA resuelve la sintaxis mecánica en segundos.</li>
-                <li>La dificultad se desplaza a la <strong>lógica de sistemas</strong>.</li>
-                <li>Auditoría de sesgos algorítmicos y control de consecuencias.</li>
-                <li>Toma de decisiones bajo incertidumbre y estrés de sobreestímulo.</li>
-              </ul>
+            <div class="dichotomy-card positive">
+              <span class="dichotomy-badge pos">Hoy · Carga Cognitiva y Ética</span>
+              <div class="dichotomy-statement">No es anulación del esfuerzo; es desplazamiento hacia la arquitectura de sistemas y la auditoría de sesgos.</div>
+              <div class="dichotomy-details">
+                La IA resuelve la sintaxis mecánica en segundos, elevando la responsabilidad humana hacia la deliberación ética bajo incertidumbre.
+              </div>
+              <div class="dichotomy-source">Fuente: Micha Kaufman (Fiverr, 2023).</div>
             </div>
           </div>
 
-          <div class="bpe-verdict-box story-beat" style="margin-top: 1.25rem;">
-            <strong>Principio Kaufman:</strong> Juzgar el presente con la nostalgia del esfuerzo manual revela una incomprensión total de la economía del conocimiento.
+          <div class="orthogonal-box" style="margin-top: 1.25rem;">
+            <div class="orthogonal-box-header">Principio Kaufman</div>
+            <div class="orthogonal-box-content">
+              Juzgar el presente con la nostalgia del esfuerzo manual revela una incomprensión total de la economía del conocimiento y de la función directiva del talento.
+              <div class="box-source-note">Fuente: Micha Kaufman (2023), The Shift in Human Effort.</div>
+            </div>
           </div>
         </div>
 
-        <footer class="inner-footer" style="position: relative; z-index: 1;">
+        <footer class="inner-footer">
           <div class="inner-footer-logo-wrapper">
             <svg viewBox="0 0 382.71 295.96"><g fill="currentColor"><path d="M139.64,5.44v126.58s-.02,7.06-8.51,7.06c-14.75,0-35.82,.02-50.57,.02-8.6,0-8.51-7.38-8.51-7.38V32.75c19.53-11.84,43.02-22.02,67.59-27.31Z"/><path d="M364.87,84.9H175.58c-8.87,0-8.12,5.39-8.12,17.66,0,27.02,.01,81.05,.01,81.05,0,6.05,.79,13.03-8.38,13.03H10.16C.13,174.48-20.41,100.87,57.13,42.27c0,44.11-.01,132.34-.01,132.34,0,10.14,10.43,10.06,10.43,10.06l79.62-.03s9.02,.11,9.02-10.05V2.48c11.39-1.63,23.14-2.48,35.14-2.48,76.68,0,142.85,34.72,173.54,84.9Z"/><path d="M378.6,112.72H248.96l-5.94,5.93v-6.13h-14.56s-.08,180.68-.08,180.68c-11.98,1.81-24.37,2.76-37.05,2.76-76.32,0-142.23-34.32-173.1-84.12l187.35-.05c3.07,0,5.79-1.48,7.5-3.76,.02-.03,.25-.35,.26-.38,1.01-1.49,1.6-3.29,1.6-5.23,0,0-.1-48.99-.02-90.16,.01-5.17,2.93-10.82,10.71-10.82h147.81s5.16,11.28,5.16,11.28Z"/><path d="M382.71,157.56s-.65,5.97-.76,6.75h0c-2.84,20.04-10.87,38.85-23.02,55.66-.03,.03-.06,.07-.08,.12-18.43,25.42-46.29,46.22-79.94,59.58-.06,.02-.13,.04-.19,.07-.03,.01-.06,.02-.08,.03-14.14,7.07-35.85,10.81-36.31,10.9h-.01s-.02,.01-.03,.01v-124.86c0-5.7,5.91-8.26,10.24-8.26h130.18Z"/></g></svg>
           </div>
@@ -391,32 +420,36 @@
           </p>
 
           <div class="metrics-stat-grid">
-            <div class="stat-orthogonal-card alert story-beat">
+            <div class="stat-orthogonal-card alert">
               <span class="stat-number" data-target="54.5" data-suffix="%">0.0%</span>
               <span class="stat-label">Desajuste Formativo Total</span>
               <span class="stat-subtext">Trabajadores en puestos desalineados con su formación.</span>
+              <div class="card-source-tag">Fuente: CEPAL / OIT (2023).</div>
             </div>
 
-            <div class="stat-orthogonal-card story-beat">
+            <div class="stat-orthogonal-card">
               <span class="stat-number" data-target="40.1" data-suffix="%">0.0%</span>
               <span class="stat-label">Fuerza Subcualificada</span>
               <span class="stat-subtext">Dominan el oficio en la práctica pero carecen de título formal.</span>
+              <div class="card-source-tag">Fuente: CEPAL / OIT (2023).</div>
             </div>
 
-            <div class="stat-orthogonal-card story-beat">
+            <div class="stat-orthogonal-card">
               <span class="stat-number" data-target="33.0" data-suffix="%">0.0%</span>
               <span class="stat-label">Graduados Universitarios</span>
               <span class="stat-subtext">Población ocupada con credencial de educación superior.</span>
+              <div class="card-source-tag">Fuente: ENCOVI / OIT.</div>
             </div>
 
-            <div class="stat-orthogonal-card alert story-beat">
+            <div class="stat-orthogonal-card alert">
               <span class="stat-number" data-target="19.5" data-suffix="%">0.0%</span>
               <span class="stat-label">Absorción Real del País</span>
-              <span class="stat-subtext">Vacantes reales de alta cualificación en la infraestructura productiva.</span>
+              <span class="stat-subtext">Vacantes reales de alta cualificación en la infraestructura.</span>
+              <div class="card-source-tag">Fuente: CEPAL / BCV.</div>
             </div>
           </div>
 
-          <div class="funnel-container story-beat">
+          <div class="funnel-container">
             <div class="funnel-bar-wrapper">
               <div class="funnel-label-row">
                 <span>Población con Título Universitario Formal</span>
@@ -436,7 +469,7 @@
                 <div class="funnel-progress-fill gap-color" data-width="19.5" style="width: 0%;"></div>
               </div>
             </div>
-            <div style="font-size: 0.78rem; color: var(--color-primary-navy); font-weight: 600;">
+            <div style="font-size: 0.8rem; color: var(--color-primary-navy); font-weight: 600;">
               Cuello de Botella Estructural: 13.5% de graduados son expulsados hacia el desajuste horizontal o la precarización.
             </div>
           </div>
@@ -454,53 +487,52 @@
       </section>
 
       <!-- ===================================================================
-           ESTACIÓN 08: DOBLE OPACIDAD ATS & TOKENIZACIÓN BPE
+           ESTACIÓN 08: DOBLE OPACIDAD ATS & TOKENIZACIÓN BPE (MODAL INTERACTIVO)
            =================================================================== -->
       <section class="slide inner-slide">
-        <!-- Fondo cinético con flujo de código y embeddings -->
-        <div class="code-stream-container">
-          <div class="code-stream-text"></div>
-        </div>
-
-        <header class="running-header" style="position: relative; z-index: 1;">
+        <header class="running-header">
           <span class="running-header-left">Ética de la Profesión</span>
           <span class="running-header-right">07. Captación y Selección Algorítmica</span>
         </header>
 
-        <div class="inner-body" style="position: relative; z-index: 1;">
+        <div class="inner-body">
           <h2 class="slide-heading">La Doble Opacidad en ATS y la Fragilidad BPE</h2>
           <p class="slide-description">
-            Caja Negra Duplicada: La opacidad de la red neuronal queda confinada dentro de plataformas comerciales intermediarias (<em>API wrappers</em>). El algoritmo BPE (Chai et al., 2024) rompe palabras por accidentes tipográficos.
+            Caja Negra Duplicada: La opacidad de la red neuronal queda confinada dentro de plataformas comerciales intermediarias. El algoritmo BPE rompe palabras por accidentes tipográficos.
           </p>
 
-          <div class="bpe-demo-container story-beat">
-            <div class="bpe-switch-tabs">
-              <button class="bpe-tab-btn active" onclick="switchBpeCase('A')">Caso A: Sintaxis Convencional</button>
-              <button class="bpe-tab-btn" onclick="switchBpeCase('B')">Caso B: Inserción de Guion Sintáctico</button>
+          <div class="dichotomy-container">
+            <div class="dichotomy-card negative">
+              <span class="dichotomy-badge neg">Mito Corporativo</span>
+              <div class="dichotomy-statement">«El software ATS garantiza objetividad matemática libre de sesgos humanos».</div>
+              <div class="dichotomy-details">
+                Se asume acríticamente que el procesamiento algorítmico es neutral, ignorando que delega decisiones vinculantes en una caja negra comercial.
+              </div>
+              <div class="dichotomy-source">Fuente: Discurso tecnocéntrico.</div>
             </div>
 
-            <div style="font-size: 0.82rem; font-weight: 600; color: var(--color-text-muted);">
-              Cadena procesada por el filtro ATS: <code id="bpe-input-text" style="background:#e2e8f0; padding: 2px 6px;">Lic. Gerencia de Talento</code>
-            </div>
-
-            <div class="bpe-tokens-display" id="bpe-tokens-container">
-              <span class="bpe-token-chip">[Lic.]</span>
-              <span class="bpe-token-chip">[Gerencia]</span>
-              <span class="bpe-token-chip">[de]</span>
-              <span class="bpe-token-chip">[Talento]</span>
-            </div>
-
-            <div class="bpe-verdict-box" id="bpe-verdict">
-              <strong>Resultado Algorítmico:</strong> Vector semántico continuo. El modelo reconoce el cargo y asigna puntaje positivo (Match: 94%).
+            <div class="dichotomy-card positive">
+              <span class="dichotomy-badge pos">Realidad Algorítmica</span>
+              <div class="dichotomy-statement">No es objetividad técnica; es fragilidad sintáctica en el espacio latente y doble opacidad.</div>
+              <div class="dichotomy-details">
+                Un simple guion ortográfico fragmenta el lema del candidato en subpalabras numéricamente dispersas, descartándolo automáticamente sin juicio humano.
+              </div>
+              <div class="dichotomy-source">Fuente: Chai, Peng & Li (2024), Tokenization Falling Short.</div>
             </div>
           </div>
 
-          <div class="story-beat" style="font-size: 0.78rem; color: var(--color-text-light); margin-top: 0.75rem;">
-            * Demostración basada en Yekun Chai, Qiwei Peng y Xuhong Li (2024), <em>Tokenization Falling Short</em>.
+          <div style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+            <button class="btn-orthogonal-primary" onclick="openModal('modal-bpe')">
+              <i data-lucide="binary" style="width: 16px; height: 16px;"></i>
+              <span>Laboratorio: Simular Filtrado y Tokenización BPE</span>
+            </button>
+            <span style="font-size: 0.8rem; color: var(--color-text-light); font-weight: 600;">
+              * Demostración basada en Yekun Chai, Qiwei Peng y Xuhong Li (2024).
+            </span>
           </div>
         </div>
 
-        <footer class="inner-footer" style="position: relative; z-index: 1;">
+        <footer class="inner-footer">
           <div class="inner-footer-logo-wrapper">
             <svg viewBox="0 0 382.71 295.96"><g fill="currentColor"><path d="M139.64,5.44v126.58s-.02,7.06-8.51,7.06c-14.75,0-35.82,.02-50.57,.02-8.6,0-8.51-7.38-8.51-7.38V32.75c19.53-11.84,43.02-22.02,67.59-27.31Z"/><path d="M364.87,84.9H175.58c-8.87,0-8.12,5.39-8.12,17.66,0,27.02,.01,81.05,.01,81.05,0,6.05,.79,13.03-8.38,13.03H10.16C.13,174.48-20.41,100.87,57.13,42.27c0,44.11-.01,132.34-.01,132.34,0,10.14,10.43,10.06,10.43,10.06l79.62-.03s9.02,.11,9.02-10.05V2.48c11.39-1.63,23.14-2.48,35.14-2.48,76.68,0,142.85,34.72,173.54,84.9Z"/><path d="M378.6,112.72H248.96l-5.94,5.93v-6.13h-14.56s-.08,180.68-.08,180.68c-11.98,1.81-24.37,2.76-37.05,2.76-76.32,0-142.23-34.32-173.1-84.12l187.35-.05c3.07,0,5.79-1.48,7.5-3.76,.02-.03,.25-.35,.26-.38,1.01-1.49,1.6-3.29,1.6-5.23,0,0-.1-48.99-.02-90.16,.01-5.17,2.93-10.82,10.71-10.82h147.81s5.16,11.28,5.16,11.28Z"/><path d="M382.71,157.56s-.65,5.97-.76,6.75h0c-2.84,20.04-10.87,38.85-23.02,55.66-.03,.03-.06,.07-.08,.12-18.43,25.42-46.29,46.22-79.94,59.58-.06,.02-.13,.04-.19,.07-.03,.01-.06,.02-.08,.03-14.14,7.07-35.85,10.81-36.31,10.9h-.01s-.02,.01-.03,.01v-124.86c0-5.7,5.91-8.26,10.24-8.26h130.18Z"/></g></svg>
           </div>
@@ -527,32 +559,38 @@
           </p>
 
           <div class="math-proof-card">
-            <!-- KaTeX display container -->
-            <div class="math-formula-display" data-tex="\Pr[\text{Falsedad / Alucinaci\acute{o}n}] > 0 \quad (\forall \text{ modelo calibrado})">
-              \Pr[\text{Falsedad / Alucinación}] > 0 \quad (\forall \text{ modelo calibrado})
+            <!-- KaTeX Display Limpio -->
+            <div class="math-formula-display" id="stoc-math-formula">
+              $$\Pr[\text{Falsedad}] > 0 \quad (\forall \text{ modelo calibrado})$$
             </div>
 
             <div class="grid-orthogonal-2">
-              <div class="story-beat">
-                <span class="timeline-step-tag">Axioma 1</span>
+              <div>
+                <span class="timeline-node-tag">Axioma 1</span>
                 <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--color-primary-navy); margin-bottom: 0.35rem;">Ausencia de Ontología</h4>
                 <p style="font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.5;">
                   El modelo no razona sobre la verdad fáctica; predice secuencias de texto a partir de frecuencias de distribución estadística. Carece de noción del mundo real.
                 </p>
+                <div class="card-source-tag">Fuente: Kalai & Vempala, ACM STOC 2024.</div>
               </div>
 
-              <div class="story-beat">
-                <span class="timeline-step-tag">Axioma 2</span>
+              <div>
+                <span class="timeline-node-tag">Axioma 2</span>
                 <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--color-primary-navy); margin-bottom: 0.35rem;">Mandato Deontológico</h4>
                 <p style="font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.5;">
                   Delegar la admisión, carrera o despido de una persona en un motor probabilístico constituye una <strong>negligencia ética grave</strong> de la dirección corporativa.
                 </p>
+                <div class="card-source-tag">Fuente: Deontología de la Decisión Humana.</div>
               </div>
             </div>
           </div>
 
-          <div class="bpe-verdict-box story-beat" style="margin-top: 1.25rem;">
-            <strong>Exigencia Ética:</strong> La tecnología puede procesar borradores analíticos; la decisión vinculante sobre la vida laboral de un ser humano jamás puede ser cedida a la máquina.
+          <div class="orthogonal-box" style="margin-top: 1.25rem;">
+            <div class="orthogonal-box-header">Dictamen Epistemológico</div>
+            <div class="orthogonal-box-content">
+              No es una imperfección transitoria de software; es un límite matemático demostrable: la máquina jamás puede rendir cuentas de justicia ante un ser humano.
+              <div class="box-source-note">Fuente: Kalai & Vempala (2024), ACM Symposium on Theory of Computing.</div>
+            </div>
           </div>
         </div>
 
@@ -582,33 +620,31 @@
             Chiavenato (2009): La obligación moral de agotar el talento interno frente al canibalismo corporativo de Microsoft Gaming (caso Asha Sharma / purga de estudios galardonados).
           </p>
 
-          <div class="grid-orthogonal-2">
-            <div class="card-orthogonal featured story-beat">
-              <span class="timeline-step-tag">Deontología (Chiavenato, 2009)</span>
-              <h3 class="card-orthogonal-title">Desarrollo y Contrato Psicológico</h3>
-              <ul style="margin-left: 1.25rem; font-size: 0.88rem; line-height: 1.6; color: var(--color-text-muted);">
-                <li>Agotar prioritariamente las fuentes de reclutamiento interno.</li>
-                <li>Honrar el compromiso acumulado y la movilidad del personal.</li>
-                <li><strong>Condena al simulacro:</strong> Es un fraude ético convocar concursos externos si la vacante ya está asignada por clientelismo.</li>
-              </ul>
+          <div class="dichotomy-container">
+            <div class="dichotomy-card positive">
+              <span class="dichotomy-badge pos">Deontología Profesional</span>
+              <div class="dichotomy-statement">Desarrollo y respeto al contrato psicológico acumulado.</div>
+              <div class="dichotomy-details">
+                Agotar prioritariamente el talento interno y honrar la dedicación. Es un fraude moral convocar concursos externos si la vacante ya está asignada por clientelismo.
+              </div>
+              <div class="dichotomy-source">Fuente: Idalberto Chiavenato (2009), Gestión del Talento Humano.</div>
             </div>
 
-            <div class="card-orthogonal story-beat">
-              <span class="timeline-step-tag">Caso Microsoft Gaming (Asha Sharma)</span>
-              <h3 class="card-orthogonal-title">Especulación Bursátil Trimestral</h3>
-              <ul style="margin-left: 1.25rem; font-size: 0.88rem; line-height: 1.6; color: var(--color-text-muted);">
-                <li>Liquidación de estudios premiados (Tango / Arkane).</li>
-                <li>Subordinación de la cultura del oficio a la cotización bursátil.</li>
-                <li>Concentración exclusiva en activos de renta pasiva (Minecraft).</li>
-                <li><strong>El talento como amortiguador numérico de pérdidas directivas.</strong></li>
-              </ul>
+            <div class="dichotomy-card negative">
+              <span class="dichotomy-badge neg">Especulación Financiera</span>
+              <div class="dichotomy-statement">No es reestructuración técnica; es canibalismo corporativo para inflar el balance trimestral.</div>
+              <div class="dichotomy-details">
+                Liquidación de estudios premiados (Tango / Arkane) para maquillar pérdidas directivas, tratando a los trabajadores como amortiguadores numéricos prescindibles.
+              </div>
+              <div class="dichotomy-source">Fuente: Caso Microsoft Gaming (Asha Sharma).</div>
             </div>
           </div>
 
-          <div class="orthogonal-box story-beat" style="margin-top: 1.25rem;">
+          <div class="orthogonal-box" style="margin-top: 1.25rem;">
             <div class="orthogonal-box-header">Fraude Deontológico</div>
             <div class="orthogonal-box-content">
-              Cuando la dirección destruye sus propios bienes internos para complacer expectativas financieras efímeras, convierte a los trabajadores en moneda de cambio prescindible.
+              Cuando la dirección sacrifica sus bienes internos para complacer expectativas bursátiles efímeras, comete una traición directa al sentido moral de la profesión.
+              <div class="box-source-note">Fuente: Alasdair MacIntyre (1984), After Virtue.</div>
             </div>
           </div>
         </div>
@@ -625,7 +661,7 @@
       </section>
 
       <!-- ===================================================================
-           ESTACIÓN 11: EL PANÓPTICO DEL TELETRABAJO (BOSSWARE)
+           ESTACIÓN 11: EL PANÓPTICO DEL TELETRABAJO (BOSSWARE Y MODAL EN VIVO)
            =================================================================== -->
       <section class="slide inner-slide">
         <header class="running-header">
@@ -639,60 +675,34 @@
             La desconfianza directiva instala al capataz decimonónico dentro del hogar: telemetría invasiva que sustituye la confianza por la vigilancia mecánica coercitiva.
           </p>
 
-          <!-- HUD en vivo de telemetría Bossware -->
-          <div class="bossware-hud story-beat">
-            <div class="hud-status">
-              <span class="hud-dot pulsing"></span>
-              <span class="hud-label">SISTEMA DE TELEMETRÍA REMOTA: ACTIVO</span>
+          <div class="dichotomy-container">
+            <div class="dichotomy-card negative">
+              <span class="dichotomy-badge neg">Retórica de Control</span>
+              <div class="dichotomy-statement">«Medimos pulsaciones y capturamos pantallas para optimizar el rendimiento».</div>
+              <div class="dichotomy-details">
+                Penaliza la pausa analítica, destruye la concentración intelectual y empuja al profesional a fingir movimientos físicos de cursor.
+              </div>
+              <div class="dichotomy-source">Fuente: Prácticas de vigilancia digital corporativa.</div>
             </div>
-            <div class="hud-metrics">
-              <div class="hud-metric">
-                <span class="hud-metric-label">CADENCIA:</span>
-                <span class="hud-metric-val" id="live-kpm-counter">284 KPM</span>
+
+            <div class="dichotomy-card positive">
+              <span class="dichotomy-badge pos">Realidad Deontológica</span>
+              <div class="dichotomy-statement">No es medición de productividad; es la confesión de una gerencia incapaz de evaluar resultados.</div>
+              <div class="dichotomy-details">
+                Forzar a un colaborador a protegerse del software espía dentro de su hogar es una degradación moral y un síntoma de bancarrota ética.
               </div>
-              <div class="hud-metric">
-                <span class="hud-metric-label">WEBCAM:</span>
-                <span class="hud-metric-val active-green" id="live-cam-indicator">SINCRONIZADA</span>
-              </div>
-              <div class="hud-metric">
-                <span class="hud-metric-label">INACTIVIDAD:</span>
-                <span class="hud-metric-val alert-red" id="live-pause-tracker">00:02s (ALERTA)</span>
-              </div>
+              <div class="dichotomy-source">Fuente: Informes OIT sobre teletrabajo y privacidad.</div>
             </div>
           </div>
 
-          <div class="bossware-grid">
-            <div class="bossware-item story-beat">
-              <div class="bossware-title">Keystroke Logging</div>
-              <div class="bossware-desc">
-                Conteo de pulsaciones por minuto. Penaliza la pausa analítica y destruye la concentración requerida para el trabajo intelectual complejo.
-              </div>
-            </div>
-
-            <div class="bossware-item story-beat">
-              <div class="bossware-title">Capturas Inopinadas de Pantalla</div>
-              <div class="bossware-desc">
-                Fotografías periódicas sin previo aviso que invaden el espacio privado y convierten al hogar del colaborador en un panóptico digital.
-              </div>
-            </div>
-
-            <div class="bossware-item story-beat">
-              <div class="bossware-title">Rastreo de Actividad de Cursor</div>
-              <div class="bossware-desc">
-                Detección de segundos de inactividad que fuerza la simulación vacía de movimiento para esquivar penalizaciones disciplinarias automáticas.
-              </div>
-            </div>
-
-            <div class="bossware-item story-beat">
-              <div class="bossware-title">Agotamiento Psicobiológico</div>
-              <div class="bossware-desc">
-                Estrés crónico y desgaste nervioso. El colaborador invierte energía mental en protegerse del software espía en lugar de innovar.
-              </div>
-            </div>
-          </div>
-
-          <div class="bpe-verdict-box rejected story-beat" style="margin-top: 1.25rem;">
-            <strong>Fallo Deontológico:</strong> Forzar a un profesional a simular actividad física es la confesión explícita de una gerencia incapaz de evaluar resultados y desprovista de confianza ética.
+          <div style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+            <button class="btn-orthogonal-primary" onclick="openModal('modal-bossware')">
+              <i data-lucide="activity" style="width: 16px; height: 16px;"></i>
+              <span>Experimento en Vivo: Medir Telemetría Laboral</span>
+            </button>
+            <span style="font-size: 0.8rem; color: var(--color-text-light); font-weight: 600;">
+              * Detecta dinámicamente si transmites desde PC o dispositivo móvil.
+            </span>
           </div>
         </div>
 
@@ -722,26 +732,54 @@
             «El criterio fundamental de la justicia consiste en la producción, reproducción y aumento de la vida concreta de cada sujeto humano en comunidad». (Dussel, 1998)
           </p>
 
-          <div style="display: flex; flex-direction: column; gap: 0.9rem;">
-            <div class="orthogonal-box story-beat" style="margin-top: 0.25rem;">
-              <div class="orthogonal-box-header">1. Primacía de la Vida Concreta</div>
-              <div class="orthogonal-box-content">
-                Ninguna meta financiera ni algoritmo de optimización posee validez moral si destruye la base biológica, psicológica y económica del trabajador.
+          <div class="orthogonal-timeline">
+            <div class="orthogonal-timeline-track">
+              <!-- Principio 1 -->
+              <div class="timeline-node-card">
+                <div class="timeline-node-point">01</div>
+                <div class="timeline-node-content">
+                  <span class="timeline-node-tag">Principio Material</span>
+                  <h3 class="timeline-node-title">Primacía de la Vida</h3>
+                  <p class="timeline-node-text">
+                    Ninguna meta financiera ni algoritmo de optimización posee validez ética si destruye la base biológica, psicológica y económica del trabajador.
+                  </p>
+                  <div class="timeline-node-source">Fuente: Enrique Dussel (1998), Ética de la liberación.</div>
+                </div>
+              </div>
+
+              <!-- Principio 2 -->
+              <div class="timeline-node-card">
+                <div class="timeline-node-point">02</div>
+                <div class="timeline-node-content">
+                  <span class="timeline-node-tag">Principio Deontológico</span>
+                  <h3 class="timeline-node-title">Indelegabilidad</h3>
+                  <p class="timeline-node-text">
+                    Las decisiones sobre carreras, salarios y despidos pertenecen a la deliberación ética entre personas; la máquina jamás rinde cuentas ante la justicia.
+                  </p>
+                  <div class="timeline-node-source">Fuente: Criterio Material de Justicia.</div>
+                </div>
+              </div>
+
+              <!-- Principio 3 -->
+              <div class="timeline-node-card">
+                <div class="timeline-node-point active">03</div>
+                <div class="timeline-node-content">
+                  <span class="timeline-node-tag">Mandato de la GTH</span>
+                  <h3 class="timeline-node-title">Soberanía Ética</h3>
+                  <p class="timeline-node-text">
+                    El gestor de talento humano debe operar como un escudo institucional de justicia, nunca como un instrumento dócil de complacencia ante el abuso.
+                  </p>
+                  <div class="timeline-node-source">Fuente: Deontología Profesional de la GTH.</div>
+                </div>
               </div>
             </div>
+          </div>
 
-            <div class="orthogonal-box story-beat" style="margin-top: 0.6rem;">
-              <div class="orthogonal-box-header">2. Indelegabilidad del Juicio Humano</div>
-              <div class="orthogonal-box-content">
-                Las decisiones sobre carreras, salarios y despidos pertenecen a la deliberación ética entre personas; la máquina jamás rinde cuentas ante la justicia.
-              </div>
-            </div>
-
-            <div class="orthogonal-box story-beat" style="margin-top: 0.6rem;">
-              <div class="orthogonal-box-header">3. Soberanía Deontológica de la GTH</div>
-              <div class="orthogonal-box-content">
-                El gestor de talento humano debe operar como un escudo de justicia institucional, nunca como un instrumento dócil de complacencia ante el abuso directivo.
-              </div>
+          <div class="orthogonal-box" style="margin-top: 1.25rem;">
+            <div class="orthogonal-box-header">Imperativo Categórico de la GTH</div>
+            <div class="orthogonal-box-content">
+              El talento humano no se optimiza como un recurso inerte: se dignifica como un fin en sí mismo.
+              <div class="box-source-note">Fuente: Enrique Dussel (1998) / Immanuel Kant.</div>
             </div>
           </div>
         </div>
@@ -758,35 +796,24 @@
       </section>
 
       <!-- ===================================================================
-           ESTACIÓN 13: CIERRE MAGISTRAL CON FONDO AZUL (MÁXIMA DE ADELA CORTINA)
+           ESTACIÓN 13: CIERRE MAGISTRAL (FONDO AZUL OFICIAL Y MÁXIMA DIRECTA)
            =================================================================== -->
       <section class="slide closing-slide-blue">
         <header class="running-header">
           <span class="running-header-left">Ética de la Profesión</span>
-          <span class="running-header-right">12. Síntesis Deontológica Final</span>
+          <span class="running-header-right">12. Síntesis Final</span>
         </header>
 
         <div class="inner-body">
-          <div class="closing-header-tag story-beat">
-            <span class="closing-tag-badge">MÁXIMA FUNDAMENTAL DE LA REFLEXIÓN ÉTICA</span>
-          </div>
-
-          <div class="closing-quote-box story-beat">
-            <blockquote class="closing-quote-text">
+          <div class="closing-direct-maxim">
+            <p class="closing-quote-statement">
               «La moral pertenece a la experiencia cotidiana y a las valoraciones heredadas por una comunidad; <strong>la ética, en cambio, constituye el ejercicio reflexivo que somete esas costumbres a juicio crítico</strong> para fundar la justicia sobre la dignidad humana».
-            </blockquote>
+            </p>
 
-            <div class="closing-quote-author">
+            <div class="closing-quote-citation">
               <strong>ADELA CORTINA</strong>
               <span>Ética mínima: Introducción a la filosofía práctica (2000)</span>
             </div>
-          </div>
-
-          <div class="closing-verdict-banner story-beat">
-            <div class="closing-verdict-title">Veredicto para la Gerencia del Talento Humano</div>
-            <p class="closing-verdict-text">
-              El talento humano no es una variable cuantitativa que deba optimizarse como recurso inerte ni vigilarse con desconfianza mecánica: <strong>constituye un fin en sí mismo</strong> cuya dignidad moral está por encima de cualquier algoritmo.
-            </p>
           </div>
         </div>
 
@@ -808,6 +835,137 @@
         </footer>
       </section>
 
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODALES EXPERIMENTALES INTERACTIVOS (ESTILO JULIO VERA)
+       =================================================================== -->
+
+  <!-- 1. Modal Adela Cortina (Simulador de Mínimos) -->
+  <div id="modal-cortina" class="editorial-modal-backdrop">
+    <div class="editorial-modal-window">
+      <div class="editorial-modal-header">
+        <span class="editorial-modal-title">Laboratorio Ético: Auditoría de Mínimos de Justicia</span>
+        <button class="editorial-modal-close" onclick="closeModal('modal-cortina')">
+          <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+        </button>
+      </div>
+      <div class="editorial-modal-body">
+        <p style="margin-bottom: 1.25rem; font-size: 0.92rem; color: var(--color-text-muted);">
+          Conmuta los interruptores para evaluar qué ocurre cuando una corporación vulnera el suelo básico innegociable de la relación de trabajo:
+        </p>
+
+        <div class="modal-interactive-row">
+          <div>
+            <strong>1. Remuneración Justa y Suficiente</strong>
+            <div style="font-size: 0.8rem; color: var(--color-text-light);">Cubre la base material de subsistencia del colaborador.</div>
+          </div>
+          <input type="checkbox" id="chk-salary" checked onchange="updateCortinaSimulation()" style="width: 20px; height: 20px; cursor: pointer;">
+        </div>
+
+        <div class="modal-interactive-row">
+          <div>
+            <strong>2. Delimitación Estricta de la Jornada</strong>
+            <div style="font-size: 0.8rem; color: var(--color-text-light);">Derecho a la desconexión y preservación de la vida personal.</div>
+          </div>
+          <input type="checkbox" id="chk-hours" checked onchange="updateCortinaSimulation()" style="width: 20px; height: 20px; cursor: pointer;">
+        </div>
+
+        <div class="modal-interactive-row">
+          <div>
+            <strong>3. Provisión de Herramientas y Equipos</strong>
+            <div style="font-size: 0.8rem; color: var(--color-text-light);">La empresa asume el costo operativo del trabajo.</div>
+          </div>
+          <input type="checkbox" id="chk-tools" checked onchange="updateCortinaSimulation()" style="width: 20px; height: 20px; cursor: pointer;">
+        </div>
+
+        <div id="cortina-sim-result" class="orthogonal-box" style="margin-top: 1.25rem; border-left: 4px solid var(--color-primary-navy); padding: 1rem 1.25rem; background: #f8fafc;">
+          <strong style="color: var(--color-primary-navy);">ESTADO: CONDICIÓN ÉTICA CUMPLIDA</strong><br>
+          La institución garantiza el suelo innegociable de justicia. La demanda de compromiso es moralmente legítima.
+        </div>
+      </div>
+      <div class="editorial-modal-footer">
+        <span>Fuente: Adela Cortina (2000), Ética de la empresa.</span>
+        <button class="btn-orthogonal-primary" onclick="closeModal('modal-cortina')">Cerrar Laboratorio</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Modal ATS & BPE (Simulador de Filtrado en Vivo) -->
+  <div id="modal-bpe" class="editorial-modal-backdrop">
+    <div class="editorial-modal-window">
+      <div class="editorial-modal-header">
+        <span class="editorial-modal-title">Laboratorio ATS: Simular Filtrado y Tokenización BPE</span>
+        <button class="editorial-modal-close" onclick="closeModal('modal-bpe')">
+          <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+        </button>
+      </div>
+      <div class="editorial-modal-body">
+        <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--color-text-muted);">
+          Escribe o modifica el título del perfil para comprobar cómo el tokenizador BPE (Byte-Pair Encoding) reacciona ante guiones o separadores tipográficos:
+        </p>
+
+        <input type="text" id="ats-input-field" class="modal-input-field" value="Lic. Gestión-Talento" oninput="runBpeAnalysis(this.value)" placeholder="Escribe un cargo profesional...">
+
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-primary-navy); margin-bottom: 0.4rem; text-transform: uppercase;">
+          Fragmentación en Tokens BPE (Espacio Latente):
+        </div>
+        <div id="bpe-tokens-result" class="modal-tokens-row"></div>
+
+        <div id="bpe-verdict-result"></div>
+      </div>
+      <div class="editorial-modal-footer">
+        <span>Fuente: Chai, Peng & Li (2024), Tokenization Falling Short.</span>
+        <button class="btn-orthogonal-primary" onclick="closeModal('modal-bpe')">Cerrar Laboratorio</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Modal Bossware (Experimento en Vivo Móvil / PC) -->
+  <div id="modal-bossware" class="editorial-modal-backdrop">
+    <div class="editorial-modal-window">
+      <div class="editorial-modal-header">
+        <span class="editorial-modal-title">Experimento en Vivo: Medición de Telemetría Laboral</span>
+        <button class="editorial-modal-close" onclick="closeModal('modal-bossware')">
+          <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+        </button>
+      </div>
+      <div class="editorial-modal-body">
+        <p style="margin-bottom: 1rem; font-size: 0.92rem; color: var(--color-text-muted);">
+          Comprueba cómo opera el software espía en tiempo real registrando tu cadencia de tipeo o el movimiento de tu dispositivo:
+        </p>
+
+        <div class="telemetry-live-box">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <div>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-primary-navy); text-transform: uppercase;">Cadencia Calculada en Vivo:</span>
+              <div id="bossware-live-kpm" class="telemetry-metric-large">0 KPM</div>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Tiempo de Pausa:</span>
+              <div id="bossware-live-pause" style="font-size: 1.5rem; font-weight: 800; color: #b91c1c;">00:00s</div>
+            </div>
+          </div>
+
+          <div id="bossware-live-alert" style="margin-top: 0.75rem; font-size: 0.88rem; font-weight: 700; color: #15803d;">
+            ESTADO: ESPERANDO ACTIVIDAD...
+          </div>
+        </div>
+
+        <div style="margin-bottom: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--color-text-main);">
+          Campo de Tipeo para Evaluación de Productividad:
+        </div>
+        <input type="text" id="bossware-test-input" class="modal-input-field" placeholder="Escribe algo aquí de continuo para mantener la cadencia KPM...">
+
+        <div id="bossware-mobile-sensor" style="display: none; padding: 0.75rem; background: #e0f2fe; border: 1px solid #7dd3fc; margin-top: 0.5rem; font-size: 0.85rem; color: #0369a1; font-weight: 600;">
+          <span id="mobile-tilt-val">Sensor Móvil: Calibrando giroscopio / orientación...</span>
+        </div>
+      </div>
+      <div class="editorial-modal-footer">
+        <span>Fuente: Informes OIT sobre vigilancia y privacidad digital.</span>
+        <button class="btn-orthogonal-primary" onclick="closeModal('modal-bossware')">Finalizar Experimento</button>
+      </div>
     </div>
   </div>
 
@@ -839,69 +997,6 @@
       lucide.createIcons();
       window.engine = new SlideEngine({ container: '#slides-container' });
     });
-
-    // Demarcación Epistémica (Estación 02)
-    function highlightEpistemic(card, type) {
-      document.querySelectorAll('.timeline-step-card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-
-      const detail = document.getElementById('epistemic-detail');
-      if (type === 'urbanidad') {
-        detail.innerHTML = '<strong>Dictamen Epistémico (Urbanidad):</strong> Saludar con una sonrisa es cortesía necesaria para no chocar en los pasillos, pero no evita que un directivo sea injusto.';
-      } else if (type === 'moral') {
-        detail.innerHTML = '<strong>Dictamen Epistémico (Moral):</strong> Las tradiciones familiares o corporativas heredadas reproducen hábitos sin reflexionar si son justos.';
-      } else {
-        detail.innerHTML = '<strong>Dictamen Epistémico (Ética):</strong> El tribunal de la razón práctica somete a juicio toda orden: <em>«¿Esta decisión instrumentaliza al trabajador o respeta su dignidad?»</em>';
-      }
-    }
-
-    // Simulador de Mínimos de Adela Cortina (Estación 03)
-    let cortinaAuditActive = false;
-    function toggleCortinaAudit() {
-      cortinaAuditActive = !cortinaAuditActive;
-      const alertBox = document.getElementById('cortina-alert');
-      if (cortinaAuditActive) {
-        alertBox.classList.add('active');
-      } else {
-        alertBox.classList.remove('active');
-      }
-    }
-
-    // Simulador Interactivo BPE (Estación 08)
-    function switchBpeCase(variant) {
-      const btns = document.querySelectorAll('.bpe-tab-btn');
-      btns.forEach(b => b.classList.remove('active'));
-
-      const inputDisplay = document.getElementById('bpe-input-text');
-      const tokensContainer = document.getElementById('bpe-tokens-container');
-      const verdict = document.getElementById('bpe-verdict');
-
-      if (variant === 'A') {
-        btns[0].classList.add('active');
-        inputDisplay.textContent = 'Lic. Gerencia de Talento';
-        tokensContainer.innerHTML = `
-          <span class="bpe-token-chip">[Lic.]</span>
-          <span class="bpe-token-chip">[Gerencia]</span>
-          <span class="bpe-token-chip">[de]</span>
-          <span class="bpe-token-chip">[Talento]</span>
-        `;
-        verdict.className = 'bpe-verdict-box';
-        verdict.innerHTML = `<strong>Resultado Algorítmico:</strong> Vector semántico continuo y regular. El modelo procesa la categoría profesional y otorga recomendación positiva de perfil (Match: 94%).`;
-      } else {
-        btns[1].classList.add('active');
-        inputDisplay.textContent = 'Lic. Gestión-Talento';
-        tokensContainer.innerHTML = `
-          <span class="bpe-token-chip broken">[Lic.]</span>
-          <span class="bpe-token-chip broken">[Gest]</span>
-          <span class="bpe-token-chip broken">[ión]</span>
-          <span class="bpe-token-chip broken">[-]</span>
-          <span class="bpe-token-chip broken">[Tal]</span>
-          <span class="bpe-token-chip broken">[ento]</span>
-        `;
-        verdict.className = 'bpe-verdict-box rejected';
-        verdict.innerHTML = `<strong>ALERTA BPE (Tokenization Falling Short):</strong> La presencia del guion fragmentó el lema en subpalabras rotas numéricamente dispersas. El vector colapsa en el espacio latente y el postulante es <strong>DESCARTADO AUTOMÁTICAMENTE</strong> por un detalle sintáctico irrelevante.`;
-      }
-    }
   </script>
 </body>
 </html>

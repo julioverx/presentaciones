@@ -1,6 +1,6 @@
 /**
- * SlideEngine - Motor de Storytelling y Presentación Interactiva (Estilo Julio Vera)
- * Soporta navegación por fragmentos (story-beats), renderizado KaTeX, telemetría y animaciones editoriales.
+ * SlideEngine - Motor Editorial y de Presentación Interactiva (Estilo Julio Vera)
+ * Control de navegación directa, renderizado matemático KaTeX y laboratorios en modal.
  */
 class SlideEngine {
   constructor(options = {}) {
@@ -8,9 +8,6 @@ class SlideEngine {
     this.slides = Array.from(document.querySelectorAll('.slide'));
     this.currentIndex = 0;
     this.totalSlides = this.slides.length;
-    this.isOverview = false;
-    this.bosswareTimer = null;
-    this.pauseTimer = null;
 
     this.progressBar = document.querySelector('#slide-progress');
     this.counterEl = document.querySelector('#slide-counter');
@@ -36,16 +33,25 @@ class SlideEngine {
       }
     }
 
-    this.initCodeStreams();
     this.bindEvents();
     this.updateSlides();
     this.renderMath();
+    this.initModalListeners();
   }
 
   bindEvents() {
-    // Teclado
+    // Navegación por teclado
     window.addEventListener('keydown', (e) => {
-      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+      // Ignorar si el usuario está interactuando con un campo de texto dentro de un modal
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        if (e.key === 'Escape') this.closeAllModals();
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        this.closeAllModals();
+        return;
+      }
 
       switch (e.key) {
         case 'ArrowRight':
@@ -75,10 +81,10 @@ class SlideEngine {
       }
     });
 
-    // Avance por clic directo en la lámina (estilo keynote/reel)
+    // Avance por clic directo en la lámina (rápido, 1 clic = 1 diapositiva)
     if (this.container) {
       this.container.addEventListener('click', (e) => {
-        if (e.target.closest('button, a, input, select, textarea, .bpe-tab-btn, .timeline-step-card, .cortina-toggle-btn')) {
+        if (e.target.closest('button, a, input, select, textarea, .editorial-modal-backdrop, .editorial-modal-window')) {
           return;
         }
         this.next();
@@ -89,13 +95,14 @@ class SlideEngine {
     if (this.nextBtn) this.nextBtn.addEventListener('click', (e) => { e.stopPropagation(); this.next(); });
     if (this.fullscreenBtn) this.fullscreenBtn.addEventListener('click', (e) => { e.stopPropagation(); this.toggleFullscreen(); });
 
-    // Soporte táctil / swipe
+    // Swipe táctil
     let touchStartX = 0;
     document.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
 
     document.addEventListener('touchend', (e) => {
+      if (document.querySelector('.editorial-modal-backdrop.active')) return;
       const touchEndX = e.changedTouches[0].screenX;
       const diff = touchEndX - touchStartX;
       if (Math.abs(diff) > 50) {
@@ -116,32 +123,12 @@ class SlideEngine {
   }
 
   next() {
-    const currentSlide = this.slides[this.currentIndex];
-    const unrevealedBeats = currentSlide.querySelectorAll('.story-beat:not(.revealed)');
-
-    // Si la diapositiva actual tiene fragmentos pendientes, revela el siguiente paso del relato
-    if (unrevealedBeats.length > 0) {
-      unrevealedBeats[0].classList.add('revealed');
-      return;
-    }
-
-    // Si ya no quedan fragmentos, avanza a la siguiente diapositiva
     if (this.currentIndex < this.totalSlides - 1) {
       this.goTo(this.currentIndex + 1);
     }
   }
 
   prev() {
-    const currentSlide = this.slides[this.currentIndex];
-    const revealedBeats = currentSlide.querySelectorAll('.story-beat.revealed');
-
-    // Si hay fragmentos revelados en esta lámina, oculta el último
-    if (revealedBeats.length > 0) {
-      revealedBeats[revealedBeats.length - 1].classList.remove('revealed');
-      return;
-    }
-
-    // Si no, retrocede a la diapositiva anterior
     if (this.currentIndex > 0) {
       this.goTo(this.currentIndex - 1);
     }
@@ -167,8 +154,6 @@ class SlideEngine {
         slide.classList.add('prev');
       } else {
         slide.classList.add('next');
-        // Resetear fragmentos futuros
-        slide.querySelectorAll('.story-beat').forEach(b => b.classList.remove('revealed'));
       }
     });
 
@@ -189,13 +174,13 @@ class SlideEngine {
     // 1. Renderizar KaTeX
     this.renderMath();
 
-    // 2. Animar contadores CEPAL y barras (Lámina 7)
+    // 2. CEPAL (Lámina 7 - index 6)
     if (slide.querySelector('.stat-number[data-target]')) {
       slide.querySelectorAll('.stat-number[data-target]').forEach(counter => {
         const target = parseFloat(counter.getAttribute('data-target'));
         const suffix = counter.getAttribute('data-suffix') || '%';
         let current = 0;
-        const steps = 30;
+        const steps = 25;
         const stepVal = target / steps;
         let count = 0;
         const timer = setInterval(() => {
@@ -207,7 +192,7 @@ class SlideEngine {
           } else {
             counter.textContent = current.toFixed(1) + suffix;
           }
-        }, 25);
+        }, 20);
       });
 
       slide.querySelectorAll('.funnel-progress-fill').forEach(bar => {
@@ -215,118 +200,43 @@ class SlideEngine {
         if (targetW) {
           bar.style.width = '0%';
           setTimeout(() => {
-            bar.style.transition = 'width 1s cubic-bezier(0.16, 1, 0.3, 1)';
             bar.style.width = `${targetW}%`;
-          }, 150);
+          }, 100);
         }
       });
     }
-
-    // 3. Simulación en tiempo real de telemetría Bossware (Lámina 11)
-    if (slide.querySelector('#live-kpm-counter')) {
-      this.startBosswareSimulation();
-    } else {
-      this.stopBosswareSimulation();
-    }
-  }
-
-  startBosswareSimulation() {
-    this.stopBosswareSimulation();
-
-    const kpmEl = document.querySelector('#live-kpm-counter');
-    const camEl = document.querySelector('#live-cam-indicator');
-    const pauseEl = document.querySelector('#live-pause-tracker');
-
-    let baseKpm = 282;
-    let pauseSeconds = 2;
-
-    this.bosswareTimer = setInterval(() => {
-      if (kpmEl) {
-        const fluctuation = Math.floor(Math.random() * 30) - 15;
-        kpmEl.textContent = (baseKpm + fluctuation) + ' KPM';
-      }
-
-      if (camEl && Math.random() > 0.6) {
-        camEl.textContent = 'CAPTURANDO...';
-        camEl.classList.remove('active-green');
-        camEl.classList.add('alert-red');
-        setTimeout(() => {
-          if (camEl) {
-            camEl.textContent = 'SINCRONIZADA';
-            camEl.classList.remove('alert-red');
-            camEl.classList.add('active-green');
-          }
-        }, 600);
-      }
-    }, 1200);
-
-    this.pauseTimer = setInterval(() => {
-      if (pauseEl) {
-        pauseSeconds++;
-        if (pauseSeconds > 5) pauseSeconds = 1;
-        pauseEl.textContent = `00:0${pauseSeconds}s (ALERTA)`;
-      }
-    }, 1000);
-  }
-
-  stopBosswareSimulation() {
-    if (this.bosswareTimer) clearInterval(this.bosswareTimer);
-    if (this.pauseTimer) clearInterval(this.pauseTimer);
-  }
-
-  initCodeStreams() {
-    const streams = document.querySelectorAll('.code-stream-text');
-    if (!streams.length) return;
-
-    const codeSample = `
-# Algoritmo de Ponderación Deontológica vs Eficiencia BPE
-import torch
-import torch.nn as nn
-
-class CandidateEvaluation(nn.Module):
-    def __init__(self, vocab_dim=4096, hidden_dim=512):
-        super().__init__()
-        self.embedding = nn.Embedding(vocab_dim, hidden_dim)
-        self.attention = nn.MultiheadAttention(hidden_dim, 8)
-        self.classifier = nn.Linear(hidden_dim, 1)
-
-    def forward(self, token_seq):
-        # BPE fragmentation: [Lic.] [Gest] [ión] [-] [Tal] [ento]
-        x = self.embedding(token_seq)
-        attn_out, _ = self.attention(x, x, x)
-        score = torch.sigmoid(self.classifier(attn_out.mean(dim=1)))
-        return score # Fallo epistemológico: carece de juicio sobre la dignidad
-
-# Kalai & Vempala (STOC 2024): Calibrated Language Models Must Hallucinate
-def check_hallucination_probability(p_calibrated):
-    assert p_calibrated > 0.0
-    return "Pr[Falsehood] > 0 (Ineludible)"
-`.repeat(3);
-
-    streams.forEach(stream => {
-      if (!stream.textContent.trim()) {
-        stream.textContent = codeSample;
-      }
-    });
   }
 
   renderMath() {
+    // Renderizado estándar y seguro con KaTeX
     if (typeof katex !== 'undefined') {
-      document.querySelectorAll('.math-formula-display').forEach(el => {
-        if (!el.dataset.rendered) {
-          const raw = el.getAttribute('data-tex') || el.textContent.trim();
-          try {
-            katex.render(raw, el, {
-              throwOnError: false,
-              displayMode: true
-            });
-            el.dataset.rendered = 'true';
-          } catch (err) {
-            console.error('KaTeX rendering error:', err);
-          }
+      const formulaEl = document.getElementById('stoc-math-formula');
+      if (formulaEl && !formulaEl.dataset.rendered) {
+        try {
+          katex.render('\\Pr[\\text{Falsedad}] > 0 \\quad (\\forall \\text{ modelo calibrado})', formulaEl, {
+            displayMode: true,
+            throwOnError: false
+          });
+          formulaEl.dataset.rendered = 'true';
+        } catch (err) {
+          console.error('KaTeX rendering error:', err);
+        }
+      }
+    }
+  }
+
+  initModalListeners() {
+    document.querySelectorAll('.editorial-modal-backdrop').forEach(backdrop => {
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) {
+          backdrop.classList.remove('active');
         }
       });
-    }
+    });
+  }
+
+  closeAllModals() {
+    document.querySelectorAll('.editorial-modal-backdrop').forEach(b => b.classList.remove('active'));
   }
 
   toggleFullscreen() {
@@ -338,6 +248,192 @@ def check_hallucination_probability(p_calibrated):
       }
     }
   }
+}
+
+// =============================================================================
+// FUNCIONES GLOBALES PARA MODALES INTERACTIVOS
+// =============================================================================
+
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.classList.add('active');
+
+    // Inicializaciones específicas por modal
+    if (id === 'modal-bpe') {
+      initBpeModal();
+    } else if (id === 'modal-bossware') {
+      initBosswareModal();
+    }
+  }
+}
+
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.classList.remove('active');
+    if (id === 'modal-bossware' && window.bosswareInterval) {
+      clearInterval(window.bosswareInterval);
+    }
+  }
+}
+
+// 1. Modal Adela Cortina (Quiebre de Mínimos)
+function updateCortinaSimulation() {
+  const s = document.getElementById('chk-salary')?.checked;
+  const h = document.getElementById('chk-hours')?.checked;
+  const t = document.getElementById('chk-tools')?.checked;
+  const res = document.getElementById('cortina-sim-result');
+
+  if (!res) return;
+
+  if (s && h && t) {
+    res.style.borderLeftColor = 'var(--color-primary-navy)';
+    res.style.background = '#f8fafc';
+    res.innerHTML = `
+      <strong style="color: var(--color-primary-navy);">ESTADO: CONDICIÓN ÉTICA CUMPLIDA</strong><br>
+      La institución garantiza el suelo innegociable de justicia. La demanda de compromiso es moralmente legítima.
+    `;
+  } else {
+    res.style.borderLeftColor = '#ef4444';
+    res.style.background = '#fef2f2';
+    res.innerHTML = `
+      <strong style="color: #b91c1c;">ALERTA DE QUIEBRE DE MÍNIMOS (ADELA CORTINA)</strong><br>
+      Al suprimir el salario justo, la jornada delimitada o las herramientas, la organización cae en <strong>«Fraude Estructural y Organización Desmoralizada»</strong>. Cualquier exigencia de lealtad se convierte en coacción ilegítima.
+    `;
+  }
+}
+
+// 2. Modal ATS & BPE (Simulador Interactivo)
+function initBpeModal() {
+  const input = document.getElementById('ats-input-field');
+  if (!input) return;
+  input.focus();
+  runBpeAnalysis(input.value);
+}
+
+function runBpeAnalysis(text) {
+  const tokensContainer = document.getElementById('bpe-tokens-result');
+  const verdict = document.getElementById('bpe-verdict-result');
+  if (!tokensContainer || !verdict) return;
+
+  const raw = text.trim();
+  if (!raw) {
+    tokensContainer.innerHTML = '<span style="color:#94a3b8; font-size:0.85rem;">Escribe un cargo o perfil arriba...</span>';
+    verdict.innerHTML = 'Esperando texto...';
+    return;
+  }
+
+  // Detección de caracteres de ruptura sintáctica (guiones, barras, etc.)
+  const hasHyphen = raw.includes('-');
+  const hasSlash = raw.includes('/');
+
+  if (hasHyphen || hasSlash) {
+    // Simular fragmentación BPE rota
+    const parts = raw.split(/([-\/])/);
+    let chipsHtml = '';
+    parts.forEach(p => {
+      if (p === '-' || p === '/') {
+        chipsHtml += `<span class="token-chip broken">[${p}]</span>`;
+      } else if (p.length > 4) {
+        chipsHtml += `<span class="token-chip broken">[${p.slice(0, 3)}]</span><span class="token-chip broken">[${p.slice(3)}]</span>`;
+      } else {
+        chipsHtml += `<span class="token-chip broken">[${p}]</span>`;
+      }
+    });
+
+    tokensContainer.innerHTML = chipsHtml;
+    verdict.className = 'orthogonal-box';
+    verdict.style.borderColor = '#ef4444';
+    verdict.innerHTML = `
+      <div class="orthogonal-box-header" style="background:#ef4444;">ALERTA BPE: TOKENIZACIÓN DEFECTUOSA (MATCH: 28%)</div>
+      <div class="orthogonal-box-content">
+        El guion o carácter separador forzó al algoritmo a fragmentar el lema en <strong>subpalabras rotas numéricamente dispersas</strong> en el espacio latente. El motor ATS <strong>DESCARTA AUTOMÁTICAMENTE</strong> la postulación por un detalle ortográfico irrelevante.
+        <div class="box-source-note">Fuente: Chai, Peng & Li (2024), Tokenization Falling Short.</div>
+      </div>
+    `;
+  } else {
+    // Tokenización regular
+    const words = raw.split(/\s+/);
+    let chipsHtml = '';
+    words.forEach(w => {
+      chipsHtml += `<span class="token-chip">[${w}]</span>`;
+    });
+
+    tokensContainer.innerHTML = chipsHtml;
+    verdict.className = 'orthogonal-box';
+    verdict.style.borderColor = 'var(--color-primary-navy)';
+    verdict.innerHTML = `
+      <div class="orthogonal-box-header" style="background:var(--color-primary-navy);">RECONOCIMIENTO SEMÁNTICO LIMPIO (MATCH: 94%)</div>
+      <div class="orthogonal-box-content">
+        Vector continuo regular. Los lemas coinciden con la matriz de pesos del modelo de selección algorítmica.
+        <div class="box-source-note">Fuente: Chai, Peng & Li (2024), Tokenization Falling Short.</div>
+      </div>
+    `;
+  }
+}
+
+// 3. Modal Bossware (Experimento en Vivo Móvil / PC)
+function initBosswareModal() {
+  const kpmDisplay = document.getElementById('bossware-live-kpm');
+  const pauseDisplay = document.getElementById('bossware-live-pause');
+  const alertBox = document.getElementById('bossware-live-alert');
+  const testInput = document.getElementById('bossware-test-input');
+  const mobileSensorBox = document.getElementById('bossware-mobile-sensor');
+
+  // Detectar si es dispositivo móvil
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
+
+  if (isMobile && mobileSensorBox) {
+    mobileSensorBox.style.display = 'block';
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', (e) => {
+        const tilt = Math.round(e.gamma || 0);
+        const sensorVal = document.getElementById('mobile-tilt-val');
+        if (sensorVal) sensorVal.textContent = `Inclinación: ${tilt}° | Movimiento: Activo`;
+      }, { passive: true });
+    }
+  }
+
+  let keystrokes = 0;
+  let lastKeyTime = Date.now();
+  let pauseSec = 0;
+
+  if (testInput) {
+    testInput.value = '';
+    testInput.focus();
+    testInput.oninput = () => {
+      keystrokes++;
+      lastKeyTime = Date.now();
+      pauseSec = 0;
+      if (alertBox) {
+        alertBox.textContent = 'ESTADO: ACTIVIDAD REGISTRADA (TRABAJADOR MONITOREADO)';
+        alertBox.style.color = '#15803d';
+      }
+    };
+  }
+
+  if (window.bosswareInterval) clearInterval(window.bosswareInterval);
+
+  window.bosswareInterval = setInterval(() => {
+    const elapsed = (Date.now() - lastKeyTime) / 1000;
+    if (elapsed > 1.5) {
+      pauseSec = Math.floor(elapsed);
+      if (pauseDisplay) pauseDisplay.textContent = `00:0${pauseSec}s`;
+      if (alertBox) {
+        alertBox.textContent = `¡ALERTA DIRECTIVA! Micro-pausa detectada (${pauseSec}s). Productividad bajo penalización.`;
+        alertBox.style.color = '#b91c1c';
+      }
+    } else {
+      if (pauseDisplay) pauseDisplay.textContent = '00:00s';
+    }
+
+    if (kpmDisplay) {
+      const calculatedKpm = keystrokes * 12;
+      kpmDisplay.textContent = `${calculatedKpm} KPM`;
+      keystrokes = Math.max(0, Math.floor(keystrokes * 0.7));
+    }
+  }, 1000);
 }
 
 window.SlideEngine = SlideEngine;

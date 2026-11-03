@@ -51,6 +51,46 @@ html, body {
   flex-direction: column;
 }
 
+/* Capa Ambiental y Reticular Glass/Mesh */
+.ambient-canvas-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.ambient-shape-1 {
+  position: absolute;
+  top: -12%;
+  right: -8%;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15, 46, 90, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(35px);
+}
+
+.ambient-shape-2 {
+  position: absolute;
+  bottom: -15%;
+  left: 5%;
+  width: 520px;
+  height: 380px;
+  background: radial-gradient(ellipse, rgba(30, 58, 138, 0.06) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(40px);
+}
+
+.ambient-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(15, 46, 90, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 46, 90, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.6;
+}
+
 /* Diapositivas */
 .slide {
   position: absolute;
@@ -70,15 +110,49 @@ html, body {
   z-index: 2;
 }
 
+.slide.active .inner-body {
+  animation: slideFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ==========================================================================
-   PORTADA ESTÁNDAR EXACTA (ESTILO JULIO VERA - RITMO HOMOGÉNEO)
+   PORTADA OFICIAL EN AZUL PROFUNDO (#0f2e5a) Y LETRAS BLANCAS
    ========================================================================== */
-.cover-slide {
+.cover-slide-blue {
+  background: var(--color-primary-navy) !important;
+  color: #ffffff !important;
   padding: 5.5% 7.4%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Distribución matemática idéntica de los 3 espacios */
+  justify-content: space-between;
   height: 100%;
+  position: relative;
+}
+
+.cover-slide-blue .ambient-shape-1 {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, rgba(15, 46, 90, 0) 70%);
+  filter: blur(45px);
+}
+
+.cover-slide-blue .ambient-shape-2 {
+  background: radial-gradient(ellipse, rgba(37, 99, 235, 0.18) 0%, rgba(15, 46, 90, 0) 70%);
+  filter: blur(50px);
+}
+
+.cover-slide-blue .ambient-grid-lines {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
 }
 
 /* Bloque 1: Cabecera institucional */
@@ -87,10 +161,12 @@ html, body {
   align-items: flex-start;
   gap: 3.5%;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .cover-logo-wrapper {
-  color: var(--color-primary-navy);
+  color: #ffffff;
   flex-shrink: 0;
   display: flex;
   align-items: flex-start;
@@ -110,7 +186,7 @@ html, body {
 
 .cover-letterhead p {
   font-size: clamp(0.85rem, 2.2vh, 1.35rem);
-  color: var(--color-text-main);
+  color: #ffffff;
   line-height: 1.35;
   letter-spacing: -0.01em;
   font-weight: 500;
@@ -125,24 +201,27 @@ html, body {
 /* Bloque 2: Título en exactamente 2 líneas */
 .cover-title-block {
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .cover-main-title {
   font-size: clamp(1.4rem, 2.6vw, 2.5rem);
   line-height: 1.3;
   letter-spacing: -0.02em;
-  color: var(--color-text-main);
+  color: #ffffff;
   max-width: 95%;
 }
 
 .cover-main-title strong {
   font-weight: 700;
-  display: block; /* Asegura línea 1 */
+  display: block;
 }
 
 .cover-main-title span {
   font-weight: 500;
-  display: block; /* Asegura línea 2 */
+  display: block;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 /* Bloque 3: Créditos con separador en el medio */
@@ -151,6 +230,8 @@ html, body {
   align-items: stretch;
   gap: 3rem;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .cover-credit-col {
@@ -161,7 +242,7 @@ html, body {
 
 .cover-credits-separator {
   width: 1px;
-  background-color: var(--color-border-subtle);
+  background-color: rgba(255, 255, 255, 0.25);
   align-self: stretch;
 }
 
@@ -169,7 +250,7 @@ html, body {
   font-size: clamp(0.95rem, 2.2vh, 1.35rem);
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--color-text-main);
+  color: #93c5fd;
   letter-spacing: -0.01em;
 }
 
@@ -177,7 +258,7 @@ html, body {
   font-size: clamp(0.95rem, 2.2vh, 1.35rem);
   font-weight: 500;
   text-transform: uppercase;
-  color: var(--color-text-main);
+  color: #ffffff;
   letter-spacing: -0.01em;
   display: flex;
   align-items: center;
@@ -187,7 +268,7 @@ html, body {
 .credit-bolo {
   font-size: 1.1em;
   line-height: 1;
-  color: var(--color-primary-navy);
+  color: #60a5fa;
   margin: 0 0.45rem;
 }
 
@@ -196,9 +277,11 @@ html, body {
   font-size: clamp(0.9rem, 2.2vh, 1.35rem);
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--color-text-main);
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: -0.01em;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 /* ==========================================================================
@@ -210,6 +293,7 @@ html, body {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  position: relative;
 }
 
 /* Running Header Superior */
@@ -222,6 +306,8 @@ html, body {
   font-weight: 600;
   flex-shrink: 0;
   margin-bottom: 1vh;
+  position: relative;
+  z-index: 1;
 }
 
 .running-header-left,
@@ -234,282 +320,345 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Busca el centro vertical de la lámina */
-  padding: 1.5vh 0;
+  justify-content: center;
+  padding: 1vh 0;
+  position: relative;
+  z-index: 1;
 }
 
 .slide-heading {
-  font-size: clamp(1.5rem, 2.8vw, 2.6rem);
+  font-size: clamp(1.45rem, 2.7vw, 2.5rem);
   font-weight: 700;
   color: var(--color-primary-navy);
   letter-spacing: -0.02em;
-  margin-bottom: 1.5vh;
+  margin-bottom: 1vh;
   line-height: 1.2;
 }
 
 .slide-description {
-  font-size: clamp(0.9rem, 1.6vh, 1.1rem);
+  font-size: clamp(0.88rem, 1.6vh, 1.05rem);
   color: var(--color-text-muted);
-  line-height: 1.55;
-  margin-bottom: 3.5vh;
-  max-width: 90%;
+  line-height: 1.5;
+  margin-bottom: 2vh;
+  max-width: 95%;
 }
 
-/* Componente de Caja Ortogonal (Páginas 18-36 del manual de Julio Vera) */
-.orthogonal-box {
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
+/* ==========================================================================
+   LÍNEA DE TIEMPO ORTOGONAL CON NODOS CONECTADOS (ESTILO JULIO VERA - PDF)
+   ========================================================================== */
+.orthogonal-timeline {
+  display: flex;
+  flex-direction: column;
   position: relative;
-  margin-top: 1.5rem;
-  padding: 1.5rem;
+  width: 100%;
+  margin-top: 1rem;
 }
 
-.orthogonal-box-header {
-  position: absolute;
-  top: -1.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-primary-navy);
-  color: #ffffff;
-  font-size: clamp(0.75rem, 1.4vh, 0.9rem);
-  font-weight: 700;
-  padding: 0.35rem 1.25rem;
-  text-transform: none;
-  white-space: nowrap;
-}
-
-.orthogonal-box-content {
-  font-size: clamp(0.85rem, 1.5vh, 1.05rem);
-  color: var(--color-text-muted);
-  line-height: 1.55;
-}
-
-/* Grilla ortogonal para 2 columnas */
-.grid-orthogonal-2 {
+.orthogonal-timeline-track {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  align-items: stretch;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
 }
 
-.card-orthogonal {
-  border: 1px solid var(--color-border-subtle);
-  padding: 1.5rem;
+.orthogonal-timeline-track::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 14%;
+  right: 14%;
+  height: 2px;
+  background: var(--color-primary-navy);
+  z-index: 1;
+}
+
+.timeline-node-card {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
 }
 
+.timeline-node-point {
+  width: 38px;
+  height: 38px;
+  background: #ffffff;
+  border: 2px solid var(--color-primary-navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--color-primary-navy);
+  margin-bottom: 1rem;
+  box-shadow: 0 0 0 5px #ffffff;
+}
+
+.timeline-node-point.active {
+  background: var(--color-primary-navy);
+  color: #ffffff;
+}
+
+.timeline-node-content {
+  border: 1px solid var(--color-border-subtle);
+  border-top: 3px solid var(--color-primary-navy);
+  background: #ffffff;
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.timeline-node-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-secondary-navy);
+  margin-bottom: 0.35rem;
+}
+
+.timeline-node-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-navy);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.timeline-node-text {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+
+.timeline-node-source {
+  margin-top: 0.85rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+/* ==========================================================================
+   ESTRUCTURA DICOTÓMICA: "NO ES ESTO, ES ESTO" (DIRECTO AL GRANO)
+   ========================================================================== */
+.dichotomy-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.dichotomy-card {
+  border: 1px solid var(--color-border-subtle);
+  padding: 1.4rem 1.6rem;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dichotomy-card.negative {
+  border-left: 4px solid #94a3b8;
+  background: #f8fafc;
+}
+
+.dichotomy-card.positive {
+  border-left: 4px solid var(--color-primary-navy);
+  background: #ffffff;
+}
+
+.dichotomy-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.dichotomy-badge.neg {
+  color: #64748b;
+}
+
+.dichotomy-badge.pos {
+  color: var(--color-primary-navy);
+}
+
+.dichotomy-statement {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
+}
+
+.dichotomy-details {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+.dichotomy-source {
+  margin-top: 0.9rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+/* Grillas Ortogonales */
+.grid-orthogonal-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.card-orthogonal {
+  border: 1px solid var(--color-border-subtle);
+  padding: 1.4rem 1.6rem;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .card-orthogonal.featured {
-  border-color: var(--color-primary-navy);
-  border-width: 1.5px;
+  border-top: 3px solid var(--color-primary-navy);
 }
 
 .card-orthogonal-title {
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--color-primary-navy);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
 }
 
 .card-orthogonal-text {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
   color: var(--color-text-muted);
-  line-height: 1.5;
+  flex: 1;
 }
 
-/* Tablas Ortogonales (Estilo páginas 40-46) */
-.table-orthogonal {
-  width: 100%;
-  border: 1.5px solid var(--color-primary-navy);
-  border-collapse: collapse;
+.card-source-tag {
+  margin-top: 0.85rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-light);
 }
 
-.table-orthogonal th,
-.table-orthogonal td {
-  border: 1px solid var(--color-border-subtle);
-  padding: 0.85rem 1.2rem;
-  text-align: left;
-  font-size: 0.9rem;
+/* Cajas de Alerta y Dictamen */
+.orthogonal-box {
+  border: 1px solid var(--color-primary-navy);
+  margin-top: 1.25rem;
+  background: #ffffff;
 }
 
-.table-orthogonal th {
+.orthogonal-box-header {
   background: var(--color-primary-navy);
   color: #ffffff;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.78rem;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* Footer de Diapositiva Interior (Logo con color sincronizado y Paginación) */
-.inner-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-shrink: 0;
-  padding-top: 1vh;
+.orthogonal-box-content {
+  padding: 0.9rem 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-text-main);
 }
 
-.inner-footer-logo-wrapper {
-  color: var(--color-primary-navy);
-  display: flex;
-  align-items: center;
+.box-source-note {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  font-weight: 600;
 }
 
-.inner-footer-logo-wrapper svg {
-  height: 24px;
-  width: auto;
-  fill: currentColor;
-}
-
-/* Paginación minimalista tipo [ N | Total ] */
-.pagination-badge {
+/* Botones Ortogonales de Acción */
+.btn-orthogonal-primary {
   display: inline-flex;
   align-items: center;
-  border: 1px solid var(--color-primary-navy);
-  border-radius: 3px;
-  overflow: hidden;
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-.pagination-current {
+  gap: 0.6rem;
   background: var(--color-primary-navy);
   color: #ffffff;
-  padding: 0.2rem 0.55rem;
-  min-width: 28px;
-  text-align: center;
+  border: 1px solid var(--color-primary-navy);
+  padding: 0.65rem 1.25rem;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 2px;
 }
 
-.pagination-total {
-  background: #ffffff;
-  color: var(--color-text-muted);
-  padding: 0.2rem 0.55rem;
-  min-width: 28px;
-  text-align: center;
+.btn-orthogonal-primary:hover {
+  background: #1e3a8a;
+  border-color: #1e3a8a;
+  transform: translateY(-1px);
 }
 
 /* ==========================================================================
-   COMPONENTES INTERACTIVOS ORTOGONALES AVANZADOS
+   ESTACIÓN 07: CEPAL / MÉTRICAS DINÁMICAS
    ========================================================================== */
-
-/* Tokenizador BPE Interactivo */
-.bpe-demo-container {
-  border: 1px solid var(--color-primary-navy);
-  padding: 1.25rem;
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.bpe-switch-tabs {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.bpe-tab-btn {
-  background: #ffffff;
-  border: 1px solid var(--color-border-subtle);
-  padding: 0.45rem 1rem;
-  font-family: inherit;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--color-text-muted);
-  transition: all 0.15s;
-}
-
-.bpe-tab-btn.active {
-  background: var(--color-primary-navy);
-  color: #ffffff;
-  border-color: var(--color-primary-navy);
-}
-
-.bpe-tokens-display {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  padding: 0.75rem;
-  background: #f8fafc;
-  border: 1px solid var(--color-border-subtle);
-  min-height: 48px;
-  align-items: center;
-}
-
-.bpe-token-chip {
-  background: #ffffff;
-  border: 1px solid var(--color-primary-navy);
-  padding: 0.2rem 0.55rem;
-  font-family: monospace;
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--color-primary-navy);
-}
-
-.bpe-token-chip.broken {
-  border-color: #b91c1c;
-  color: #b91c1c;
-  background: #fef2f2;
-}
-
-.bpe-verdict-box {
-  padding: 0.75rem 1rem;
-  font-size: 0.88rem;
-  line-height: 1.45;
-  border-left: 3px solid var(--color-primary-navy);
-  background: #f0f4f9;
-}
-
-.bpe-verdict-box.rejected {
-  border-left-color: #b91c1c;
-  background: #fef2f2;
-  color: #991b1b;
-}
-
-/* Gráfico de Barras y Métricas CEPAL */
 .metrics-stat-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .stat-orthogonal-card {
   border: 1px solid var(--color-border-subtle);
-  padding: 1rem;
+  padding: 1.25rem;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
 }
 
 .stat-orthogonal-card.alert {
-  border-top: 3px solid var(--color-primary-navy);
+  border-top: 3px solid #ef4444;
 }
 
 .stat-number {
-  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-size: 2.2rem;
   font-weight: 800;
   color: var(--color-primary-navy);
-  line-height: 1.1;
-  margin-bottom: 0.35rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
 }
 
 .stat-label {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--color-text-main);
-  line-height: 1.3;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
 }
 
 .stat-subtext {
-  font-size: 0.72rem;
-  color: var(--color-text-light);
-  line-height: 1.3;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  flex: 1;
 }
 
-/* Embudo de Absorción CEPAL */
 .funnel-container {
   border: 1px solid var(--color-border-subtle);
-  padding: 1.25rem;
+  padding: 1.25rem 1.5rem;
   background: #f8fafc;
   display: flex;
   flex-direction: column;
@@ -519,111 +668,37 @@ html, body {
 .funnel-bar-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.35rem;
 }
 
 .funnel-label-row {
   display: flex;
   justify-content: space-between;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: var(--color-text-main);
 }
 
 .funnel-progress-track {
-  height: 16px;
+  height: 8px;
   background: #e2e8f0;
-  width: 100%;
-  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 .funnel-progress-fill {
   height: 100%;
   background: var(--color-primary-navy);
-  transition: width 0.4s ease;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .funnel-progress-fill.gap-color {
-  background: #64748b;
+  background: #ef4444;
 }
 
-/* Simulador de Mínimos Adela Cortina */
-.cortina-audit-wrapper {
-  border: 1px solid var(--color-primary-navy);
-  padding: 1.25rem;
-  background: #ffffff;
-}
-
-.cortina-toggle-btn {
-  background: var(--color-primary-navy);
-  color: #ffffff;
-  border: none;
-  padding: 0.5rem 1.25rem;
-  font-family: inherit;
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: background 0.15s;
-}
-
-.cortina-toggle-btn:hover {
-  background: #0a2040;
-}
-
-.cortina-alert-banner {
-  margin-top: 1rem;
-  padding: 0.85rem 1.2rem;
-  border: 1.5px solid #b91c1c;
-  background: #fef2f2;
-  color: #991b1b;
-  display: none;
-  font-size: 0.88rem;
-  line-height: 1.45;
-}
-
-.cortina-alert-banner.active {
-  display: block;
-}
-
-/* Timeline Péndulo Histórico */
-.timeline-stepper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
-
-.timeline-step-card {
-  border: 1px solid var(--color-border-subtle);
-  padding: 1.25rem;
-  cursor: pointer;
-  background: #ffffff;
-  transition: all 0.2s;
-  display: flex;
-  flex-direction: column;
-}
-
-.timeline-step-card:hover,
-.timeline-step-card.active {
-  border-color: var(--color-primary-navy);
-  box-shadow: 0 4px 12px rgba(15, 46, 90, 0.08);
-}
-
-.timeline-step-card.active {
-  border-top: 4px solid var(--color-primary-navy);
-}
-
-.timeline-step-tag {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--color-primary-navy);
-  text-transform: uppercase;
-  margin-bottom: 0.4rem;
-}
-
-/* Panel Matemático STOC 2024 */
+/* ==========================================================================
+   ESTACIÓN 09: STOC 2024 (PANEL MATEMÁTICO KΑΤΕΧ)
+   ========================================================================== */
 .math-proof-card {
   border: 1px solid var(--color-primary-navy);
   background: #ffffff;
@@ -631,45 +706,310 @@ html, body {
 }
 
 .math-formula-display {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1.35rem;
+  font-size: 1.6rem;
   color: var(--color-primary-navy);
   text-align: center;
-  padding: 0.75rem;
-  background: #f0f4f9;
+  padding: 1rem;
+  background: #f8fafc;
   border: 1px solid var(--color-border-subtle);
   margin-bottom: 1.25rem;
-  font-style: italic;
 }
 
-/* Matriz de Telemetría Bossware */
-.bossware-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+.katex-display {
+  margin: 0.25rem 0 !important;
 }
 
-.bossware-item {
-  border: 1px solid var(--color-border-subtle);
-  padding: 1rem 1.25rem;
+.katex {
+  font-size: 1.45rem !important;
+  color: var(--color-primary-navy) !important;
+}
+
+/* ==========================================================================
+   ESTACIÓN 13: CIERRE MAGISTRAL CON FONDO AZUL (#0f2e5a) - DIRECTO Y LIMPIO
+   ========================================================================== */
+.closing-slide-blue {
+  background: var(--color-primary-navy) !important;
+  color: #ffffff !important;
+  padding: 4.5% 7.4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+}
+
+.closing-slide-blue .running-header {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.closing-direct-maxim {
+  margin: auto 0;
+  max-width: 94%;
+}
+
+.closing-quote-statement {
+  font-size: clamp(1.4rem, 2.7vw, 2.45rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.2rem;
+}
+
+.closing-quote-statement strong {
+  font-weight: 700;
+  color: #bfdbfe;
+}
+
+.closing-quote-citation {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  padding-top: 1.4rem;
+}
+
+.closing-quote-citation strong {
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.closing-quote-citation span {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.closing-slide-blue .inner-footer {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.closing-slide-blue .inner-footer-logo-wrapper {
+  color: #ffffff;
+}
+
+.closing-slide-blue .pagination-badge {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+
+.closing-slide-blue .pagination-current {
   background: #ffffff;
-  border-left: 3px solid var(--color-primary-navy);
+  color: var(--color-primary-navy);
 }
 
-.bossware-title {
+/* ==========================================================================
+   PIE DE PÁGINA (PAGINACIÓN ORTOGONAL CON CAJÓN RECTANGULAR [ N | TOTAL ])
+   ========================================================================== */
+.inner-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 1.2vh;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.inner-footer-logo-wrapper {
+  color: var(--color-primary-navy);
+  display: flex;
+  align-items: center;
+}
+
+.inner-footer-logo-wrapper svg {
+  height: clamp(24px, 3.8vh, 36px);
+  width: auto;
+  fill: currentColor;
+}
+
+.pagination-badge {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--color-primary-navy);
+  border-radius: 0;
+  font-size: clamp(0.75rem, 1.6vh, 0.9rem);
+  font-weight: 700;
+  overflow: hidden;
+  color: var(--color-primary-navy);
+}
+
+.pagination-current {
+  background: var(--color-primary-navy);
+  color: #ffffff;
+  padding: 0.25rem 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-total {
+  padding: 0.25rem 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   MODALES EDITORIAES ORTOGONALES (ESTILO JULIO VERA)
+   ========================================================================== */
+.editorial-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 17, 32, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.editorial-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.editorial-modal-window {
+  width: min(92vw, 760px);
+  max-height: 88vh;
+  background: #ffffff;
+  border: 1px solid var(--color-primary-navy);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(14px) scale(0.98);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.editorial-modal-backdrop.active .editorial-modal-window {
+  transform: translateY(0) scale(1);
+}
+
+.editorial-modal-header {
+  background: var(--color-primary-navy);
+  color: #ffffff;
+  padding: 1.1rem 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editorial-modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.editorial-modal-close {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+  transition: opacity 0.15s;
+}
+
+.editorial-modal-close:hover {
+  opacity: 1;
+}
+
+.editorial-modal-body {
+  padding: 1.75rem 2rem;
+  overflow-y: auto;
   font-size: 0.95rem;
+  color: var(--color-text-main);
+  line-height: 1.6;
+}
+
+.editorial-modal-footer {
+  padding: 0.9rem 2rem;
+  border-top: 1px solid var(--color-border-subtle);
+  background: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+
+/* Estilos de Contenido de los Modales */
+.modal-interactive-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1rem;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 0.75rem;
+  background: #ffffff;
+}
+
+.modal-input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  border: 1px solid var(--color-primary-navy);
+  margin-bottom: 1rem;
+  outline: none;
+}
+
+.modal-tokens-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  min-height: 52px;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.token-chip {
+  padding: 0.3rem 0.65rem;
+  background: #ffffff;
+  border: 1px solid var(--color-primary-navy);
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--color-primary-navy);
-  margin-bottom: 0.35rem;
 }
 
-.bossware-desc {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  line-height: 1.45;
+.token-chip.broken {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #b91c1c;
 }
 
-/* Barra Flotante de Controles */
+.telemetry-live-box {
+  border: 1px solid var(--color-primary-navy);
+  padding: 1.25rem;
+  background: #f8fafc;
+  margin-bottom: 1rem;
+}
+
+.telemetry-metric-large {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-primary-navy);
+}
+
+/* ==========================================================================
+   BARRA FLOTANTE DE CONTROLES
+   ========================================================================== */
 .presentation-controls {
   position: fixed;
   bottom: 1.25rem;
@@ -717,240 +1057,4 @@ html, body {
   width: 1px;
   height: 14px;
   background: #334155;
-}
-
-/* ==========================================================================
-   STORYTELLING CINÉTICO (BEATS SECUENCIALES - ESTILO REEL/VIDEO)
-   ========================================================================== */
-.story-beat {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.story-beat.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Fondo Cinético de Flujo de Código (Slides Técnicas) */
-.code-stream-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-  opacity: 0.055;
-}
-
-.code-stream-text {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-size: 0.82rem;
-  line-height: 1.6;
-  color: var(--color-primary-navy);
-  white-space: pre;
-  user-select: none;
-  animation: codeFlowScroll 38s linear infinite;
-}
-
-@keyframes codeFlowScroll {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
-}
-
-/* HUD de Telemetría Bossware en Vivo (Slide 11) */
-.bossware-hud {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #0f172a;
-  color: #f8fafc;
-  padding: 0.55rem 1rem;
-  border-radius: 2px;
-  margin-bottom: 1.25rem;
-  border-left: 4px solid #ef4444;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-}
-
-.hud-status {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.hud-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ef4444;
-}
-
-.hud-dot.pulsing {
-  animation: hudPulse 1.2s infinite ease-in-out;
-}
-
-@keyframes hudPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(1.25); }
-}
-
-.hud-label {
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: #fca5a5;
-}
-
-.hud-metrics {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.hud-metric {
-  display: flex;
-  gap: 0.4rem;
-}
-
-.hud-metric-label {
-  color: #94a3b8;
-}
-
-.hud-metric-val {
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.hud-metric-val.active-green {
-  color: #4ade80;
-}
-
-.hud-metric-val.alert-red {
-  color: #f87171;
-}
-
-/* ==========================================================================
-   ESTACIÓN 13: CIERRE MAGISTRAL CON FONDO AZUL PROFUNDO (#0f2e5a)
-   ========================================================================== */
-.closing-slide-blue {
-  background: var(--color-primary-navy) !important;
-  color: #ffffff !important;
-  padding: 4.5% 7.4%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-.closing-slide-blue .running-header {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.closing-header-tag {
-  margin-bottom: 1rem;
-}
-
-.closing-tag-badge {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #93c5fd;
-}
-
-.closing-quote-box {
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.04);
-  padding: 2.2rem 2.8rem;
-  margin-bottom: 1.5rem;
-}
-
-.closing-quote-text {
-  font-size: clamp(1.25rem, 2.3vw, 2.15rem);
-  font-weight: 500;
-  line-height: 1.45;
-  color: #ffffff;
-  letter-spacing: -0.015em;
-  margin-bottom: 1.5rem;
-}
-
-.closing-quote-text strong {
-  font-weight: 700;
-  color: #bfdbfe;
-}
-
-.closing-quote-author {
-  display: flex;
-  align-items: baseline;
-  gap: 0.85rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.8);
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-  padding-top: 1rem;
-}
-
-.closing-quote-author strong {
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 0.06em;
-}
-
-.closing-quote-author span {
-  font-weight: 400;
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.closing-verdict-banner {
-  border-left: 3px solid #60a5fa;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 1rem 1.4rem;
-}
-
-.closing-verdict-title {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #93c5fd;
-  margin-bottom: 0.35rem;
-}
-
-.closing-verdict-text {
-  font-size: clamp(0.88rem, 1.6vh, 1.05rem);
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.closing-slide-blue .inner-footer {
-  border-top-color: rgba(255, 255, 255, 0.18);
-}
-
-.closing-slide-blue .inner-footer-logo-wrapper {
-  color: #ffffff;
-}
-
-.closing-slide-blue .pagination-badge {
-  border-color: rgba(255, 255, 255, 0.35);
-  color: #ffffff;
-}
-
-.closing-slide-blue .pagination-current {
-  background: #ffffff;
-  color: var(--color-primary-navy);
-}
-
-/* Renderizado KaTeX afinado */
-.katex-display {
-  margin: 0.5rem 0 !important;
-}
-
-.math-formula-display .katex {
-  font-size: 1.5rem !important;
-  color: var(--color-primary-navy);
 }
