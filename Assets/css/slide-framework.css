@@ -1155,6 +1155,69 @@ html, body {
   color: var(--color-primary-navy);
 }
 
+.modal-row-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-row-title-wrap strong {
+  font-size: 1rem;
+  color: var(--color-primary-navy);
+}
+
+.modal-row-desc {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+  margin-top: 4px;
+}
+
+.modal-field-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary-navy);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.telemetry-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary-navy);
+  text-transform: uppercase;
+}
+
+.telemetry-pause-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #b91c1c;
+}
+
+.telemetry-alert-text {
+  margin-top: 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #15803d;
+}
+
+.telemetry-sensor-box {
+  display: none;
+  padding: 0.75rem;
+  background: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #0369a1;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.modal-result-box {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+}
+
 /* ==========================================================================
    BARRA FLOTANTE DE CONTROLES
    ========================================================================== */
@@ -1249,115 +1312,301 @@ html, body {
 
 /* ==========================================================================
    ADAPTACIÓN RESPONSIVA MÓVIL (PROYECCIÓN VERTICAL / INTERACCIONES ADAPTADAS)
+   Modales compactos, tipografía reducida proporcional para smartphone, sin scroll forzado.
    ========================================================================== */
 @media (max-width: 768px), (orientation: portrait) {
   .editorial-modal-backdrop {
-    padding: 12px;
-    align-items: center;
+    padding: 8px !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .editorial-modal-window {
-    width: 96vw !important;
-    max-width: 520px !important;
-    max-height: 92vh !important;
+    width: 95vw !important;
+    max-width: 440px !important;
+    max-height: 88vh !important;
     border-radius: 5px !important;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
   }
 
   .editorial-modal-header {
-    padding: 0.85rem 1.15rem !important;
+    padding: 8px 12px !important;
+    min-height: 38px !important;
+    flex-shrink: 0 !important;
   }
 
   .editorial-modal-title {
-    font-size: 0.98rem !important;
-    line-height: 1.35;
+    font-size: 0.84rem !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.01em !important;
   }
 
   .editorial-modal-close {
-    padding: 0.4rem;
-    min-width: 44px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 2px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .editorial-modal-close svg {
+    width: 18px !important;
+    height: 18px !important;
   }
 
   .editorial-modal-body {
-    padding: 1.15rem 1.25rem !important;
-    -webkit-overflow-scrolling: touch;
+    padding: 10px 12px !important;
+    font-size: 0.78rem !important;
+    line-height: 1.38 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 
-  /* Filas interactivas en disposición vertical para uso cómodo con una mano */
-  .modal-interactive-row {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 0.75rem !important;
-    padding: 1rem !important;
+  .editorial-modal-body p {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 8px !important;
+    color: var(--color-text-muted) !important;
   }
 
-  .modal-interactive-row > div {
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
-
-  .modal-interactive-row input[type="checkbox"] {
-    align-self: flex-start !important;
-    width: 26px !important;
-    height: 26px !important;
-    margin-top: 2px;
-    cursor: pointer;
-  }
-
-  /* Telemetría Bossware verticalizada para pantalla móvil */
-  .telemetry-live-box {
-    padding: 1rem !important;
-  }
-
-  .telemetry-live-box > div:first-child {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 0.85rem !important;
-  }
-
-  .telemetry-live-box > div:first-child > div:last-child {
-    text-align: left !important;
-    padding-top: 0.5rem;
-    border-top: 1px dashed #cbd5e1;
-  }
-
-  .telemetry-metric-large {
-    font-size: 2.2rem !important;
+  .modal-field-label,
+  .editorial-modal-body > div[style*="uppercase"] {
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 4px !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.25 !important;
   }
 
   .modal-input-field {
-    font-size: 16px !important; /* Previene auto-zoom molesto en Safari / Android */
-    padding: 0.85rem 1rem !important;
+    font-size: 14px !important;
+    padding: 6px 10px !important;
+    margin-bottom: 8px !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--color-primary-navy) !important;
   }
 
   .modal-tokens-row {
-    padding: 0.75rem !important;
-    gap: 0.45rem !important;
+    padding: 4px 8px !important;
+    min-height: 32px !important;
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+    border-radius: 4px !important;
   }
 
+  .token-chip {
+    padding: 2px 6px !important;
+    font-size: 0.70rem !important;
+    border-radius: 3px !important;
+  }
+
+  /* Cajas de resultado, alertas y veredictos BPE / Cortina dentro del modal */
+  .editorial-modal-body .orthogonal-box {
+    margin-top: 8px !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    border: 1px solid var(--color-primary-navy) !important;
+  }
+
+  .editorial-modal-body .orthogonal-box-header {
+    padding: 5px 8px !important;
+    font-size: 0.70rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.25 !important;
+  }
+
+  .editorial-modal-body .orthogonal-box-content {
+    padding: 8px 10px !important;
+    font-size: 0.76rem !important;
+    line-height: 1.38 !important;
+  }
+
+  .editorial-modal-body .orthogonal-box-content strong {
+    font-weight: 700 !important;
+  }
+
+  .editorial-modal-body .box-source-note {
+    margin-top: 4px !important;
+    font-size: 0.66rem !important;
+    line-height: 1.25 !important;
+    color: var(--color-text-light) !important;
+  }
+
+  /* Filas interactivas compactas (Checkboxes y Botones) */
+  .modal-interactive-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    padding: 6px 10px !important;
+    margin-bottom: 6px !important;
+    border-radius: 4px !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .modal-interactive-row > div {
+    font-size: 0.76rem !important;
+    line-height: 1.3 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .modal-interactive-row strong {
+    font-size: 0.80rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .modal-interactive-row div[style*="font-size: 0.8rem"],
+  .modal-interactive-row div[style*="font-size: 0.82rem"],
+  .modal-row-desc {
+    font-size: 0.68rem !important;
+    line-height: 1.25 !important;
+    margin-top: 2px !important;
+  }
+
+  .modal-row-title-wrap strong {
+    font-size: 0.80rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .modal-interactive-row input[type="checkbox"] {
+    align-self: center !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+  }
+
+  .modal-interactive-row button,
+  .modal-interactive-row a.btn-orthogonal-primary {
+    padding: 5px 10px !important;
+    font-size: 0.74rem !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    border-radius: 4px !important;
+    height: auto !important;
+    min-height: 30px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .modal-interactive-row svg.lucide,
+  .modal-interactive-row i[data-lucide] {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  /* Simulador Adela Cortina */
+  #cortina-sim-result,
+  .modal-result-box {
+    margin-top: 8px !important;
+    padding: 6px 10px !important;
+    font-size: 0.76rem !important;
+    line-height: 1.32 !important;
+    border-radius: 4px !important;
+  }
+
+  #cortina-sim-result strong,
+  .modal-result-box strong {
+    font-size: 0.78rem !important;
+  }
+
+  /* Telemetría Bossware */
+  .telemetry-live-box {
+    padding: 6px 10px !important;
+    margin-bottom: 8px !important;
+    border-radius: 4px !important;
+  }
+
+  .telemetry-live-box > div:first-child {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .telemetry-live-box span,
+  .telemetry-label {
+    font-size: 0.64rem !important;
+  }
+
+  .telemetry-metric-large {
+    font-size: 1.4rem !important;
+    line-height: 1.1 !important;
+  }
+
+  #bossware-live-pause,
+  .telemetry-pause-val {
+    font-size: 1rem !important;
+  }
+
+  #bossware-live-alert,
+  .telemetry-alert-text {
+    margin-top: 3px !important;
+    font-size: 0.70rem !important;
+  }
+
+  #bossware-mobile-sensor,
+  .telemetry-sensor-box {
+    padding: 4px 6px !important;
+    font-size: 0.68rem !important;
+    margin-top: 4px !important;
+    border-radius: 4px !important;
+  }
+
+  /* Modal de Descargas y Progreso */
+  #export-progress-box {
+    margin-top: 6px !important;
+    padding: 6px 8px !important;
+    border-radius: 4px !important;
+  }
+
+  #export-progress-text {
+    font-size: 0.74rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  #export-progress-box > div:last-child {
+    height: 6px !important;
+  }
+
+  /* Pie de modal */
   .editorial-modal-footer {
     flex-direction: column-reverse !important;
     align-items: stretch !important;
-    gap: 0.75rem !important;
-    padding: 0.9rem 1.25rem !important;
+    gap: 4px !important;
+    padding: 6px 12px !important;
+    background: #f8fafc !important;
+    flex-shrink: 0 !important;
   }
 
   .editorial-modal-footer button {
     width: 100% !important;
-    min-height: 48px !important;
-    font-size: 0.92rem !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    padding: 4px 10px !important;
+    border-radius: 4px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
   }
 
   .editorial-modal-footer span {
-    text-align: center;
-    font-size: 0.75rem;
+    text-align: center !important;
+    font-size: 0.64rem !important;
+    line-height: 1.2 !important;
+    color: var(--color-text-light) !important;
   }
 }
 

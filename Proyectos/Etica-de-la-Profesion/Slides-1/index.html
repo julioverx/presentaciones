@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../../../Assets/css/slide-framework.css?v=4">
+  <link rel="stylesheet" href="../../../Assets/css/slide-framework.css?v=5">
   
   <!-- KaTeX para renderizado matemático formal (STOC 2024) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -860,35 +860,35 @@
         </button>
       </div>
       <div class="editorial-modal-body">
-        <p style="margin-bottom: 1.25rem; font-size: 0.92rem; color: var(--color-text-muted);">
+        <p>
           Conmuta los interruptores para evaluar qué ocurre cuando una corporación vulnera el suelo básico innegociable de la relación de trabajo:
         </p>
 
         <div class="modal-interactive-row">
           <div>
             <strong>1. Remuneración Justa y Suficiente</strong>
-            <div style="font-size: 0.8rem; color: var(--color-text-light);">Cubre la base material de subsistencia del colaborador.</div>
+            <div class="modal-row-desc">Cubre la base material de subsistencia del colaborador.</div>
           </div>
-          <input type="checkbox" id="chk-salary" checked onchange="updateCortinaSimulation()" style="width: 20px; height: 20px; cursor: pointer;">
+          <input type="checkbox" id="chk-salary" checked onchange="updateCortinaSimulation()">
         </div>
 
         <div class="modal-interactive-row">
           <div>
             <strong>2. Delimitación Estricta de la Jornada</strong>
-            <div style="font-size: 0.8rem; color: var(--color-text-light);">Derecho a la desconexión y preservación de la vida personal.</div>
+            <div class="modal-row-desc">Derecho a la desconexión y preservación de la vida personal.</div>
           </div>
-          <input type="checkbox" id="chk-hours" checked onchange="updateCortinaSimulation()" style="width: 20px; height: 20px; cursor: pointer;">
+          <input type="checkbox" id="chk-hours" checked onchange="updateCortinaSimulation()">
         </div>
 
         <div class="modal-interactive-row">
           <div>
             <strong>3. Provisión de Herramientas y Equipos</strong>
-            <div style="font-size: 0.8rem; color: var(--color-text-light);">La empresa asume el costo operativo del trabajo.</div>
+            <div class="modal-row-desc">La empresa asume el costo operativo del trabajo.</div>
           </div>
-          <input type="checkbox" id="chk-tools" checked onchange="updateCortinaSimulation()" style="width: 20px; height: 20px; cursor: pointer;">
+          <input type="checkbox" id="chk-tools" checked onchange="updateCortinaSimulation()">
         </div>
 
-        <div id="cortina-sim-result" class="orthogonal-box" style="margin-top: 1.25rem; border: 1px solid var(--color-primary-navy); border-radius: 8px; padding: 1rem 1.25rem; background: #f8fafc;">
+        <div id="cortina-sim-result" class="orthogonal-box modal-result-box" style="border: 1px solid var(--color-primary-navy); border-radius: 5px; background: #f8fafc;">
           <strong style="color: var(--color-primary-navy);">ESTADO: CONDICIÓN ÉTICA CUMPLIDA</strong><br>
           La institución garantiza el suelo innegociable de justicia. La demanda de compromiso es moralmente legítima.
         </div>
@@ -910,13 +910,13 @@
         </button>
       </div>
       <div class="editorial-modal-body">
-        <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--color-text-muted);">
+        <p>
           Escribe o modifica el título del perfil para comprobar cómo el tokenizador BPE (Byte-Pair Encoding) reacciona ante guiones o separadores tipográficos:
         </p>
 
         <input type="text" id="ats-input-field" class="modal-input-field" value="Lic. Gestión-Talento" oninput="runBpeAnalysis(this.value)" placeholder="Escribe un cargo profesional...">
 
-        <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-primary-navy); margin-bottom: 0.4rem; text-transform: uppercase;">
+        <div class="modal-field-label">
           Fragmentación en Tokens BPE (Espacio Latente):
         </div>
         <div id="bpe-tokens-result" class="modal-tokens-row"></div>
@@ -940,33 +940,33 @@
         </button>
       </div>
       <div class="editorial-modal-body">
-        <p style="margin-bottom: 1rem; font-size: 0.92rem; color: var(--color-text-muted);">
+        <p>
           Comprueba cómo opera el software espía en tiempo real registrando tu cadencia de tipeo o el movimiento de tu dispositivo:
         </p>
 
         <div class="telemetry-live-box">
           <div style="display: flex; justify-content: space-between; align-items: baseline;">
             <div>
-              <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-primary-navy); text-transform: uppercase;">Cadencia Calculada en Vivo:</span>
+              <span class="telemetry-label">Cadencia Calculada en Vivo:</span>
               <div id="bossware-live-kpm" class="telemetry-metric-large">0 KPM</div>
             </div>
             <div style="text-align: right;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Tiempo de Pausa:</span>
-              <div id="bossware-live-pause" style="font-size: 1.5rem; font-weight: 800; color: #b91c1c;">00:00s</div>
+              <span class="telemetry-label" style="color: #64748b;">Tiempo de Pausa:</span>
+              <div id="bossware-live-pause" class="telemetry-pause-val">00:00s</div>
             </div>
           </div>
 
-          <div id="bossware-live-alert" style="margin-top: 0.75rem; font-size: 0.88rem; font-weight: 700; color: #15803d;">
+          <div id="bossware-live-alert" class="telemetry-alert-text">
             ESTADO: ESPERANDO ACTIVIDAD...
           </div>
         </div>
 
-        <div style="margin-bottom: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--color-text-main);">
+        <div class="modal-field-label">
           Campo de Tipeo para Evaluación de Productividad:
         </div>
         <input type="text" id="bossware-test-input" class="modal-input-field" placeholder="Escribe algo aquí de continuo para mantener la cadencia KPM...">
 
-        <div id="bossware-mobile-sensor" style="display: none; padding: 0.75rem; background: #e0f2fe; border: 1px solid #7dd3fc; margin-top: 0.5rem; font-size: 0.85rem; color: #0369a1; font-weight: 600;">
+        <div id="bossware-mobile-sensor" class="telemetry-sensor-box">
           <span id="mobile-tilt-val">Sensor Móvil: Calibrando giroscopio / orientación...</span>
         </div>
       </div>
@@ -987,22 +987,22 @@
         </button>
       </div>
       <div class="editorial-modal-body">
-        <p style="margin-bottom: 1.25rem; font-size: 0.92rem; color: var(--color-text-muted);">
+        <p>
           Selecciona el formato de exportación estático en alta resolución (1920×1080). Todas las láminas se generan con la tipografía oficial Figtree y estilo editorial ortogonal:
         </p>
 
         <!-- Opción 1: ZIP con 13 imágenes PNG -->
         <div class="modal-interactive-row" style="cursor: pointer;" onclick="window.exporter.exportZip()">
           <div>
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="modal-row-title-wrap">
               <i data-lucide="file-archive" style="width: 20px; height: 20px; color: var(--color-primary-navy);"></i>
-              <strong style="font-size: 1rem; color: var(--color-primary-navy);">Colección PNG en archivo ZIP</strong>
+              <strong>Colección PNG en archivo ZIP</strong>
             </div>
-            <div style="font-size: 0.82rem; color: var(--color-text-light); margin-top: 4px;">
+            <div class="modal-row-desc">
               Descarga un archivo .zip con las 13 láminas individuales en formato PNG estático a 1920×1080.
             </div>
           </div>
-          <button id="btn-export-zip" class="btn-orthogonal-primary" style="padding: 8px 16px; font-size: 13px;" onclick="event.stopPropagation(); window.exporter.exportZip();">
+          <button id="btn-export-zip" class="btn-orthogonal-primary" onclick="event.stopPropagation(); window.exporter.exportZip();">
             Descargar ZIP
           </button>
         </div>
@@ -1010,15 +1010,15 @@
         <!-- Opción 2: Documento PDF Directo -->
         <div class="modal-interactive-row" style="cursor: pointer;" onclick="window.exporter.exportPdf()">
           <div>
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="modal-row-title-wrap">
               <i data-lucide="file-text" style="width: 20px; height: 20px; color: var(--color-primary-navy);"></i>
-              <strong style="font-size: 1rem; color: var(--color-primary-navy);">Documento PDF Oficial (1 Clic)</strong>
+              <strong>Documento PDF Oficial (1 Clic)</strong>
             </div>
-            <div style="font-size: 0.82rem; color: var(--color-text-light); margin-top: 4px;">
+            <div class="modal-row-desc">
               Compila y descarga automáticamente un documento PDF horizontal de 13 páginas en formato 16:9.
             </div>
           </div>
-          <button id="btn-export-pdf" class="btn-orthogonal-primary" style="padding: 8px 16px; font-size: 13px;" onclick="event.stopPropagation(); window.exporter.exportPdf();">
+          <button id="btn-export-pdf" class="btn-orthogonal-primary" onclick="event.stopPropagation(); window.exporter.exportPdf();">
             Descargar PDF
           </button>
         </div>
@@ -1026,15 +1026,15 @@
         <!-- Opción 3: Imprimir / Guardar PDF Vectorial Nativo -->
         <div class="modal-interactive-row" style="cursor: pointer;" onclick="window.exporter.printNative()">
           <div>
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="modal-row-title-wrap">
               <i data-lucide="printer" style="width: 20px; height: 20px; color: var(--color-primary-navy);"></i>
-              <strong style="font-size: 1rem; color: var(--color-primary-navy);">Imprimir / Guardar PDF Vectorial Nativo</strong>
+              <strong>Imprimir / Guardar PDF Vectorial Nativo</strong>
             </div>
-            <div style="font-size: 0.82rem; color: var(--color-text-light); margin-top: 4px;">
+            <div class="modal-row-desc">
               Abre el diálogo nativo del navegador con maquetación 16:9 exacta para texto y vectores 100% nítidos.
             </div>
           </div>
-          <button class="btn-orthogonal-primary" style="padding: 8px 16px; font-size: 13px;" onclick="event.stopPropagation(); window.exporter.printNative();">
+          <button class="btn-orthogonal-primary" onclick="event.stopPropagation(); window.exporter.printNative();">
             Imprimir
           </button>
         </div>
@@ -1042,23 +1042,23 @@
         <!-- Opción 4: Ensayo Académico Completo -->
         <div class="modal-interactive-row" style="cursor: pointer;" onclick="window.open('ensayo.html', '_blank')">
           <div>
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="modal-row-title-wrap">
               <i data-lucide="book-open" style="width: 20px; height: 20px; color: var(--color-primary-navy);"></i>
-              <strong style="font-size: 1rem; color: var(--color-primary-navy);">Ensayo Académico Completo</strong>
+              <strong>Ensayo Académico Completo</strong>
             </div>
-            <div style="font-size: 0.82rem; color: var(--color-text-light); margin-top: 4px;">
+            <div class="modal-row-desc">
               Lectura en línea y descarga en PDF del ensayo monográfico de investigación que fundamenta esta presentación.
             </div>
           </div>
           <div style="display: flex; gap: 8px;">
-            <a href="ensayo.html" target="_blank" class="btn-orthogonal-primary" style="padding: 8px 16px; font-size: 13px; text-decoration: none;" onclick="event.stopPropagation();">
+            <a href="ensayo.html" target="_blank" class="btn-orthogonal-primary" style="text-decoration: none;" onclick="event.stopPropagation();">
               Leer Ensayo
             </a>
           </div>
         </div>
 
         <!-- Barra de Progreso de Exportación -->
-        <div id="export-progress-box" style="display: none; margin-top: 1.25rem; padding: 1rem; border: 1px solid var(--color-border-subtle); border-radius: 5px; background: #f8fafc;">
+        <div id="export-progress-box" style="display: none; margin-top: 1rem; padding: 1rem; border: 1px solid var(--color-border-subtle); border-radius: 5px; background: #f8fafc;">
           <div id="export-progress-text" style="font-size: 0.88rem; font-weight: 700; color: var(--color-primary-navy); margin-bottom: 8px;">
             Iniciando exportación...
           </div>
