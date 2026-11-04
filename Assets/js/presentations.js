@@ -5,25 +5,25 @@
 const PRESENTATIONS = [
   {
     id: "etica-profesion-edad-dorada",
-    title: "La Ilusión de la Edad Dorada",
+    title: "El Problema de la Nostalgia",
     subtitle: "Técnica, juicio ético y los nuevos dilemas algorítmicos en la gestión del trabajo",
     subject: "Ética de la Profesión",
     degree: "Maestría en Ciencias Administrativas: Gerencia del Talento Humano",
     institution: "UNESR — Decanato de Postgrado y Educación Avanzada (Núcleo Apure)",
     author: "Julio Vera",
     idNumber: "V-26.889.534",
-    facilitator: "Dra. Yennis Sarmiento",
+    facilitator: "Dra. Yennys Sarmiento",
     date: "Noviembre 2026",
     location: "Biruaca, Venezuela",
     tags: ["Ética", "Algoritmos", "Talento Humano", "Inteligencia Artificial", "Gestión Laboral"],
     url: "Proyectos/Etica-de-la-Profesion/Slides-1/index.html",
-    pdfUrl: null,
-    essayUrl: "Proyectos/Etica-de-la-Profesion/Slides-1/ensayo.html",
+    pdfUrl: "Proyectos/Etica-de-la-Profesion/Slides-1/ensayo.pdf",
+    essayUrl: "Proyectos/Etica-de-la-Profesion/Slides-1/ensayo.pdf",
     slidesCount: 13,
     status: "Disponible",
     featured: true,
     accentColor: "#2563eb",
-    summary: "Análisis crítico sobre la automatización algorítmica en la gestión de recursos humanos y la necesidad ineludible del juicio ético profesional frente al reduccionismo técnico."
+    summary: "Análisis crítico sobre la nostalgia laboral, el reduccionismo técnico y los dilemas algorítmicos (ATS, BPE, Bossware) en la gestión moderna del talento humano."
   },
   {
     id: "teorias-administracion-slides-1",

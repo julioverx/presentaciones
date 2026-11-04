@@ -748,6 +748,248 @@ html, body {
 }
 
 /* ==========================================================================
+   SISTEMA DE ESQUEMAS, GRAFOS Y NODOS ORTOGONALES (ESTILO JULIO VERA)
+   Láminas esquemáticas de flujo: Nodos, Cajas, Flechas y Cero Saturación
+   ========================================================================== */
+.schema-flow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1540px;
+  margin: 0 auto;
+}
+
+/* Nodos y bloques conceptuales */
+.schema-pill-node {
+  background: #ffffff;
+  border: 1px solid var(--color-primary-navy);
+  border-radius: 5px;
+  padding: 8px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 14px rgba(15, 46, 90, 0.04);
+}
+
+.schema-badge {
+  background: var(--color-primary-navy);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.schema-node-text {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-primary-navy);
+}
+
+.schema-node-subtext {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Flechas y conectores direccionales ortogonales */
+.schema-connector-down {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4px 0;
+  position: relative;
+}
+
+.schema-arrow-svg {
+  width: 18px;
+  height: 22px;
+  color: var(--color-primary-navy);
+  flex-shrink: 0;
+}
+
+.schema-connector-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: #b91c1c;
+  background: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 1px 8px;
+  margin-bottom: 2px;
+  letter-spacing: 0.02em;
+}
+
+/* Grillas de bifurcación (2 o 3 columnas conectadas) */
+.schema-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+}
+
+.schema-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Cajas contenedoras del esquema (100% sólidas, bordes uniformes 1px, radio 5px) */
+.schema-card {
+  background: #ffffff;
+  border: 1px solid var(--color-primary-navy);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(15, 46, 90, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.schema-card-header {
+  background: var(--color-primary-navy);
+  color: #ffffff;
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.schema-card-body {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--color-text-main);
+  flex: 1;
+}
+
+.schema-card-subblock {
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.schema-card-subblock.positive {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.schema-card-subblock.negative {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.schema-subblock-title {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 3px;
+}
+
+.schema-card-subblock.positive .schema-subblock-title {
+  color: #15803d;
+}
+
+.schema-card-subblock.negative .schema-subblock-title {
+  color: #b91c1c;
+}
+
+.schema-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.schema-list li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.schema-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary-navy);
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.schema-list li strong {
+  color: var(--color-primary-navy);
+}
+
+/* Caja de Síntesis / Conclusión */
+.schema-synthesis-box {
+  background: #ffffff;
+  border: 1px solid var(--color-primary-navy);
+  border-radius: 5px;
+  padding: 12px 20px;
+  width: 100%;
+  box-shadow: 0 4px 18px rgba(15, 46, 90, 0.04);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.schema-synthesis-box.vertical {
+  flex-direction: column;
+  text-align: center;
+  gap: 6px;
+}
+
+.schema-quote-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary-navy);
+  line-height: 1.4;
+}
+
+/* Pasos animados dinámicos por capas (stagger) */
+@keyframes schemaNodeEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide.active .schema-step-1 { animation: schemaNodeEnter 0.30s cubic-bezier(0.16, 1, 0.3, 1) 0.04s both; }
+.slide.active .schema-step-2 { animation: schemaNodeEnter 0.30s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both; }
+.slide.active .schema-step-3 { animation: schemaNodeEnter 0.30s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both; }
+.slide.active .schema-step-4 { animation: schemaNodeEnter 0.30s cubic-bezier(0.16, 1, 0.3, 1) 0.34s both; }
+.slide.active .schema-step-5 { animation: schemaNodeEnter 0.30s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both; }
+
+body.export-mode .schema-step-1,
+body.export-mode .schema-step-2,
+body.export-mode .schema-step-3,
+body.export-mode .schema-step-4,
+body.export-mode .schema-step-5 {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ==========================================================================
    ESTACIÓN 07: CEPAL / MÉTRICAS
    ========================================================================== */
 .metrics-stat-grid {
