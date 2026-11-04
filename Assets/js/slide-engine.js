@@ -497,12 +497,142 @@ function initBosswareModal() {
 
 /**
  * SlideExporter - Motor de Descarga de Diapositivas Estáticas (ZIP de PNGs y PDF)
- * Captura a resolución canónica 1920x1080
+ * Captura aislada pixel-perfect a resolución canónica 1920x1080 inmune a escala o dispositivo.
  */
 class SlideExporter {
   constructor(engine) {
     this.engine = engine;
     this.isExporting = false;
+  }
+
+  /**
+   * Captura una diapositiva individual en un contenedor sandbox 1920x1080 aislado,
+   * libre de transformaciones CSS del scaler y sin verse afectado por el ancho del teléfono.
+   */
+  async captureSlide(slideEl, index, total) {
+    const isDark = slideEl.classList.contains('cover-slide-blue') || slideEl.classList.contains('closing-slide-blue');
+
+    // 1. Obtener o crear sandbox aislado en document.body (fuera del scaler)
+    let sandbox = document.getElementById('render-export-sandbox');
+    if (!sandbox) {
+      sandbox = document.createElement('div');
+      sandbox.id = 'render-export-sandbox';
+      sandbox.className = 'slide-canvas';
+      sandbox.style.cssText = `
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 1920px !important;
+        height: 1080px !important;
+        min-width: 1920px !important;
+        min-height: 1080px !important;
+        max-width: 1920px !important;
+        max-height: 1080px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        outline: none !important;
+        transform: none !important;
+        filter: none !important;
+        overflow: hidden !important;
+        z-index: 100 !important;
+        pointer-events: none !important;
+        font-family: 'Figtree', system-ui, -apple-system, sans-serif !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      `;
+      document.body.appendChild(sandbox);
+    }
+
+    sandbox.style.backgroundColor = isDark ? '#0f2e5a' : '#ffffff';
+    sandbox.innerHTML = '';
+
+    // 2. Si es diapositiva interior clara, agregar retícula geométrica ambiental de fondo
+    if (!isDark) {
+      const ambientBg = document.createElement('div');
+      ambientBg.className = 'ambient-canvas-layer';
+      ambientBg.style.cssText = 'position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 1;';
+      ambientBg.innerHTML = `
+        <div class="ambient-shape-1" style="position: absolute; top: -80px; right: -80px; width: 640px; height: 640px; border-radius: 50%; background: radial-gradient(circle, rgba(15, 46, 90, 0.07) 0%, rgba(255, 255, 255, 0) 70%); filter: blur(40px);"></div>
+        <div class="ambient-shape-2" style="position: absolute; bottom: -100px; left: 60px; width: 700px; height: 500px; background: radial-gradient(ellipse, rgba(30, 58, 138, 0.06) 0%, rgba(255, 255, 255, 0) 70%); filter: blur(45px);"></div>
+        <div class="ambient-grid-lines" style="position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(15, 46, 90, 0.022) 1px, transparent 1px), linear-gradient(to bottom, rgba(15, 46, 90, 0.022) 1px, transparent 1px); background-size: 48px 48px; opacity: 0.7;"></div>
+      `;
+      sandbox.appendChild(ambientBg);
+    }
+
+    // 3. Clonar la diapositiva en el sandbox
+    const clone = slideEl.cloneNode(true);
+    clone.classList.add('active');
+    clone.style.cssText = `
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 1920px !important;
+      height: 1080px !important;
+      min-width: 1920px !important;
+      min-height: 1080px !important;
+      max-width: 1920px !important;
+      max-height: 1080px !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+      transition: none !important;
+      animation: none !important;
+      z-index: 5 !important;
+      background: ${isDark ? '#0f2e5a' : 'transparent'} !important;
+      color: ${isDark ? '#ffffff' : '#0f172a'} !important;
+    `;
+
+    // Congelar transiciones y animaciones internas
+    clone.querySelectorAll('*').forEach(el => {
+      el.style.animation = 'none';
+      el.style.transition = 'none';
+    });
+
+    const innerBody = clone.querySelector('.inner-body');
+    if (innerBody) {
+      innerBody.style.opacity = '1';
+      innerBody.style.transform = 'none';
+      innerBody.style.animation = 'none';
+    }
+
+    // Asegurar métricas completas en gráficos de barras y contadores estadísticos
+    clone.querySelectorAll('.stat-number[data-target]').forEach(counter => {
+      const target = parseFloat(counter.getAttribute('data-target'));
+      const suffix = counter.getAttribute('data-suffix') || '%';
+      counter.textContent = target.toFixed(1) + suffix;
+    });
+
+    clone.querySelectorAll('.funnel-progress-fill[data-width]').forEach(bar => {
+      const targetW = bar.getAttribute('data-width');
+      bar.style.width = `${targetW}%`;
+    });
+
+    sandbox.appendChild(clone);
+
+    // Breve pausa para estabilizar renderizado de fuentes y DOM en el sandbox
+    await new Promise(r => setTimeout(r, 60));
+
+    // 4. Capturar en lienzo 1920x1080 canónico
+    const canvas = await html2canvas(sandbox, {
+      width: 1920,
+      height: 1080,
+      windowWidth: 1920,
+      windowHeight: 1080,
+      x: 0,
+      y: 0,
+      scrollX: 0,
+      scrollY: 0,
+      scale: 1,
+      useCORS: true,
+      logging: false,
+      backgroundColor: isDark ? '#0f2e5a' : '#ffffff'
+    });
+
+    // Limpiar contenido del sandbox para evitar retención de memoria
+    sandbox.innerHTML = '';
+    return canvas;
   }
 
   async exportZip() {
@@ -523,39 +653,31 @@ class SlideExporter {
         throw new Error('Librerías de exportación no cargadas');
       }
 
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+
       const zip = new JSZip();
       const slides = this.engine.slides;
       const total = slides.length;
-      const originalCurrent = this.engine.currentIndex;
-
       document.body.classList.add('export-mode');
 
       for (let i = 0; i < total; i++) {
-        if (progressText) progressText.textContent = `Procesando lámina ${i + 1} de ${total}...`;
+        if (progressText) progressText.textContent = `Capturando lámina ${i + 1} de ${total} (1920×1080)...`;
         if (progressBar) progressBar.style.width = `${Math.round(((i + 1) / (total + 1)) * 100)}%`;
 
-        this.engine.goTo(i, false);
-        await new Promise(r => setTimeout(r, 150));
-
-        const slideEl = slides[i];
-        const isDark = slideEl.classList.contains('cover-slide-blue') || slideEl.classList.contains('closing-slide-blue');
-
-        const canvas = await html2canvas(slideEl, {
-          width: 1920,
-          height: 1080,
-          scale: 1,
-          useCORS: true,
-          logging: false,
-          backgroundColor: isDark ? '#0f2e5a' : '#ffffff'
-        });
-
+        const canvas = await this.captureSlide(slides[i], i, total);
         const dataUrl = canvas.toDataURL('image/png');
         const base64Data = dataUrl.replace(/^data:image\/png;base64,/, '');
         const filename = `Lamina-${String(i + 1).padStart(2, '0')}.png`;
         zip.file(filename, base64Data, { base64: true });
+
+        // Liberar memoria gráfica del canvas inmediatamente
+        canvas.width = 0;
+        canvas.height = 0;
       }
 
-      if (progressText) progressText.textContent = 'Comprimiendo archivo ZIP...';
+      if (progressText) progressText.textContent = 'Comprimiendo archivo ZIP de alta resolución...';
       const content = await zip.generateAsync({ type: 'blob' });
 
       const link = document.createElement('a');
@@ -566,8 +688,7 @@ class SlideExporter {
       document.body.removeChild(link);
       URL.revokeObjectURL(link.href);
 
-      this.engine.goTo(originalCurrent, false);
-      if (progressText) progressText.textContent = '¡Colección ZIP descargada con éxito!';
+      if (progressText) progressText.textContent = '¡Colección ZIP (1920×1080) descargada con éxito!';
       setTimeout(() => {
         if (progressBox) progressBox.style.display = 'none';
         closeModal('modal-download');
@@ -577,6 +698,8 @@ class SlideExporter {
       console.error('Error al exportar ZIP:', err);
       if (progressText) progressText.textContent = 'Error al exportar imágenes. Utiliza la opción de impresión PDF.';
     } finally {
+      const sandbox = document.getElementById('render-export-sandbox');
+      if (sandbox) sandbox.remove();
       document.body.classList.remove('export-mode');
       this.isExporting = false;
       if (btnZip) btnZip.disabled = false;
@@ -602,6 +725,10 @@ class SlideExporter {
         throw new Error('Librerías de exportación no cargadas');
       }
 
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+
       const { jsPDF } = window.jspdf;
       const pdf = new jsPDF({
         orientation: 'landscape',
@@ -611,38 +738,25 @@ class SlideExporter {
 
       const slides = this.engine.slides;
       const total = slides.length;
-      const originalCurrent = this.engine.currentIndex;
-
       document.body.classList.add('export-mode');
 
       for (let i = 0; i < total; i++) {
-        if (progressText) progressText.textContent = `Generando página ${i + 1} de ${total}...`;
+        if (progressText) progressText.textContent = `Generando página ${i + 1} de ${total} (1920×1080)...`;
         if (progressBar) progressBar.style.width = `${Math.round(((i + 1) / (total + 1)) * 100)}%`;
 
-        this.engine.goTo(i, false);
-        await new Promise(r => setTimeout(r, 150));
-
-        const slideEl = slides[i];
-        const isDark = slideEl.classList.contains('cover-slide-blue') || slideEl.classList.contains('closing-slide-blue');
-
-        const canvas = await html2canvas(slideEl, {
-          width: 1920,
-          height: 1080,
-          scale: 1,
-          useCORS: true,
-          logging: false,
-          backgroundColor: isDark ? '#0f2e5a' : '#ffffff'
-        });
-
+        const canvas = await this.captureSlide(slides[i], i, total);
         const imgData = canvas.toDataURL('image/jpeg', 0.95);
         if (i > 0) pdf.addPage([1920, 1080], 'landscape');
         pdf.addImage(imgData, 'JPEG', 0, 0, 1920, 1080);
+
+        // Liberar memoria del canvas de inmediato
+        canvas.width = 0;
+        canvas.height = 0;
       }
 
-      if (progressText) progressText.textContent = 'Guardando documento PDF...';
+      if (progressText) progressText.textContent = 'Guardando documento PDF en resolución 16:9...';
       pdf.save('Diapositivas-Etica-Julio-Vera.pdf');
 
-      this.engine.goTo(originalCurrent, false);
       if (progressText) progressText.textContent = '¡Documento PDF descargado!';
       setTimeout(() => {
         if (progressBox) progressBox.style.display = 'none';
@@ -653,6 +767,8 @@ class SlideExporter {
       console.error('Error al exportar PDF:', err);
       if (progressText) progressText.textContent = 'Error al generar PDF. Utiliza la opción de impresión nativa.';
     } finally {
+      const sandbox = document.getElementById('render-export-sandbox');
+      if (sandbox) sandbox.remove();
       document.body.classList.remove('export-mode');
       this.isExporting = false;
       if (btnZip) btnZip.disabled = false;
