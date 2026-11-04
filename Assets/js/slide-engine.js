@@ -495,4 +495,175 @@ function initBosswareModal() {
   }, 1000);
 }
 
+/**
+ * SlideExporter - Motor de Descarga de Diapositivas Estáticas (ZIP de PNGs y PDF)
+ * Captura a resolución canónica 1920x1080
+ */
+class SlideExporter {
+  constructor(engine) {
+    this.engine = engine;
+    this.isExporting = false;
+  }
+
+  async exportZip() {
+    if (this.isExporting) return;
+    this.isExporting = true;
+    const progressBox = document.getElementById('export-progress-box');
+    const progressBar = document.getElementById('export-progress-bar');
+    const progressText = document.getElementById('export-progress-text');
+    const btnZip = document.getElementById('btn-export-zip');
+    const btnPdf = document.getElementById('btn-export-pdf');
+
+    if (progressBox) progressBox.style.display = 'block';
+    if (btnZip) btnZip.disabled = true;
+    if (btnPdf) btnPdf.disabled = true;
+
+    try {
+      if (typeof JSZip === 'undefined' || typeof html2canvas === 'undefined') {
+        throw new Error('Librerías de exportación no cargadas');
+      }
+
+      const zip = new JSZip();
+      const slides = this.engine.slides;
+      const total = slides.length;
+      const originalCurrent = this.engine.currentIndex;
+
+      document.body.classList.add('export-mode');
+
+      for (let i = 0; i < total; i++) {
+        if (progressText) progressText.textContent = `Procesando lámina ${i + 1} de ${total}...`;
+        if (progressBar) progressBar.style.width = `${Math.round(((i + 1) / (total + 1)) * 100)}%`;
+
+        this.engine.goTo(i, false);
+        await new Promise(r => setTimeout(r, 150));
+
+        const slideEl = slides[i];
+        const isDark = slideEl.classList.contains('cover-slide-blue') || slideEl.classList.contains('closing-slide-blue');
+
+        const canvas = await html2canvas(slideEl, {
+          width: 1920,
+          height: 1080,
+          scale: 1,
+          useCORS: true,
+          logging: false,
+          backgroundColor: isDark ? '#0f2e5a' : '#ffffff'
+        });
+
+        const dataUrl = canvas.toDataURL('image/png');
+        const base64Data = dataUrl.replace(/^data:image\/png;base64,/, '');
+        const filename = `Lamina-${String(i + 1).padStart(2, '0')}.png`;
+        zip.file(filename, base64Data, { base64: true });
+      }
+
+      if (progressText) progressText.textContent = 'Comprimiendo archivo ZIP...';
+      const content = await zip.generateAsync({ type: 'blob' });
+
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(content);
+      link.download = 'Diapositivas-Etica-Julio-Vera.zip';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+
+      this.engine.goTo(originalCurrent, false);
+      if (progressText) progressText.textContent = '¡Colección ZIP descargada con éxito!';
+      setTimeout(() => {
+        if (progressBox) progressBox.style.display = 'none';
+        closeModal('modal-download');
+      }, 1400);
+
+    } catch (err) {
+      console.error('Error al exportar ZIP:', err);
+      if (progressText) progressText.textContent = 'Error al exportar imágenes. Utiliza la opción de impresión PDF.';
+    } finally {
+      document.body.classList.remove('export-mode');
+      this.isExporting = false;
+      if (btnZip) btnZip.disabled = false;
+      if (btnPdf) btnPdf.disabled = false;
+    }
+  }
+
+  async exportPdf() {
+    if (this.isExporting) return;
+    this.isExporting = true;
+    const progressBox = document.getElementById('export-progress-box');
+    const progressBar = document.getElementById('export-progress-bar');
+    const progressText = document.getElementById('export-progress-text');
+    const btnZip = document.getElementById('btn-export-zip');
+    const btnPdf = document.getElementById('btn-export-pdf');
+
+    if (progressBox) progressBox.style.display = 'block';
+    if (btnZip) btnZip.disabled = true;
+    if (btnPdf) btnPdf.disabled = true;
+
+    try {
+      if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
+        throw new Error('Librerías de exportación no cargadas');
+      }
+
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'px',
+        format: [1920, 1080]
+      });
+
+      const slides = this.engine.slides;
+      const total = slides.length;
+      const originalCurrent = this.engine.currentIndex;
+
+      document.body.classList.add('export-mode');
+
+      for (let i = 0; i < total; i++) {
+        if (progressText) progressText.textContent = `Generando página ${i + 1} de ${total}...`;
+        if (progressBar) progressBar.style.width = `${Math.round(((i + 1) / (total + 1)) * 100)}%`;
+
+        this.engine.goTo(i, false);
+        await new Promise(r => setTimeout(r, 150));
+
+        const slideEl = slides[i];
+        const isDark = slideEl.classList.contains('cover-slide-blue') || slideEl.classList.contains('closing-slide-blue');
+
+        const canvas = await html2canvas(slideEl, {
+          width: 1920,
+          height: 1080,
+          scale: 1,
+          useCORS: true,
+          logging: false,
+          backgroundColor: isDark ? '#0f2e5a' : '#ffffff'
+        });
+
+        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+        if (i > 0) pdf.addPage([1920, 1080], 'landscape');
+        pdf.addImage(imgData, 'JPEG', 0, 0, 1920, 1080);
+      }
+
+      if (progressText) progressText.textContent = 'Guardando documento PDF...';
+      pdf.save('Diapositivas-Etica-Julio-Vera.pdf');
+
+      this.engine.goTo(originalCurrent, false);
+      if (progressText) progressText.textContent = '¡Documento PDF descargado!';
+      setTimeout(() => {
+        if (progressBox) progressBox.style.display = 'none';
+        closeModal('modal-download');
+      }, 1400);
+
+    } catch (err) {
+      console.error('Error al exportar PDF:', err);
+      if (progressText) progressText.textContent = 'Error al generar PDF. Utiliza la opción de impresión nativa.';
+    } finally {
+      document.body.classList.remove('export-mode');
+      this.isExporting = false;
+      if (btnZip) btnZip.disabled = false;
+      if (btnPdf) btnPdf.disabled = false;
+    }
+  }
+
+  printNative() {
+    window.print();
+  }
+}
+
 window.SlideEngine = SlideEngine;
+window.SlideExporter = SlideExporter;

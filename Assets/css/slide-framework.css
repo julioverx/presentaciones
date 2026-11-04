@@ -485,9 +485,9 @@ html, body {
   content: '';
   position: absolute;
   top: 24px;
-  left: 14%;
-  right: 14%;
-  height: 3px;
+  left: calc((100% - 72px) / 6);
+  right: calc((100% - 72px) / 6);
+  height: 2px;
   background: var(--color-primary-navy);
   z-index: 1;
 }
@@ -497,6 +497,7 @@ html, body {
   z-index: 2;
   display: flex;
   flex-direction: column;
+  align-items: center; /* Centrado horizontal exacto del punto con respecto al contenedor */
 }
 
 .timeline-node-point {
@@ -512,15 +513,20 @@ html, body {
   font-size: 18px;
   color: var(--color-primary-navy);
   margin-bottom: 18px;
-  box-shadow: 0 0 0 6px #ffffff;
+  box-shadow: 0 0 0 8px #ffffff;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
 }
 
 .timeline-node-point.active {
   background: var(--color-primary-navy);
   color: #ffffff;
+  box-shadow: 0 0 0 8px #ffffff;
 }
 
 .timeline-node-content {
+  width: 100%;
   border: 1px solid var(--color-primary-navy);
   border-radius: 5px;
   background: #ffffff; /* 100% sólido */
@@ -1354,5 +1360,115 @@ html, body {
     font-size: 0.75rem;
   }
 }
+
+/* ==========================================================================
+   MODO DE EXPORTACIÓN ESTÁTICA Y @MEDIA PRINT (16:9 CANÓNICO)
+   ========================================================================== */
+body.export-mode .slide {
+  transition: none !important;
+  animation: none !important;
+}
+
+body.export-mode .inner-body {
+  animation: none !important;
+}
+
+body.export-mode .ambient-canvas-layer {
+  display: block !important;
+}
+
+@media print {
+  @page {
+    size: 1920px 1080px;
+    margin: 0;
+  }
+
+  html, body {
+    width: 1920px !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .presentation-viewport {
+    position: static !important;
+    width: 1920px !important;
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .slide-stage-scaler {
+    position: static !important;
+    transform: none !important;
+    width: 1920px !important;
+    height: auto !important;
+    min-width: 1920px !important;
+    min-height: auto !important;
+    max-width: 1920px !important;
+    max-height: none !important;
+    display: block !important;
+  }
+
+  .slide-canvas {
+    position: static !important;
+    width: 1920px !important;
+    height: auto !important;
+    min-height: auto !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  /* Ocultar elementos dinámicos en impresión */
+  .ambient-canvas-layer,
+  .presentation-controls,
+  .mobile-rotate-pill,
+  .editorial-modal-backdrop {
+    display: none !important;
+  }
+
+  /* Renderizar cada diapositiva estática en su página 16:9 */
+  .slide {
+    position: relative !important;
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    width: 1920px !important;
+    height: 1080px !important;
+    min-height: 1080px !important;
+    max-height: 1080px !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .cover-slide-blue,
+  .closing-slide-blue {
+    background: #0f2e5a !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .inner-slide {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
 
 
