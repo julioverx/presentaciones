@@ -206,6 +206,16 @@ class SlideEngine {
 
     if (this.prevBtn) this.prevBtn.disabled = this.currentIndex === 0;
     if (this.nextBtn) this.nextBtn.disabled = this.currentIndex === this.totalSlides - 1;
+
+    // Sincronizar tema de fondo canónico Método VERA
+    const currentSlide = this.slides[this.currentIndex];
+    const isDarkSlide = currentSlide && (
+      currentSlide.classList.contains('cover-slide-blue') ||
+      currentSlide.classList.contains('closing-slide-blue')
+    );
+    if (window.veraBg && typeof window.veraBg.setTheme === 'function') {
+      window.veraBg.setTheme(isDarkSlide);
+    }
   }
 
   triggerSlideAnimations(slide, index) {
@@ -329,14 +339,14 @@ function updateCortinaSimulation() {
   if (!res) return;
 
   if (s && h && t) {
-    res.style.borderLeftColor = 'var(--color-primary-navy)';
+    res.style.borderColor = 'var(--color-primary-navy)';
     res.style.background = '#f8fafc';
     res.innerHTML = `
       <strong style="color: var(--color-primary-navy);">ESTADO: CONDICIÓN ÉTICA CUMPLIDA</strong><br>
       La institución garantiza el suelo innegociable de justicia. La demanda de compromiso es moralmente legítima.
     `;
   } else {
-    res.style.borderLeftColor = '#ef4444';
+    res.style.borderColor = '#ef4444';
     res.style.background = '#fef2f2';
     res.innerHTML = `
       <strong style="color: #b91c1c;">ALERTA DE QUIEBRE DE MÍNIMOS (ADELA CORTINA)</strong><br>
@@ -421,20 +431,32 @@ function initBosswareModal() {
 
   const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
 
+  let keystrokes = 0;
+  let lastKeyTime = Date.now();
+  let pauseSec = 0;
+  let lastGamma = null;
+
   if (isMobile && mobileSensorBox) {
     mobileSensorBox.style.display = 'block';
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientation', (e) => {
         const tilt = Math.round(e.gamma || 0);
         const sensorVal = document.getElementById('mobile-tilt-val');
-        if (sensorVal) sensorVal.textContent = `Inclinación: ${tilt}° | Movimiento: Activo`;
+        if (sensorVal) sensorVal.textContent = `Inclinación: ${tilt}° | Telemetría: Activa`;
+
+        if (lastGamma !== null && Math.abs(tilt - lastGamma) > 2) {
+          keystrokes += 2;
+          lastKeyTime = Date.now();
+          pauseSec = 0;
+          if (alertBox) {
+            alertBox.textContent = 'ESTADO: MOVIMIENTO MÓVIL REGISTRADO (SUPERVISIÓN BIOMÉTRICA)';
+            alertBox.style.color = '#15803d';
+          }
+        }
+        lastGamma = tilt;
       }, { passive: true });
     }
   }
-
-  let keystrokes = 0;
-  let lastKeyTime = Date.now();
-  let pauseSec = 0;
 
   if (testInput) {
     testInput.value = '';

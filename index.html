@@ -10,6 +10,9 @@
 </head>
 <body>
 
+  <!-- Fondo Canónico Método VERA con Efecto Vidrio -->
+  <div id="hub-bg-container" class="hub-bg-canvas"></div>
+
   <!-- Header -->
   <header class="hub-header">
     <div class="hub-header-container">
@@ -46,10 +49,19 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="Assets/js/vera-background.js"></script>
   <script src="Assets/js/presentations.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+
+      // Fondo Canónico VERA para el Dashboard
+      new VeraBackgroundEngine({
+        container: '#hub-bg-container',
+        viewWidth: 1920,
+        viewHeight: 1080,
+        isDark: false
+      });
 
       const gridEl = document.getElementById('presentations-grid');
       const searchInput = document.getElementById('search-input');

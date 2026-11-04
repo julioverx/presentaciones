@@ -84,6 +84,7 @@ body {
 .search-input-box {
   width: 100%;
   border: 1px solid var(--border-dark);
+  border-radius: 5px;
   padding: 0.75rem 1rem;
   font-family: inherit;
   font-size: 0.95rem;
@@ -105,6 +106,7 @@ body {
 .filter-btn-orthogonal {
   background: #ffffff;
   border: 1px solid var(--border-color);
+  border-radius: 4px;
   color: var(--text-muted);
   padding: 0.4rem 0.85rem;
   font-size: 0.82rem;
@@ -140,9 +142,11 @@ body {
   gap: 2rem;
 }
 
-/* Tarjeta Ortogonal */
+/* Tarjeta Editorial */
 .hub-card {
   border: 1px solid var(--border-dark);
+  border-radius: 5px;
+  overflow: hidden;
   background: #ffffff;
   display: flex;
   flex-direction: column;
@@ -201,6 +205,7 @@ body {
   background: var(--primary-navy);
   color: #ffffff;
   padding: 0.55rem 1.15rem;
+  border-radius: 5px;
   font-size: 0.85rem;
   font-weight: 700;
   text-decoration: none;
@@ -218,8 +223,146 @@ body {
 .hub-footer {
   border-top: 1px solid var(--border-color);
   padding: 2rem 1.5rem;
-  background: var(--bg-subtle);
+  background: #ffffff;
   font-size: 0.82rem;
   color: var(--text-light);
   text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   SISTEMA GRÁFICO GENERATIVO CANÓNICO VERA (DASHBOARD)
+   ========================================================================== */
+.hub-bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hub-bg-canvas .vera-canonical-stage {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+@keyframes centeredConcentricExpansion {
+  0% {
+    opacity: 0;
+    filter: blur(24px);
+    transform: scale(0.90);
+  }
+  20% {
+    opacity: 0.14;
+    filter: blur(14px);
+  }
+  50% {
+    opacity: 0.22;
+    filter: blur(3.5px);
+    transform: scale(1.06);
+  }
+  80% {
+    opacity: 0.13;
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(26px);
+    transform: scale(1.24);
+  }
+}
+
+@keyframes drawFluidLine {
+  0% {
+    stroke-dashoffset: 4500;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes nexusSoftFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.95;
+  }
+}
+
+.giant-projection-group {
+  transform-box: view-box;
+  animation: centeredConcentricExpansion 14s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.blueprint-line {
+  stroke-dasharray: 4500;
+  stroke-dashoffset: 4500;
+  animation: drawFluidLine 6.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.blueprint-line.delay-1 {
+  animation-delay: 0.8s;
+}
+
+.blueprint-line.delay-2 {
+  animation-delay: 1.6s;
+}
+
+.blueprint-node {
+  opacity: 0;
+  animation: nexusSoftFadeIn 1.4s ease forwards;
+}
+
+.nexus-base {
+  animation-delay: 1.0s;
+}
+
+.nexus-split {
+  animation-delay: 3.4s;
+}
+
+.nexus-end {
+  animation-delay: 5.8s;
+}
+
+/* Header, Contenedores y Tarjetas Sobre el Fondo */
+.hub-header, .hub-top-bar, .hub-container {
+  position: relative;
+  z-index: 1;
+}
+
+.hub-card {
+  box-shadow: 0 4px 18px rgba(15, 46, 90, 0.04);
+}
+
+/* Responsividad Móvil */
+@media (max-width: 768px) {
+  .hub-header-container {
+    padding: 1.15rem 1.25rem;
+  }
+
+  .hub-top-bar {
+    margin: 1.5rem auto 1rem;
+    padding: 0 1.25rem;
+    gap: 1rem;
+  }
+
+  .hub-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .hub-card-body {
+    padding: 1.25rem;
+  }
+
+  .hub-card-btn {
+    min-height: 44px;
+    padding: 0.65rem 1.2rem;
+  }
 }
