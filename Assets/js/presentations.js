@@ -18,6 +18,7 @@ const PRESENTATIONS = [
     tags: ["Ética", "Algoritmos", "Talento Humano", "Inteligencia Artificial", "Gestión Laboral"],
     url: "Proyectos/Etica-de-la-Profesion/Slides-1/index.html",
     pdfUrl: null,
+    essayUrl: "Proyectos/Etica-de-la-Profesion/Slides-1/ensayo.pdf",
     slidesCount: 13,
     status: "Disponible",
     featured: true,

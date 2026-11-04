@@ -123,10 +123,18 @@
 
               <div class="hub-card-meta">
                 <span style="font-size: 0.8rem; color: var(--text-light); font-weight: 500;">${item.date}</span>
-                <a href="${item.url}" class="hub-card-btn">
-                  <span>Abrir Diapositivas</span>
-                  <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
-                </a>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  ${item.essayUrl ? `
+                    <a href="${item.essayUrl}" class="hub-card-btn-outline" title="Descargar Ensayo Académico (PDF)" download>
+                      <i data-lucide="book-open" style="width: 14px; height: 14px;"></i>
+                      <span>Ensayo</span>
+                    </a>
+                  ` : ''}
+                  <a href="${item.url}" class="hub-card-btn">
+                    <span>Diapositivas</span>
+                    <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
               </div>
             </div>
           </article>
