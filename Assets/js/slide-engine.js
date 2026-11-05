@@ -222,7 +222,10 @@ class SlideEngine {
     // 1. Renderizar KaTeX
     this.renderMath();
 
-    // 2. CEPAL (Lámina 7 - index 6)
+    // 2. Generar y activar bordes animados tipo Trim Path (SVG)
+    this.injectTrimPathBorders(slide);
+
+    // 3. CEPAL (Métricas animadas)
     if (slide.querySelector('.stat-number[data-target]')) {
       slide.querySelectorAll('.stat-number[data-target]').forEach(counter => {
         const target = parseFloat(counter.getAttribute('data-target'));
@@ -253,6 +256,46 @@ class SlideEngine {
         }
       });
     }
+  }
+
+  injectTrimPathBorders(slide) {
+    const selectors = [
+      '.toc-item-card',
+      '.equation-statement-box',
+      '.editorial-quote-box',
+      '.card-orthogonal',
+      '.pendulum-bottom-box',
+      '.kaufman-row',
+      '.orthogonal-box',
+      '.stat-orthogonal-card',
+      '.funnel-container',
+      '.closing-outline-box'
+    ];
+    const boxes = slide.querySelectorAll(selectors.join(', '));
+    boxes.forEach((box, idx) => {
+      const oldSvg = box.querySelector(':scope > svg.trimpath-border-svg');
+      if (oldSvg) oldSvg.remove();
+
+      const w = box.offsetWidth;
+      const h = box.offsetHeight;
+      if (w <= 0 || h <= 0) return;
+
+      const isDarkBox = box.classList.contains('closing-outline-box');
+      const delayDraw = (idx * 0.10).toFixed(2);
+      const delayRun = (0.95 + idx * 0.15).toFixed(2);
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', `trimpath-border-svg ${isDarkBox ? 'dark-trimpath' : ''}`);
+      svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+      svg.setAttribute('width', w);
+      svg.setAttribute('height', h);
+
+      svg.innerHTML = `
+        <rect class="trimpath-rect-draw" x="0.75" y="0.75" width="${w - 1.5}" height="${h - 1.5}" rx="5" ry="5" pathLength="1000" style="animation-delay: ${delayDraw}s;" />
+        <rect class="trimpath-rect-runner" x="0.75" y="0.75" width="${w - 1.5}" height="${h - 1.5}" rx="5" ry="5" pathLength="1000" style="animation-delay: ${delayRun}s;" />
+      `;
+      box.appendChild(svg);
+    });
   }
 
   renderMath() {
@@ -584,7 +627,8 @@ class SlideExporter {
       color: ${isDark ? '#ffffff' : '#0f172a'} !important;
     `;
 
-    // Congelar transiciones y animaciones internas
+    // Congelar transiciones y animaciones internas y limpiar overlays dinámicos de Trim Path
+    clone.querySelectorAll('.trimpath-border-svg').forEach(s => s.remove());
     clone.querySelectorAll('*').forEach(el => {
       el.style.animation = 'none';
       el.style.transition = 'none';

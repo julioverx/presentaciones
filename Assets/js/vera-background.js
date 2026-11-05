@@ -54,6 +54,10 @@ class VeraBackgroundEngine {
     }
     this.svg = svg;
 
+    if (this.container.parentElement) {
+      this.container.parentElement.classList.toggle('dark-theme-active', this.isDark);
+    }
+
     this.spawnShape(0);
     this.startCycle();
   }
@@ -198,6 +202,9 @@ class VeraBackgroundEngine {
   }
 
   setTheme(isDark) {
+    if (this.container && this.container.parentElement) {
+      this.container.parentElement.classList.toggle('dark-theme-active', isDark);
+    }
     if (this.isDark !== isDark) {
       this.isDark = isDark;
       this.spawnShape(this.currentIdx);
