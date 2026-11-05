@@ -19,7 +19,7 @@ const PRESENTATIONS = [
     url: "Proyectos/Etica-de-la-Profesion/Slides-1/index.html",
     pdfUrl: "Proyectos/Etica-de-la-Profesion/Slides-1/ensayo.pdf",
     essayUrl: "Proyectos/Etica-de-la-Profesion/Slides-1/ensayo.pdf",
-    slidesCount: 13,
+    slidesCount: 15,
     status: "Disponible",
     featured: true,
     accentColor: "#2563eb",
