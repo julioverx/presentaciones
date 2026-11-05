@@ -2,16 +2,18 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>El Problema de la Nostalgia | Defensa de Ética de la Profesión</title>
   <link rel="icon" type="image/svg+xml" href="../../../Assets/Logo.svg">
 
-  <!-- Tipografía Oficial Figtree (Google Fonts) -->
+  <!-- Tipografía Oficial Figtree y Libre Bodoni para Parser (Google Fonts) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Libre+Bodoni:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../../../Assets/css/slide-framework.css?v=9">
+  <link rel="stylesheet" href="../../../Assets/css/slide-framework.css?v=10">
 
   <!-- KaTeX para renderizado matemático formal -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -696,39 +698,19 @@
 
           <div class="dilemmas-grid-4">
             <div class="card-orthogonal featured animated-border-card schema-step-1">
-              <div>
-                <h3 class="card-orthogonal-title">Conflicto con los Sistemas de Captación (ATS) y la IA</h3>
-                <p class="card-orthogonal-text">
-                  Opacidad de la <em>caja negra duplicada</em> en intermediarios comerciales (Templeton et al., 2024), exclusión arbitraria por fragmentación de subpalabras en el algoritmo BPE (Chai, Peng &amp; Li, 2024) y margen inevitable de alucinación estocástica ($P &gt; 0$, Kalai &amp; Vempala, STOC 2024).
-                </p>
-              </div>
+              <h3 class="card-orthogonal-title">Conflicto con los Sistemas de Captación (ATS) y la IA</h3>
             </div>
 
             <div class="card-orthogonal animated-border-card schema-step-2">
-              <div>
-                <h3 class="card-orthogonal-title">Clientelismo, Máximos sobre Mínimos y Captación Interna Omitida</h3>
-                <p class="card-orthogonal-text">
-                  Imposición de los máximos privados o políticos del directivo por encima de la ética de mínimos, y falla en las captaciones internas al colocar convocatorias externas o plazas asignadas por clientelismo sobre el talento que ya sostiene la institución (Chiavenato, 2009).
-                </p>
-              </div>
+              <h3 class="card-orthogonal-title">El Clientelismo y la Ética de Máximos por encima de la Ética de Mínimos y la Falla en las Captaciones Internas</h3>
             </div>
 
             <div class="card-orthogonal animated-border-card schema-step-3">
-              <div>
-                <h3 class="card-orthogonal-title">La Hipervigilancia y el <em>Bossware</em></h3>
-                <p class="card-orthogonal-text">
-                  Reactivación del taylorismo mediante software de supervisión invasiva en el hogar (registro de pulsaciones por minuto, capturas de pantalla ocultas y control de inactividad del cursor), fracturando el contrato psicológico y la salud psicobiológica.
-                </p>
-              </div>
+              <h3 class="card-orthogonal-title">La Hipervigilancia y el <em>Bossware</em></h3>
             </div>
 
             <div class="card-orthogonal featured animated-border-card schema-step-4">
-              <div>
-                <h3 class="card-orthogonal-title">Despidos Masivos en las Empresas de Videojuegos</h3>
-                <p class="card-orthogonal-text">
-                  Desmantelamiento intempestivo de estudios creativos consolidados tras la sobrecontratación pandémica (caso Microsoft Gaming y gestión de Asha Sharma, 2026), tratando a los trabajadores como variables de amortiguación bursátil.
-                </p>
-              </div>
+              <h3 class="card-orthogonal-title">Despidos Masivos en las Empresas de Videojuegos</h3>
             </div>
           </div>
         </div>
@@ -859,7 +841,7 @@
         </div>
 
         <!-- Opción 4: Ensayo Académico Oficial Completo -->
-        <div class="modal-interactive-row" style="cursor: pointer;" onclick="window.open('ensayo.pdf', '_blank')">
+        <div class="modal-interactive-row" style="cursor: pointer;" onclick="window.open('../../../Ensayos/Etica-de-la-Profesion/Slides-1/ensayo.pdf', '_blank')">
           <div>
             <div class="modal-row-title-wrap">
               <i data-lucide="book-open" style="width: 20px; height: 20px; color: var(--color-primary-navy);"></i>
@@ -870,7 +852,7 @@
             </div>
           </div>
           <div style="display: flex; gap: 8px;">
-            <a href="ensayo.pdf" download="El-problema-de-la-nostalgia-Julio-Vera.pdf" class="btn-orthogonal-primary" style="text-decoration: none;" onclick="event.stopPropagation();">
+            <a href="../../../Ensayos/Etica-de-la-Profesion/Slides-1/ensayo.pdf" download="El-problema-de-la-nostalgia-Julio-Vera.pdf" class="btn-orthogonal-primary" style="text-decoration: none;" onclick="event.stopPropagation();">
               Descargar PDF
             </a>
             <a href="ensayo.html" target="_blank" class="btn-orthogonal-primary" style="text-decoration: none; background: #ffffff; color: var(--color-primary-navy); border: 1px solid var(--color-primary-navy);" onclick="event.stopPropagation();">
@@ -935,8 +917,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <!-- Sistema Gráfico Canónico VERA y Motor de Diapositivas -->
-  <script src="../../../Assets/js/vera-background.js?v=8"></script>
-  <script src="../../../Assets/js/slide-engine.js?v=8"></script>
+  <script src="../../../Assets/js/vera-background.js?v=10"></script>
+  <script src="../../../Assets/js/slide-engine.js?v=10"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();

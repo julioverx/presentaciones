@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Libre+Bodoni:ital,wght@0,700;1,700&display=swap');
 
 :root {
   --font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+  --font-math: 'Libre Bodoni', Georgia, serif;
   --color-bg: #ffffff;
   --color-viewport-bg: #0b1120;
   --color-primary-navy: #0f2e5a;
@@ -22,11 +23,13 @@
 html, body {
   width: 100%;
   height: 100%;
+  height: 100dvh;
   overflow: hidden;
   font-family: var(--font-family);
   background-color: var(--color-viewport-bg);
   color: var(--color-text-main);
   user-select: none;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* ==========================================================================
@@ -34,7 +37,9 @@ html, body {
    ========================================================================== */
 .presentation-viewport {
   width: 100vw;
+  width: 100dvw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   position: fixed;
   inset: 0;
@@ -1386,17 +1391,29 @@ body.export-mode .animated-border-card {
   margin-top: 4px;
 }
 
-/* LÁMINA 14: Grilla 2x2 de Dilemas Contemporáneos */
+/* LÁMINA 14: Grilla 2x2 de Dilemas Contemporáneos (Solo Títulos) */
 .dilemmas-grid-4 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px 32px;
+  gap: 28px 36px;
   width: 100%;
 }
 
 .dilemmas-grid-4 .card-orthogonal {
-  min-height: 220px;
-  padding: 24px 30px;
+  min-height: 195px;
+  padding: 36px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.dilemmas-grid-4 .card-orthogonal-title {
+  font-size: 30px;
+  line-height: 1.32;
+  margin-bottom: 0;
+  font-weight: 800;
+  color: var(--color-primary-navy);
 }
 
 /* ==========================================================================
@@ -1515,9 +1532,24 @@ body.export-mode .animated-border-card {
   margin: 4px 0 !important;
 }
 
-.katex {
-  font-size: 28px !important;
+/* Parser Matemático Universal: Libre Bodoni en Itálica y Negrita */
+.katex,
+.katex *,
+.katex .mathnormal,
+.katex .mathdefault,
+.katex .mord,
+.katex .mop,
+.katex .mbin,
+.katex .mrel,
+.math-bodoni {
+  font-family: 'Libre Bodoni', Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
   color: var(--color-primary-navy) !important;
+}
+
+.math-formula-display .katex {
+  font-size: 28px !important;
 }
 
 /* ==========================================================================
@@ -1881,11 +1913,11 @@ body.export-mode .animated-border-card {
 }
 
 /* ==========================================================================
-   BARRA FLOTANTE DE CONTROLES
+   BARRA FLOTANTE DE CONTROLES (COMPATIBLE CON IPHONE / IOS SAFARI & CHROME)
    ========================================================================== */
 .presentation-controls {
   position: fixed;
-  bottom: 1.25rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -1897,12 +1929,32 @@ body.export-mode .animated-border-card {
   border: 1px solid #334155;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   z-index: 1000;
-  opacity: 0.3;
-  transition: opacity 0.2s;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.presentation-controls:hover {
+.presentation-controls:hover,
+.presentation-controls:active {
   opacity: 1;
+}
+
+body.controls-idle .presentation-controls,
+body.controls-idle .mobile-rotate-pill {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+body.ios-immersive-mode .mobile-rotate-pill {
+  display: none !important;
+}
+
+@supports (-webkit-touch-callout: none) {
+  /* En iPhone (Safari y Chrome iOS), elevar controles por encima de la barra inferior del navegador */
+  .presentation-controls {
+    bottom: calc(1.65rem + env(safe-area-inset-bottom, 12px));
+    padding: 0.45rem 0.85rem;
+    opacity: 0.85;
+  }
 }
 
 .ctrl-btn {

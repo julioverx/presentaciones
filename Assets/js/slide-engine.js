@@ -10,6 +10,9 @@ class SlideEngine {
     this.currentIndex = 0;
     this.totalSlides = this.slides.length;
     this.isRotatedMobile = false;
+    this.isIosImmersive = false;
+    this.wakeLockSentinel = null;
+    this.idleTimer = null;
 
     this.progressBar = document.querySelector('#slide-progress');
     this.counterEl = document.querySelector('#slide-counter');
@@ -39,15 +42,18 @@ class SlideEngine {
     }
 
     this.bindEvents();
-    this.updateSlides();
     this.renderMath();
+    this.updateSlides();
     this.initModalListeners();
+    this.initWakeLock();
+    this.resetIdleTimer();
   }
 
   fitStage() {
     if (!this.scaler) return;
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const vv = window.visualViewport;
+    const w = vv ? vv.width : window.innerWidth;
+    const h = vv ? vv.height : window.innerHeight;
 
     // Si el usuario forzó la rotación a 16:9 en móvil vertical
     if (this.isRotatedMobile && w < h) {
@@ -68,14 +74,71 @@ class SlideEngine {
     if (pill) {
       pill.style.display = this.isRotatedMobile ? 'none' : 'flex';
     }
+    this.resetIdleTimer();
+  }
+
+  resetIdleTimer() {
+    document.body.classList.remove('controls-idle');
+    if (this.idleTimer) clearTimeout(this.idleTimer);
+    const isMobileOrFullscreen =
+      window.innerWidth <= 920 ||
+      this.isRotatedMobile ||
+      this.isIosImmersive ||
+      !!(document.fullscreenElement || document.webkitFullscreenElement);
+
+    if (isMobileOrFullscreen) {
+      this.idleTimer = setTimeout(() => {
+        if (!document.querySelector('.editorial-modal-backdrop.active')) {
+          document.body.classList.add('controls-idle');
+        }
+      }, 3200);
+    }
+  }
+
+  async requestWakeLock() {
+    if ('wakeLock' in navigator) {
+      try {
+        if (!this.wakeLockSentinel) {
+          this.wakeLockSentinel = await navigator.wakeLock.request('screen');
+          this.wakeLockSentinel.addEventListener('release', () => {
+            this.wakeLockSentinel = null;
+          });
+        }
+      } catch (err) {
+        // Ignorar silenciosamente si el navegador requiere interacción previa
+      }
+    }
+  }
+
+  initWakeLock() {
+    this.requestWakeLock();
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        this.requestWakeLock();
+      }
+    });
+    const unlockOnGesture = () => {
+      this.requestWakeLock();
+      document.removeEventListener('touchstart', unlockOnGesture);
+      document.removeEventListener('click', unlockOnGesture);
+    };
+    document.addEventListener('touchstart', unlockOnGesture, { passive: true });
+    document.addEventListener('click', unlockOnGesture, { passive: true });
   }
 
   bindEvents() {
     window.addEventListener('resize', () => this.fitStage());
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => this.fitStage());
+    }
     window.addEventListener('orientationchange', () => {
       this.isRotatedMobile = false;
       setTimeout(() => this.fitStage(), 150);
     });
+
+    // Reactivar controles ante movimiento o toque
+    window.addEventListener('mousemove', () => this.resetIdleTimer(), { passive: true });
+    window.addEventListener('touchstart', () => this.resetIdleTimer(), { passive: true });
 
     // Navegación por teclado
     window.addEventListener('keydown', (e) => {
@@ -133,18 +196,32 @@ class SlideEngine {
     if (this.fullscreenBtn) this.fullscreenBtn.addEventListener('click', (e) => { e.stopPropagation(); this.toggleFullscreen(); });
     if (this.rotateBtn) this.rotateBtn.addEventListener('click', (e) => { e.stopPropagation(); this.toggleMobileRotate(); });
 
-    // Swipe táctil
+    // Swipe táctil inteligente 2D (soporta modo normal horizontal y modo 16:9 rotado en vertical)
     let touchStartX = 0;
+    let touchStartY = 0;
     document.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
     }, { passive: true });
 
     document.addEventListener('touchend', (e) => {
       if (document.querySelector('.editorial-modal-backdrop.active')) return;
       const touchEndX = e.changedTouches[0].screenX;
-      const diff = touchEndX - touchStartX;
-      if (Math.abs(diff) > 50) {
-        if (diff < 0) this.next();
+      const touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      // Cuando el teléfono está en modo 16:9 girado 90deg, el eje horizontal de la lámina corresponde a screenY
+      if (this.isRotatedMobile && window.innerWidth < window.innerHeight) {
+        if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 45) {
+          if (diffY < 0) this.next();
+          else this.prev();
+          return;
+        }
+      }
+
+      if (Math.abs(diffX) > 45) {
+        if (diffX < 0) this.next();
         else this.prev();
       }
     }, { passive: true });
@@ -299,7 +376,7 @@ class SlideEngine {
   }
 
   renderMath() {
-    // Renderizado estándar KaTeX sin acentos problemáticos
+    // 1. Renderizado explícito por ID si existe
     if (typeof katex !== 'undefined') {
       const formulaEl = document.getElementById('stoc-math-formula');
       if (formulaEl && !formulaEl.dataset.rendered) {
@@ -314,6 +391,43 @@ class SlideEngine {
         }
       }
     }
+
+    // 2. Parser matemático automático para expresiones entre $...$ o $$...$$ con fuente Libre Bodoni Bold Italic
+    if (!this.container) return;
+    const textContainers = this.container.querySelectorAll(
+      'p, h2, h3, li, span, .card-orthogonal-text, .editorial-quote-text, .orthogonal-box-content, .slide-description'
+    );
+    textContainers.forEach(el => {
+      if (el.dataset.mathParsed === 'true') return;
+      if (el.children.length > 0 && !el.innerHTML.includes('$')) return;
+      const html = el.innerHTML;
+      if (!html.includes('$')) return;
+
+      const parsedHtml = html
+        .replace(/\$\$([^$]+)\$\$/g, (_, expr) => {
+          const cleanExpr = expr.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&');
+          if (typeof katex !== 'undefined') {
+            try {
+              return `<span class="math-bodoni">${katex.renderToString(cleanExpr, { displayMode: true, throwOnError: false })}</span>`;
+            } catch (e) {}
+          }
+          return `<span class="math-bodoni">${expr}</span>`;
+        })
+        .replace(/\$([^$]+)\$/g, (_, expr) => {
+          const cleanExpr = expr.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&');
+          if (typeof katex !== 'undefined') {
+            try {
+              return `<span class="math-bodoni">${katex.renderToString(cleanExpr, { displayMode: false, throwOnError: false })}</span>`;
+            } catch (e) {}
+          }
+          return `<span class="math-bodoni">${expr}</span>`;
+        });
+
+      if (parsedHtml !== html) {
+        el.innerHTML = parsedHtml;
+        el.dataset.mathParsed = 'true';
+      }
+    });
   }
 
   initModalListeners() {
@@ -331,16 +445,49 @@ class SlideEngine {
   }
 
   toggleFullscreen() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().then(() => {
-        if (screen.orientation && screen.orientation.lock) {
-          screen.orientation.lock('landscape').catch(() => {});
-        }
-      }).catch(err => console.log(err));
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
+    const docEl = document.documentElement;
+    const isNativeFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    const requestFs = docEl.requestFullscreen || docEl.webkitRequestFullscreen || docEl.mozRequestFullScreen || docEl.msRequestFullscreen;
+    const exitFs = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+
+    // En iPhone (iOS Safari y Chrome iOS), Apple bloquea requestFullscreen en elementos HTML.
+    // Activamos un modo inmersivo 16:9 a pantalla completa que adapta el lienzo y oculta controles.
+    if (!requestFs) {
+      this.isIosImmersive = !this.isIosImmersive;
+      document.body.classList.toggle('ios-immersive-mode', this.isIosImmersive);
+      if (window.innerWidth < window.innerHeight) {
+        this.isRotatedMobile = this.isIosImmersive;
+        const pill = document.getElementById('mobile-rotate-pill');
+        if (pill) pill.style.display = this.isRotatedMobile ? 'none' : 'flex';
       }
+      window.scrollTo(0, 1);
+      this.fitStage();
+      this.resetIdleTimer();
+      return;
+    }
+
+    if (!isNativeFs) {
+      const fsPromise = requestFs.call(docEl);
+      if (fsPromise && typeof fsPromise.then === 'function') {
+        fsPromise.then(() => {
+          if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock('landscape').catch(() => {});
+          }
+          this.fitStage();
+          this.resetIdleTimer();
+        }).catch(() => {
+          // Fallback si el navegador móvil rechaza requestFullscreen (ej. WebKit iOS)
+          this.isIosImmersive = !this.isIosImmersive;
+          document.body.classList.toggle('ios-immersive-mode', this.isIosImmersive);
+          if (window.innerWidth < window.innerHeight) {
+            this.isRotatedMobile = this.isIosImmersive;
+          }
+          this.fitStage();
+          this.resetIdleTimer();
+        });
+      }
+    } else if (exitFs) {
+      exitFs.call(document);
     }
   }
 }
