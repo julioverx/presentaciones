@@ -1,393 +1,714 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teorías de la Administración | Postgrado UNESR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Caso FUSÓ: Entornos VUCA/BANI | Teorías de la Administración</title>
   <link rel="icon" type="image/svg+xml" href="../../../Assets/Logo.svg">
-  <link rel="stylesheet" href="../../../Assets/css/slide-framework.css">
-  <!-- Lucide Icons -->
+
+  <!-- Tipografía Oficial Figtree y Libre Bodoni para Parser (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Libre+Bodoni:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../Assets/css/slide-framework.css?v=11">
+
+  <!-- KaTeX para renderizado matemático formal -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
   <div class="presentation-viewport">
-    <div class="slide-canvas" id="slides-container">
+    <div class="slide-stage-scaler" id="slide-stage-scaler">
+      <div class="slide-canvas" id="slides-container">
 
-      <!-- SLIDE 1: PORTADA OFICIAL UNESR -->
-      <section class="slide active">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>REPÚBLICA BOLIVARIANA DE VENEZUELA</h3>
-              <p>UNIVERSIDAD NACIONAL EXPERIMENTAL SIMÓN RODRÍGUEZ</p>
-              <p>DECANATO DE POSTGRADO Y EDUCACIÓN AVANZADA — NÚCLEO APURE</p>
-            </div>
+      <!-- Capa Reticular de Fondo (Geometría Canónica Método VERA con Efecto Vidrio) -->
+      <div id="vera-ambient-container" class="ambient-canvas-layer">
+        <div class="ambient-shape-1"></div>
+        <div class="ambient-shape-2"></div>
+        <div class="ambient-grid-lines"></div>
+      </div>
+
+      <!-- ===================================================================
+           LÁMINA 01: PORTADA OFICIAL EN AZUL INSTITUCIONAL
+           =================================================================== -->
+      <section class="slide cover-slide-blue active">
+        <!-- Cabecera institucional -->
+        <header class="cover-header">
+          <div class="cover-logo-wrapper">
+            <svg class="cover-logo-svg" viewBox="0 0 382.71 295.96">
+              <g fill="currentColor">
+                <path d="M139.64,5.44v126.58s-.02,7.06-8.51,7.06c-14.75,0-35.82,.02-50.57,.02-8.6,0-8.51-7.38-8.51-7.38V32.75c19.53-11.84,43.02-22.02,67.59-27.31Z"/>
+                <path d="M364.87,84.9H175.58c-8.87,0-8.12,5.39-8.12,17.66,0,27.02,.01,81.05,.01,81.05,0,6.05,.79,13.03-8.38,13.03H10.16C.13,174.48-20.41,100.87,57.13,42.27c0,44.11-.01,132.34-.01,132.34,0,10.14,10.43,10.06,10.43,10.06l79.62-.03s9.02,.11,9.02-10.05V2.48c11.39-1.63,23.14-2.48,35.14-2.48,76.68,0,142.85,34.72,173.54,84.9Z"/>
+                <path d="M378.6,112.72H248.96l-5.94,5.93v-6.13h-14.56s-.08,180.68-.08,180.68c-11.98,1.81-24.37,2.76-37.05,2.76-76.32,0-142.23-34.32-173.1-84.12l187.35-.05c3.07,0,5.79-1.48,7.5-3.76,.02-.03,.25-.35,.26-.38,1.01-1.49,1.6-3.29,1.6-5.23,0,0-.1-48.99-.02-90.16,.01-5.17,2.93-10.82,10.71-10.82h147.81s5.16,11.28,5.16,11.28Z"/>
+                <path d="M382.71,157.56s-.65,5.97-.76,6.75h0c-2.84,20.04-10.87,38.85-23.02,55.66-.03,.03-.06,.07-.08,.12-18.43,25.42-46.29,46.22-79.94,59.58-.06,.02-.13,.04-.19,.07-.03,.01-.06,.02-.08,.03-14.14,7.07-35.85,10.81-36.31,10.9h-.01s-.02,.01-.03,.01v-124.86c0-5.7,5.91-8.26,10.24-8.26h130.18Z"/>
+              </g>
+            </svg>
           </div>
-          <div class="slide-context-badge">
-            <span class="badge" style="color: #059669;">Teorías de la Administración</span>
+          <div class="cover-letterhead">
+            <p>REPÚBLICA BOLIVARIANA DE VENEZUELA</p>
+            <p class="bold">UNIVERSIDAD NACIONAL EXPERIMENTAL SIMÓN RODRÍGUEZ</p>
+            <p>DECANATO DE POSTGRADO Y EDUCACIÓN AVANZADA <span class="bold">— NÚCLEO APURE</span></p>
+            <p>MAESTRÍA EN CIENCIAS ADMINISTRATIVAS: GERENCIA DEL TALENTO HUMANO</p>
+            <p class="bold">CURSO: TEORÍAS DE LA ADMINISTRACIÓN</p>
           </div>
+        </header>
+
+        <!-- Título centrado en 2 líneas -->
+        <div class="cover-title-block">
+          <h1 class="cover-main-title">
+            <strong>Análisis de Caso Sistemático:</strong>
+            <span>reestructuración organizacional y adaptación contingencial en entornos VUCA/BANI (Caso FUSÓ)</span>
+          </h1>
         </div>
 
-        <div class="slide-body cover-layout">
-          <div>
-            <span style="font-size: 0.85rem; font-weight: 700; color: #059669; letter-spacing: 0.05em; text-transform: uppercase;">
-              Maestría en Ciencias Administrativas: Gerencia del Talento Humano
+        <!-- Créditos con separador central y viñeta -->
+        <div class="cover-credits-block">
+          <div class="cover-credit-col">
+            <span class="cover-credit-label">FACILITADORA</span>
+            <span class="cover-credit-value">DRA. MAIRA RUÍZ</span>
+          </div>
+
+          <div class="cover-credits-separator"></div>
+
+          <div class="cover-credit-col">
+            <span class="cover-credit-label">PARTICIPANTES</span>
+            <span class="cover-credit-value">
+              JULIO VERA <span class="credit-bolo">•</span> V-26.889.534
             </span>
-            <h1 class="cover-title" style="margin-top: 0.5rem;">
-              Teorías de la Administración
-            </h1>
-            <p class="cover-subtitle">
-              Evolución del pensamiento administrativo: de la eficiencia mecanicista a la complejidad sistémica
+            <span class="cover-credit-value">
+              MABRI HERRERA <span class="credit-bolo">•</span> V-14.694.959
+            </span>
+          </div>
+        </div>
+
+        <!-- Pie de portada -->
+        <div class="cover-footer-block">
+          BIRUACA, NOVIEMBRE DE 2026
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           LÁMINA 02: EL ENTORNO VUCA (QUÉ ES Y SIGNIFICADO DE SUS INICIALES)
+           =================================================================== -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Teorías de la Administración</span>
+          <span class="running-header-right">01. Marco Conceptual: Entornos VUCA</span>
+        </header>
+
+        <div class="inner-body">
+          <h2 class="slide-heading">¿Qué es el Entorno VUCA?</h2>
+          <p class="slide-description">
+            Modelo clásico de diagnóstico estratégico para comprender la turbulencia externa que enfrentan las organizaciones contemporáneas.
+          </p>
+
+          <div class="acronym-grid-4">
+            <div class="acronym-card animated-border-card schema-step-1">
+              <div class="acronym-letter-badge">V</div>
+              <div class="acronym-body">
+                <h3 class="acronym-title">Volatilidad <em>(Volatility)</em></h3>
+                <p class="acronym-desc">
+                  Cambios rápidos, frecuentes e inesperados en el mercado, la tecnología y las reglas de operación que exigen respuesta ágil.
+                </p>
+              </div>
+            </div>
+
+            <div class="acronym-card animated-border-card schema-step-2">
+              <div class="acronym-letter-badge">U</div>
+              <div class="acronym-body">
+                <h3 class="acronym-title">Incertidumbre <em>(Uncertainty)</em></h3>
+                <p class="acronym-desc">
+                  Imposibilidad de predecir el futuro a partir del pasado debido a fluctuaciones económicas y disrupciones continuas.
+                </p>
+              </div>
+            </div>
+
+            <div class="acronym-card animated-border-card schema-step-3">
+              <div class="acronym-letter-badge">C</div>
+              <div class="acronym-body">
+                <h3 class="acronym-title">Complejidad <em>(Complexity)</em></h3>
+                <p class="acronym-desc">
+                  Múltiples variables interconectadas —técnicas, legales, culturales y horarias— que operan de forma simultánea.
+                </p>
+              </div>
+            </div>
+
+            <div class="acronym-card animated-border-card schema-step-4">
+              <div class="acronym-letter-badge">A</div>
+              <div class="acronym-body">
+                <h3 class="acronym-title">Ambigüedad <em>(Ambiguity)</em></h3>
+                <p class="acronym-desc">
+                  Falta de claridad en las relaciones causa-efecto; los escenarios admiten múltiples interpretaciones y exigen criterio propio.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="inner-footer">
+          <div class="inner-footer-logo-wrapper">
+            <svg viewBox="0 0 382.71 295.96"><g fill="currentColor"><path d="M139.64,5.44v126.58s-.02,7.06-8.51,7.06c-14.75,0-35.82,.02-50.57,.02-8.6,0-8.51-7.38-8.51-7.38V32.75c19.53-11.84,43.02-22.02,67.59-27.31Z"/><path d="M364.87,84.9H175.58c-8.87,0-8.12,5.39-8.12,17.66,0,27.02,.01,81.05,.01,81.05,0,6.05,.79,13.03-8.38,13.03H10.16C.13,174.48-20.41,100.87,57.13,42.27c0,44.11-.01,132.34-.01,132.34,0,10.14,10.43,10.06,10.43,10.06l79.62-.03s9.02,.11,9.02-10.05V2.48c11.39-1.63,23.14-2.48,35.14-2.48,76.68,0,142.85,34.72,173.54,84.9Z"/><path d="M378.6,112.72H248.96l-5.94,5.93v-6.13h-14.56s-.08,180.68-.08,180.68c-11.98,1.81-24.37,2.76-37.05,2.76-76.32,0-142.23-34.32-173.1-84.12l187.35-.05c3.07,0,5.79-1.48,7.5-3.76,.02-.03,.25-.35,.26-.38,1.01-1.49,1.6-3.29,1.6-5.23,0,0-.1-48.99-.02-90.16,.01-5.17,2.93-10.82,10.71-10.82h147.81s5.16,11.28,5.16,11.28Z"/><path d="M382.71,157.56s-.65,5.97-.76,6.75h0c-2.84,20.04-10.87,38.85-23.02,55.66-.03,.03-.06,.07-.08,.12-18.43,25.42-46.29,46.22-79.94,59.58-.06,.02-.13,.04-.19,.07-.03,.01-.06,.02-.08,.03-14.14,7.07-35.85,10.81-36.31,10.9h-.01s-.02,.01-.03,.01v-124.86c0-5.7,5.91-8.26,10.24-8.26h130.18Z"/></g></svg>
+          </div>
+          <div class="pagination-badge">
+            <span class="pagination-current">2</span>
+            <span class="pagination-total">8</span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- ===================================================================
+           LÁMINA 03: EL ENTORNO BANI (JAMAIS CASCIO, 2020)
+           =================================================================== -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Teorías de la Administración</span>
+          <span class="running-header-right">01. Marco Conceptual: Entornos BANI</span>
+        </header>
+
+        <div class="inner-body">
+          <h2 class="slide-heading">¿Qué es el Entorno BANI? (Jamais Cascio, 2020)</h2>
+          <p class="slide-description">
+            Marco contemporáneo que describe escenarios donde los sistemas no solo cambian rápido, sino que se vuelven caóticos y quebradizos.
+          </p>
+
+          <div class="acronym-grid-4">
+            <div class="acronym-card animated-border-card schema-step-1">
+              <div class="acronym-letter-badge">B</div>
+              <div class="acronym-body">
+                <h3 class="acronym-title">Frágil <em>(Brittle)</em></h3>
+                <p class="acronym-desc">
+                  Modelos que aparentan solidez pero colapsan de forma súbita cuando cambian las condiciones tecnológicas o la automatización.
+                </p>
+              </div>
+            </div>
+
+            <div class="acronym-card animated-border-card schema-step-2">
+              <div class="acronym-letter-badge">A</div>
+              <div class="acronym-body">
+                <h3 class="acronym-title">Ansioso <em>(Anxious)</em></h3>
+                <p class="acronym-desc">
+                  Tensión psicológica permanente en el talento humano frente a la presión económica, la IA y el temor a tomar decisiones erróneas.
+                </p>
+              </div>
+            </div>
+
+            <div class="acronym-card animated-border-card schema-step-3">
+              <div class="acronym-letter-badge">N</div>
+              <div class="acronym-body">
+                <h3 class="acronym-title">No Lineal <em>(Non-linear)</em></h3>
+                <p class="acronym-desc">
+                  Desproporción entre causa y efecto: una mínima variación técnica o un fallo operativo pequeño altera radicalmente los resultados.
+                </p>
+              </div>
+            </div>
+
+            <div class="acronym-card animated-border-card schema-step-4">
+              <div class="acronym-letter-badge">I</div>
+              <div class="acronym-body">
+                <h3 class="acronym-title">Incomprensible <em>(Incomprehensible)</em></h3>
+                <p class="acronym-desc">
+                  Saturación de información y ruido en el mercado donde acumular más datos no garantiza mayor claridad para decidir.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="inner-footer">
+          <div class="inner-footer-logo-wrapper">
+            <svg viewBox="0 0 382.71 295.96"><g fill="currentColor"><path d="M139.64,5.44v126.58s-.02,7.06-8.51,7.06c-14.75,0-35.82,.02-50.57,.02-8.6,0-8.51-7.38-8.51-7.38V32.75c19.53-11.84,43.02-22.02,67.59-27.31Z"/><path d="M364.87,84.9H175.58c-8.87,0-8.12,5.39-8.12,17.66,0,27.02,.01,81.05,.01,81.05,0,6.05,.79,13.03-8.38,13.03H10.16C.13,174.48-20.41,100.87,57.13,42.27c0,44.11-.01,132.34-.01,132.34,0,10.14,10.43,10.06,10.43,10.06l79.62-.03s9.02,.11,9.02-10.05V2.48c11.39-1.63,23.14-2.48,35.14-2.48,76.68,0,142.85,34.72,173.54,84.9Z"/><path d="M378.6,112.72H248.96l-5.94,5.93v-6.13h-14.56s-.08,180.68-.08,180.68c-11.98,1.81-24.37,2.76-37.05,2.76-76.32,0-142.23-34.32-173.1-84.12l187.35-.05c3.07,0,5.79-1.48,7.5-3.76,.02-.03,.25-.35,.26-.38,1.01-1.49,1.6-3.29,1.6-5.23,0,0-.1-48.99-.02-90.16,.01-5.17,2.93-10.82,10.71-10.82h147.81s5.16,11.28,5.16,11.28Z"/><path d="M382.71,157.56s-.65,5.97-.76,6.75h0c-2.84,20.04-10.87,38.85-23.02,55.66-.03,.03-.06,.07-.08,.12-18.43,25.42-46.29,46.22-79.94,59.58-.06,.02-.13,.04-.19,.07-.03,.01-.06,.02-.08,.03-14.14,7.07-35.85,10.81-36.31,10.9h-.01s-.02,.01-.03,.01v-124.86c0-5.7,5.91-8.26,10.24-8.26h130.18Z"/></g></svg>
+          </div>
+          <div class="pagination-badge">
+            <span class="pagination-current">3</span>
+            <span class="pagination-total">8</span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- ===================================================================
+           LÁMINA 04: ENTROPÍA VS. NEGUENTROPÍA (TEORÍA GENERAL DE SISTEMAS)
+           =================================================================== -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Teorías de la Administración</span>
+          <span class="running-header-right">02. Teoría General de Sistemas (Bertalanffy / Arnold &amp; Osorio)</span>
+        </header>
+
+        <div class="inner-body">
+          <h2 class="slide-heading">Entropía y Neguentropía en los Sistemas Abiertos</h2>
+          <p class="slide-description">
+            Las dos fuerzas que determinan el desgaste natural o la supervivencia ordenada de toda organización.
+          </p>
+
+          <div class="grid-orthogonal-2">
+            <div class="card-orthogonal featured animated-border-card schema-step-1" style="min-height: 370px; padding: 38px 42px;">
+              <div>
+                <h3 class="card-orthogonal-title" style="font-size: 34px; margin-bottom: 16px;">Entropía</h3>
+                <p class="card-orthogonal-text" style="font-size: 20px;">
+                  Tendencia natural de todo sistema abierto al <strong>desorden, la dispersión y el desgaste operativo</strong> cuando carece de reglas claras de coordinación.
+                </p>
+                <p class="card-orthogonal-text" style="font-size: 18px; margin-top: 16px; color: var(--color-primary-navy);">
+                  <strong>En FlyAds:</strong> Operación por pura intuición sin procesos escritos, mensajes de prospectos sin respuesta y tres logotipos fragmentando la marca.
+                </p>
+              </div>
+              <div class="card-source-tag">Fuente: Ludwig von Bertalanffy (1976), Teoría general de los sistemas.</div>
+            </div>
+
+            <div class="card-orthogonal animated-border-card schema-step-2" style="min-height: 370px; padding: 38px 42px;">
+              <div>
+                <h3 class="card-orthogonal-title" style="font-size: 34px; margin-bottom: 16px;">Neguentropía</h3>
+                <p class="card-orthogonal-text" style="font-size: 20px;">
+                  Inyección de <strong>energía, información y estructura ordenadora</strong> que detiene el deterioro interno y mantiene el equilibrio dinámico del sistema.
+                </p>
+                <p class="card-orthogonal-text" style="font-size: 18px; margin-top: 16px; color: var(--color-primary-navy);">
+                  <strong>En FUSÓ:</strong> Manual de Gobernanza e Identidad que codificó los flujos de trabajo y unificó la marca bajo el concepto «Juntos como uno».
+                </p>
+              </div>
+              <div class="card-source-tag">Fuente: Marcelo Arnold &amp; Francisco Osorio (1998), Revista Cinta de Moebio.</div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="inner-footer">
+          <div class="inner-footer-logo-wrapper">
+            <svg viewBox="0 0 382.71 295.96"><g fill="currentColor"><path d="M139.64,5.44v126.58s-.02,7.06-8.51,7.06c-14.75,0-35.82,.02-50.57,.02-8.6,0-8.51-7.38-8.51-7.38V32.75c19.53-11.84,43.02-22.02,67.59-27.31Z"/><path d="M364.87,84.9H175.58c-8.87,0-8.12,5.39-8.12,17.66,0,27.02,.01,81.05,.01,81.05,0,6.05,.79,13.03-8.38,13.03H10.16C.13,174.48-20.41,100.87,57.13,42.27c0,44.11-.01,132.34-.01,132.34,0,10.14,10.43,10.06,10.43,10.06l79.62-.03s9.02,.11,9.02-10.05V2.48c11.39-1.63,23.14-2.48,35.14-2.48,76.68,0,142.85,34.72,173.54,84.9Z"/><path d="M378.6,112.72H248.96l-5.94,5.93v-6.13h-14.56s-.08,180.68-.08,180.68c-11.98,1.81-24.37,2.76-37.05,2.76-76.32,0-142.23-34.32-173.1-84.12l187.35-.05c3.07,0,5.79-1.48,7.5-3.76,.02-.03,.25-.35,.26-.38,1.01-1.49,1.6-3.29,1.6-5.23,0,0-.1-48.99-.02-90.16,.01-5.17,2.93-10.82,10.71-10.82h147.81s5.16,11.28,5.16,11.28Z"/><path d="M382.71,157.56s-.65,5.97-.76,6.75h0c-2.84,20.04-10.87,38.85-23.02,55.66-.03,.03-.06,.07-.08,.12-18.43,25.42-46.29,46.22-79.94,59.58-.06,.02-.13,.04-.19,.07-.03,.01-.06,.02-.08,.03-14.14,7.07-35.85,10.81-36.31,10.9h-.01s-.02,.01-.03,.01v-124.86c0-5.7,5.91-8.26,10.24-8.26h130.18Z"/></g></svg>
+          </div>
+          <div class="pagination-badge">
+            <span class="pagination-current">4</span>
+            <span class="pagination-total">8</span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- ===================================================================
+           LÁMINA 05: CASO AUDITADO FUSÓ — CONTEXTO Y ACCIONES EJECUTADAS
+           =================================================================== -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Teorías de la Administración</span>
+          <span class="running-header-right">03. Auditoría Organizacional: De FlyAds Agency a FUSÓ</span>
+        </header>
+
+        <div class="inner-body">
+          <h2 class="slide-heading">Intervención en FUSÓ: Diagnóstico y Acciones Clave</h2>
+          <p class="slide-description">
+            Agencia digital B2B con 6 especialistas operando en remoto en 4 países (Venezuela, Colombia, Argentina y Uruguay).
+          </p>
+
+          <div class="grid-orthogonal-2" style="gap: 24px 32px;">
+            <div class="card-orthogonal featured animated-border-card schema-step-1" style="min-height: 215px; padding: 26px 32px;">
+              <div>
+                <h3 class="card-orthogonal-title">1. Sistema Abierto en Dos Subsistemas</h3>
+                <p class="card-orthogonal-text">
+                  Se articuló la operación interna entre el <strong>Eje del Sabio</strong> (estrategia y análisis de datos) y el <strong>Eje del Creador</strong> (identidad y campañas), cerrando el ciclo con retroalimentación continua.
+                </p>
+              </div>
+            </div>
+
+            <div class="card-orthogonal animated-border-card schema-step-2" style="min-height: 215px; padding: 26px 32px;">
+              <div>
+                <h3 class="card-orthogonal-title">2. Reducción de Complejidad (Luhmann)</h3>
+                <p class="card-orthogonal-text">
+                  El Manual de Gobernanza fijó un <strong>SLA máximo de 12 horas</strong> de respuesta y un tono de voz horizontal, restaurando la comunicación y eliminando criterios dispares.
+                </p>
+              </div>
+            </div>
+
+            <div class="card-orthogonal animated-border-card schema-step-3" style="min-height: 215px; padding: 26px 32px;">
+              <div>
+                <h3 class="card-orthogonal-title">3. La Estructura Sigue a la Estrategia (Chandler)</h3>
+                <p class="card-orthogonal-text">
+                  Se abandonó el rol de «proveedor táctico subordinado» para convertirse en <strong>socio estratégico integral</strong>, redefiniendo Misión, Visión y 3 valores medibles.
+                </p>
+              </div>
+            </div>
+
+            <div class="card-orthogonal featured animated-border-card schema-step-4" style="min-height: 215px; padding: 26px 32px;">
+              <div>
+                <h3 class="card-orthogonal-title">4. Estructura Orgánica Flexible (Burns &amp; Stalker)</h3>
+                <p class="card-orthogonal-text">
+                  Se descartó la rigidez burocrática para consolidar una red horizontal (<strong>El Telar</strong>), capaz de reaccionar en tiempo real a los cambios del mercado digital.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="inner-footer">
+          <div class="inner-footer-logo-wrapper">
+            <svg viewBox="0 0 382.71 295.96"><g fill="currentColor"><path d="M139.64,5.44v126.58s-.02,7.06-8.51,7.06c-14.75,0-35.82,.02-50.57,.02-8.6,0-8.51-7.38-8.51-7.38V32.75c19.53-11.84,43.02-22.02,67.59-27.31Z"/><path d="M364.87,84.9H175.58c-8.87,0-8.12,5.39-8.12,17.66,0,27.02,.01,81.05,.01,81.05,0,6.05,.79,13.03-8.38,13.03H10.16C.13,174.48-20.41,100.87,57.13,42.27c0,44.11-.01,132.34-.01,132.34,0,10.14,10.43,10.06,10.43,10.06l79.62-.03s9.02,.11,9.02-10.05V2.48c11.39-1.63,23.14-2.48,35.14-2.48,76.68,0,142.85,34.72,173.54,84.9Z"/><path d="M378.6,112.72H248.96l-5.94,5.93v-6.13h-14.56s-.08,180.68-.08,180.68c-11.98,1.81-24.37,2.76-37.05,2.76-76.32,0-142.23-34.32-173.1-84.12l187.35-.05c3.07,0,5.79-1.48,7.5-3.76,.02-.03,.25-.35,.26-.38,1.01-1.49,1.6-3.29,1.6-5.23,0,0-.1-48.99-.02-90.16,.01-5.17,2.93-10.82,10.71-10.82h147.81s5.16,11.28,5.16,11.28Z"/><path d="M382.71,157.56s-.65,5.97-.76,6.75h0c-2.84,20.04-10.87,38.85-23.02,55.66-.03,.03-.06,.07-.08,.12-18.43,25.42-46.29,46.22-79.94,59.58-.06,.02-.13,.04-.19,.07-.03,.01-.06,.02-.08,.03-14.14,7.07-35.85,10.81-36.31,10.9h-.01s-.02,.01-.03,.01v-124.86c0-5.7,5.91-8.26,10.24-8.26h130.18Z"/></g></svg>
+          </div>
+          <div class="pagination-badge">
+            <span class="pagination-current">5</span>
+            <span class="pagination-total">8</span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- ===================================================================
+           LÁMINA 06: CUADRO 1 DE LA AUDITORÍA — DIFERENCIACIÓN E INTEGRACIÓN
+           =================================================================== -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Teorías de la Administración</span>
+          <span class="running-header-right">04. Auditoría FUSÓ: Enfoque Contingencial (Lawrence y Lorsch, 1967)</span>
+        </header>
+
+        <div class="inner-body">
+          <h2 class="slide-heading">Auditoría FUSÓ: Diferenciación e Integración</h2>
+          <p class="slide-description">
+            Equilibrio entre la especialización de roles y la cohesión del sistema remoto distribuido en cuatro países.
+          </p>
+
+          <div class="audit-table-box animated-border-card schema-step-1">
+            <table class="audit-table">
+              <thead>
+                <tr>
+                  <th style="width: 26%;">Mecanismo Contingencial</th>
+                  <th style="width: 42%;">Aplicación en la Reestructuración de FUSÓ</th>
+                  <th style="width: 32%;">Impacto en el Talento Humano</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="audit-col-key">
+                    Diferenciación
+                    <span>Especialización de roles</span>
+                  </td>
+                  <td>
+                    Mapeo de las competencias y arquetipos funcionales de los 6 integrantes (Gobernante, Sabio, Explorador, Mago, Creador y Amante) a lo largo del eje <strong>Sabio – Creador</strong>.
+                  </td>
+                  <td>
+                    Eliminó la duplicidad de tareas y las zonas grises de autoridad en el trabajo remoto.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="audit-col-key">
+                    Integración
+                    <span>Cohesión del sistema</span>
+                  </td>
+                  <td>
+                    Creación de un lenguaje compartido mediante las metáforas operativas del <strong>Telar</strong> y el <strong>Fuselaje</strong>, respaldadas por el Manual de Tono y Protocolos.
+                  </td>
+                  <td>
+                    Alineó a seis profesionales ubicados en cuatro países distintos bajo una misma cultura colaborativa.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <footer class="inner-footer">
+          <div class="inner-footer-logo-wrapper">
+            <svg viewBox="0 0 382.71 295.96"><g fill="currentColor"><path d="M139.64,5.44v126.58s-.02,7.06-8.51,7.06c-14.75,0-35.82,.02-50.57,.02-8.6,0-8.51-7.38-8.51-7.38V32.75c19.53-11.84,43.02-22.02,67.59-27.31Z"/><path d="M364.87,84.9H175.58c-8.87,0-8.12,5.39-8.12,17.66,0,27.02,.01,81.05,.01,81.05,0,6.05,.79,13.03-8.38,13.03H10.16C.13,174.48-20.41,100.87,57.13,42.27c0,44.11-.01,132.34-.01,132.34,0,10.14,10.43,10.06,10.43,10.06l79.62-.03s9.02,.11,9.02-10.05V2.48c11.39-1.63,23.14-2.48,35.14-2.48,76.68,0,142.85,34.72,173.54,84.9Z"/><path d="M378.6,112.72H248.96l-5.94,5.93v-6.13h-14.56s-.08,180.68-.08,180.68c-11.98,1.81-24.37,2.76-37.05,2.76-76.32,0-142.23-34.32-173.1-84.12l187.35-.05c3.07,0,5.79-1.48,7.5-3.76,.02-.03,.25-.35,.26-.38,1.01-1.49,1.6-3.29,1.6-5.23,0,0-.1-48.99-.02-90.16,.01-5.17,2.93-10.82,10.71-10.82h147.81s5.16,11.28,5.16,11.28Z"/><path d="M382.71,157.56s-.65,5.97-.76,6.75h0c-2.84,20.04-10.87,38.85-23.02,55.66-.03,.03-.06,.07-.08,.12-18.43,25.42-46.29,46.22-79.94,59.58-.06,.02-.13,.04-.19,.07-.03,.01-.06,.02-.08,.03-14.14,7.07-35.85,10.81-36.31,10.9h-.01s-.02,.01-.03,.01v-124.86c0-5.7,5.91-8.26,10.24-8.26h130.18Z"/></g></svg>
+          </div>
+          <div class="pagination-badge">
+            <span class="pagination-current">6</span>
+            <span class="pagination-total">8</span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- ===================================================================
+           LÁMINA 07: CUADRO 2 DE LA AUDITORÍA — ADAPTACIÓN VUCA / BANI EN FUSÓ
+           =================================================================== -->
+      <section class="slide inner-slide">
+        <header class="running-header">
+          <span class="running-header-left">Teorías de la Administración</span>
+          <span class="running-header-right">04. Auditoría FUSÓ: Diagnóstico y Adaptación VUCA / BANI</span>
+        </header>
+
+        <div class="inner-body">
+          <h2 class="slide-heading">Auditoría FUSÓ: Matriz de Adaptación VUCA / BANI</h2>
+          <p class="slide-description" style="margin-bottom: 20px;">
+            Cruce entre las evidencias empíricas detectadas en FlyAds y los métodos de adaptación implementados en FUSÓ.
+          </p>
+
+          <div class="audit-table-box animated-border-card schema-step-1">
+            <table class="audit-table compact">
+              <thead>
+                <tr>
+                  <th style="width: 24%;">Dimensión (VUCA / BANI)</th>
+                  <th style="width: 38%;">Evidencia Empírica (FlyAds / FUSÓ)</th>
+                  <th style="width: 38%;">Método de Adaptación Implementado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="audit-col-key">
+                    Volatilidad (VUCA) / No Linealidad (BANI)
+                  </td>
+                  <td>
+                    Cambios abruptos en algoritmos de Meta y Google: una mínima variación técnica o mensaje desatendido alteraba radicalmente los resultados.
+                  </td>
+                  <td>
+                    Sustitución de la dependencia algorítmica táctica por <strong>consultoría estratégica integral de marca</strong> y fidelización de largo plazo.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="audit-col-key">
+                    Incertidumbre (VUCA) / Ansiedad (BANI)
+                  </td>
+                  <td>
+                    Contracción económica en Latinoamérica (recorte de presupuestos) y ansiedad laboral ante la automatización operativa por Inteligencia Artificial.
+                  </td>
+                  <td>
+                    Reposicionamiento del talento hacia <strong>pensamiento crítico y creativo</strong> (insustituible por IA) y <em>workshops</em> internos de alineación psicológica.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="audit-col-key">
+                    Complejidad (VUCA) / Fragilidad (BANI)
+                  </td>
+                  <td>
+                    Quiebra de agencias centradas solo en compra de medios y alta complejidad legal, horaria y cultural al operar en 4 países.
+                  </td>
+                  <td>
+                    Diseño de una red de trabajo remoto horizontal (<strong>El Telar</strong>), con protocolos asíncronos estandarizados y un <strong>SLA de 12 horas</strong>.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="audit-col-key">
+                    Ambigüedad (VUCA) / Incomprensibilidad (BANI)
+                  </td>
+                  <td>
+                    Confusión nominal de <em>FlyAds</em> con softwares automatizados homónimos y saturación de información en el mercado de <em>freelancers</em>.
+                  </td>
+                  <td>
+                    Renombramiento estratégico hacia <strong>FUSÓ («Juntos como uno»)</strong>, eliminación de tipografías autoritarias y propuesta de valor nítida.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <footer class="inner-footer">
+          <div class="inner-footer-logo-wrapper">
+            <svg viewBox="0 0 382.71 295.96"><g fill="currentColor"><path d="M139.64,5.44v126.58s-.02,7.06-8.51,7.06c-14.75,0-35.82,.02-50.57,.02-8.6,0-8.51-7.38-8.51-7.38V32.75c19.53-11.84,43.02-22.02,67.59-27.31Z"/><path d="M364.87,84.9H175.58c-8.87,0-8.12,5.39-8.12,17.66,0,27.02,.01,81.05,.01,81.05,0,6.05,.79,13.03-8.38,13.03H10.16C.13,174.48-20.41,100.87,57.13,42.27c0,44.11-.01,132.34-.01,132.34,0,10.14,10.43,10.06,10.43,10.06l79.62-.03s9.02,.11,9.02-10.05V2.48c11.39-1.63,23.14-2.48,35.14-2.48,76.68,0,142.85,34.72,173.54,84.9Z"/><path d="M378.6,112.72H248.96l-5.94,5.93v-6.13h-14.56s-.08,180.68-.08,180.68c-11.98,1.81-24.37,2.76-37.05,2.76-76.32,0-142.23-34.32-173.1-84.12l187.35-.05c3.07,0,5.79-1.48,7.5-3.76,.02-.03,.25-.35,.26-.38,1.01-1.49,1.6-3.29,1.6-5.23,0,0-.1-48.99-.02-90.16,.01-5.17,2.93-10.82,10.71-10.82h147.81s5.16,11.28,5.16,11.28Z"/><path d="M382.71,157.56s-.65,5.97-.76,6.75h0c-2.84,20.04-10.87,38.85-23.02,55.66-.03,.03-.06,.07-.08,.12-18.43,25.42-46.29,46.22-79.94,59.58-.06,.02-.13,.04-.19,.07-.03,.01-.06,.02-.08,.03-14.14,7.07-35.85,10.81-36.31,10.9h-.01s-.02,.01-.03,.01v-124.86c0-5.7,5.91-8.26,10.24-8.26h130.18Z"/></g></svg>
+          </div>
+          <div class="pagination-badge">
+            <span class="pagination-current">7</span>
+            <span class="pagination-total">8</span>
+          </div>
+        </footer>
+      </section>
+
+      <!-- ===================================================================
+           LÁMINA 08: CIERRE MAGISTRAL — LUDWIG VON BERTALANFFY Y SÍNTESIS
+           =================================================================== -->
+      <section class="slide closing-slide-blue">
+        <header class="running-header">
+          <span class="running-header-left">Teorías de la Administración</span>
+          <span class="running-header-right">05. Síntesis y Conclusión Gerencial</span>
+        </header>
+
+        <div class="inner-body">
+          <div class="closing-direct-maxim">
+            <p class="closing-quote-statement" style="font-size: 42px; margin-bottom: 20px;">
+              «Un sistema es <strong>mucho más que la suma de sus partes</strong>; su verdadero desempeño surge de las interrelaciones dinámicas que enlazan a sus elementos con el entorno».
             </p>
-          </div>
 
-          <div class="cover-credits-grid">
-            <div class="credit-box">
-              <h4>Facilitador / Cátedra</h4>
-              <p>Cátedra de Teorías Administrativas</p>
-              <small>Postgrado UNESR</small>
+            <div class="closing-quote-citation" style="margin-bottom: 44px; padding-top: 18px;">
+              <strong>LUDWIG VON BERTALANFFY (1976)</strong>
+              <span>Teoría general de los sistemas: Fundamentos, desarrollo, aplicaciones</span>
             </div>
-            <div class="credit-box">
-              <h4>Participante</h4>
-              <p>Julio Vera</p>
-              <small>C.I: V-26.889.534</small>
-            </div>
-            <div class="credit-box">
-              <h4>Lugar y Fecha</h4>
-              <p>Biruaca, Noviembre 2026</p>
-              <small>Estado Apure, Venezuela</small>
-            </div>
-          </div>
-        </div>
 
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill" id="slide-progress" style="background: #059669;"></div>
-        </div>
-      </section>
-
-      <!-- SLIDE 2: INTRODUCCIÓN Y LÍNEA DE TIEMPO -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
-              <p>Teorías de la Administración — Módulo 1</p>
-            </div>
-          </div>
-          <div class="slide-context-badge">
-            <span class="badge" style="color: #059669;">01. Panorama Histórico</span>
-          </div>
-        </div>
-
-        <div class="slide-body">
-          <h2 class="slide-title">La Génesis del Pensamiento Administrativo</h2>
-          <p class="slide-lead">
-            La administración surge como respuesta científica a las transformaciones de la Revolución Industrial y las necesidades de coordinación productiva.
-          </p>
-
-          <div class="content-grid-2">
-            <div class="concept-card">
-              <div class="concept-icon" style="background: rgba(5, 150, 105, 0.12); color: #059669;"><i data-lucide="cog"></i></div>
-              <h4>El Desafío de la Productividad</h4>
-              <p>
-                La transición de los talleres artesanales a las grandes fábricas exigió formalizar métodos de trabajo, racionalizar tareas y estructurar jerarquías de mando.
-              </p>
-            </div>
-            <div class="concept-card">
-              <div class="concept-icon" style="background: rgba(5, 150, 105, 0.12); color: #059669;"><i data-lucide="git-merge"></i></div>
-              <h4>Evolución Multidimensional</h4>
-              <p>
-                Cada escuela administrativa no anula por completo a la anterior, sino que expande el enfoque: desde las tareas y la estructura, hacia las personas, el entorno y la tecnología.
+            <div class="closing-outline-box animated-border-card">
+              <p style="font-size: 29px; font-weight: 500; line-height: 1.45; color: #ffffff; letter-spacing: -0.01em;">
+                La reestructuración hacia <strong style="color: #bfdbfe; font-weight: 700;">FUSÓ</strong> demostró que la crisis inicial no era comercial ni estética, sino de diseño organizacional: inyectar <strong style="color: #bfdbfe; font-weight: 700;">neguentropía</strong> permitió transformar a seis especialistas dispersos en un <strong style="color: #bfdbfe; font-weight: 700;">colectivo orgánico altamente competitivo</strong>.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill" style="background: #059669;"></div>
-        </div>
+        <footer class="inner-footer">
+          <div class="inner-footer-logo-wrapper">
+            <svg viewBox="0 0 382.71 295.96">
+              <g fill="currentColor">
+                <path d="M139.64,5.44v126.58s-.02,7.06-8.51,7.06c-14.75,0-35.82,.02-50.57,.02-8.6,0-8.51-7.38-8.51-7.38V32.75c19.53-11.84,43.02-22.02,67.59-27.31Z"/>
+                <path d="M364.87,84.9H175.58c-8.87,0-8.12,5.39-8.12,17.66,0,27.02,.01,81.05,.01,81.05,0,6.05,.79,13.03-8.38,13.03H10.16C.13,174.48-20.41,100.87,57.13,42.27c0,44.11-.01,132.34-.01,132.34,0,10.14,10.43,10.06,10.43,10.06l79.62-.03s9.02,.11,9.02-10.05V2.48c11.39-1.63,23.14-2.48,35.14-2.48,76.68,0,142.85,34.72,173.54,84.9Z"/>
+                <path d="M378.6,112.72H248.96l-5.94,5.93v-6.13h-14.56s-.08,180.68-.08,180.68c-11.98,1.81-24.37,2.76-37.05,2.76-76.32,0-142.23-34.32-173.1-84.12l187.35-.05c3.07,0,5.79-1.48,7.5-3.76,.02-.03,.25-.35,.26-.38,1.01-1.49,1.6-3.29,1.6-5.23,0,0-.1-48.99-.02-90.16,.01-5.17,2.93-10.82,10.71-10.82h147.81s5.16,11.28,5.16,11.28Z"/>
+                <path d="M382.71,157.56s-.65,5.97-.76,6.75h0c-2.84,20.04-10.87,38.85-23.02,55.66-.03,.03-.06,.07-.08,.12-18.43,25.42-46.29,46.22-79.94,59.58-.06,.02-.13,.04-.19,.07-.03,.01-.06,.02-.08,.03-14.14,7.07-35.85,10.81-36.31,10.9h-.01s-.02,.01-.03,.01v-124.86c0-5.7,5.91-8.26,10.24-8.26h130.18Z"/>
+              </g>
+            </svg>
+          </div>
+          <div class="pagination-badge">
+            <span class="pagination-current">8</span>
+            <span class="pagination-total">8</span>
+          </div>
+        </footer>
       </section>
 
-      <!-- SLIDE 3: ESCUELAS CLÁSICAS -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
-              <p>Teorías de la Administración — Enfoque Clásico</p>
-            </div>
-          </div>
-          <div class="slide-context-badge">
-            <span class="badge" style="color: #059669;">02. Enfoque Clásico</span>
-          </div>
-        </div>
-
-        <div class="slide-body">
-          <h2 class="slide-title">Taylorismo y Fayolismo: Fundamentos</h2>
-          <p class="slide-lead">
-            Los dos pilares fundacionales que estructuraron la ciencia de la administración moderna a principios del siglo XX.
-          </p>
-
-          <div class="content-grid-2">
-            <div class="concept-card">
-              <h4 style="color: #059669; display: flex; align-items: center; gap: 0.5rem;">
-                <i data-lucide="wrench"></i> Frederick W. Taylor (1903)
-              </h4>
-              <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--slide-text);">
-                Administración Científica (Énfasis en las Tareas)
-              </p>
-              <ul style="margin-left: 1.25rem; font-size: 0.88rem; color: var(--slide-text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
-                <li>Estudio de tiempos y movimientos (Organización Racional del Trabajo).</li>
-                <li>División rigurosa del trabajo y especialización del operario.</li>
-                <li>Incentivos salariales por pieza producida (Homo Economicus).</li>
-                <li>Supervisión funcional y estandarización de procesos.</li>
-              </ul>
-            </div>
-
-            <div class="concept-card">
-              <h4 style="color: #059669; display: flex; align-items: center; gap: 0.5rem;">
-                <i data-lucide="building-2"></i> Henri Fayol (1916)
-              </h4>
-              <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--slide-text);">
-                Teoría Clásica (Énfasis en la Estructura Organizacional)
-              </p>
-              <ul style="margin-left: 1.25rem; font-size: 0.88rem; color: var(--slide-text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
-                <li>Funciones administrativas: Planear, Organizar, Dirigir, Coordinar y Controlar (PODCC).</li>
-                <li>14 Principios Generales (Unidad de mando, jerarquía, disciplina, orden).</li>
-                <li>Visión anatómica y fisiológica de la empresa integral.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill" style="background: #059669;"></div>
-        </div>
-      </section>
-
-      <!-- SLIDE 4: ENFOQUE HUMANISTA -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
-              <p>Teorías de la Administración — Revolución Humanista</p>
-            </div>
-          </div>
-          <div class="slide-context-badge">
-            <span class="badge" style="color: #059669;">03. Enfoque Humanista</span>
-          </div>
-        </div>
-
-        <div class="slide-body">
-          <h2 class="slide-title">La Escuela de las Relaciones Humanas</h2>
-          <p class="slide-lead">
-            El giro copernicano liderado por Elton Mayo y los experimentos de Hawthorne (1927–1932): el trabajador como ser social.
-          </p>
-
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;">
-            <div class="concept-card">
-              <div class="concept-icon" style="background: rgba(5, 150, 105, 0.12); color: #059669;"><i data-lucide="users"></i></div>
-              <h4 style="font-size: 1.05rem;">Grupos Informales</h4>
-              <p style="font-size: 0.88rem;">La productividad depende de normas sociales y de la integración grupal más que de la disposición física.</p>
-            </div>
-            <div class="concept-card">
-              <div class="concept-icon" style="background: rgba(5, 150, 105, 0.12); color: #059669;"><i data-lucide="sparkle"></i></div>
-              <h4 style="font-size: 1.05rem;">Motivación & Reconocimiento</h4>
-              <p style="font-size: 0.88rem;">El ser humano responde a necesidades de pertenencia, afecto y consideración moral, no solo al estímulo monetario.</p>
-            </div>
-            <div class="concept-card">
-              <div class="concept-icon" style="background: rgba(5, 150, 105, 0.12); color: #059669;"><i data-lucide="messages-square"></i></div>
-              <h4 style="font-size: 1.05rem;">Liderazgo & Comunicación</h4>
-              <p style="font-size: 0.88rem;">La autoridad impuesta cede el paso al liderazgo participativo, la escucha activa y la resolución dialógica de conflictos.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill" style="background: #059669;"></div>
-        </div>
-      </section>
-
-      <!-- SLIDE 5: ENFOQUE SISTÉMICO Y CONTINGENCIAL -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>UNESR • POSTGRADO GERENCIA DEL TALENTO HUMANO</h3>
-              <p>Teorías de la Administración — Paradigmas Contemporáneos</p>
-            </div>
-          </div>
-          <div class="slide-context-badge">
-            <span class="badge" style="color: #059669;">04. Complejidad</span>
-          </div>
-        </div>
-
-        <div class="slide-body">
-          <h2 class="slide-title">Teoría General de Sistemas y Contingencia</h2>
-          <p class="slide-lead">
-            Comprender la organización como un sistema abierto en interacción constante y dinámica con su entorno.
-          </p>
-
-          <div class="content-grid-2">
-            <div class="concept-card">
-              <div class="concept-icon" style="background: rgba(5, 150, 105, 0.12); color: #059669;"><i data-lucide="network"></i></div>
-              <h4>Enfoque Sistémico (Ludwig von Bertalanffy)</h4>
-              <p>
-                Las organizaciones son totalidades interconectadas (entradas, procesamiento, salidas y retroalimentación). El cambio en un subsistema impacta en toda la dinámica institucional.
-              </p>
-            </div>
-            <div class="concept-card">
-              <div class="concept-icon" style="background: rgba(5, 150, 105, 0.12); color: #059669;"><i data-lucide="compass"></i></div>
-              <h4>Teoría Contingencial (Lawrence & Lorsch)</h4>
-              <p>
-                No existe una "única mejor manera" (one best way) de administrar. El diseño organizativo y las prácticas de talento humano dependen de variables situacionales (ambiente, tecnología, tamaño).
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill" style="background: #059669;"></div>
-        </div>
-      </section>
-
-      <!-- SLIDE 6: CONCLUSIONES -->
-      <section class="slide">
-        <div class="slide-header">
-          <div class="slide-header-brand">
-            <img src="../../../Assets/Logo.svg" alt="UNESR" class="slide-logo">
-            <div class="slide-institution-meta">
-              <h3>REPÚBLICA BOLIVARIANA DE VENEZUELA</h3>
-              <p>UNIVERSIDAD NACIONAL EXPERIMENTAL SIMÓN RODRÍGUEZ</p>
-            </div>
-          </div>
-          <div class="slide-context-badge">
-            <span class="badge" style="color: #059669;">Conclusiones</span>
-          </div>
-        </div>
-
-        <div class="slide-body" style="text-align: center; max-width: 850px; margin: 0 auto;">
-          <h2 class="slide-title" style="margin-bottom: 1.5rem;">
-            Implicaciones para la Gerencia Estratégica del Talento Humano
-          </h2>
-
-          <div style="background: var(--slide-surface); border: 1px solid var(--slide-border); border-radius: 14px; padding: 1.75rem; text-align: left; margin-bottom: 2rem;">
-            <p style="font-size: 1rem; color: var(--slide-text); line-height: 1.6; margin-bottom: 1rem;">
-              El gerente del talento humano contemporáneo no descarta los aportes clásicos de la estructura y la eficiencia, pero los integra dialécticamente con el respeto irrestricto a la dignidad humana, la adaptabilidad al cambio y la responsabilidad social.
-            </p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-              <span class="badge" style="background: rgba(5, 150, 105, 0.1); color: #059669; border: 1px solid rgba(5, 150, 105, 0.2);">Estructura</span>
-              <span class="badge" style="background: rgba(5, 150, 105, 0.1); color: #059669; border: 1px solid rgba(5, 150, 105, 0.2);">Humanismo</span>
-              <span class="badge" style="background: rgba(5, 150, 105, 0.1); color: #059669; border: 1px solid rgba(5, 150, 105, 0.2);">Sistemas Dinámicos</span>
-              <span class="badge" style="background: rgba(5, 150, 105, 0.1); color: #059669; border: 1px solid rgba(5, 150, 105, 0.2);">Contingencia</span>
-            </div>
-          </div>
-
-          <div style="display: flex; justify-content: center; gap: 1rem;">
-            <a href="../../../index.html" class="ctrl-btn" style="background: #059669; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
-              <i data-lucide="home" style="width: 18px; height: 18px;"></i>
-              Volver al Catálogo Principal
-            </a>
-          </div>
-        </div>
-
-        <div class="slide-progress-track">
-          <div class="slide-progress-fill" style="background: #059669;"></div>
-        </div>
-      </section>
-
+      </div>
     </div>
   </div>
 
-  <!-- Barra de Controles Flotante -->
+  <!-- ===================================================================
+       MODAL CENTRO DE DESCARGAS (PNG ZIP / PDF & CASO OFICIAL FUSÓ)
+       =================================================================== -->
+  <div id="modal-download" class="editorial-modal-backdrop">
+    <div class="editorial-modal-window" style="max-width: 680px;">
+      <div class="editorial-modal-header">
+        <span class="editorial-modal-title">Centro de Descargas y Material Oficial</span>
+        <button class="editorial-modal-close" onclick="closeModal('modal-download')">
+          <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+        </button>
+      </div>
+      <div class="editorial-modal-body">
+        <p>
+          Selecciona el material o formato de exportación en alta resolución (1920×1080). Todas las láminas se generan con la tipografía oficial Figtree y estilo editorial ortogonal:
+        </p>
+
+        <!-- Opción 1: ZIP con 8 imágenes PNG -->
+        <div class="modal-interactive-row" style="cursor: pointer;" onclick="window.exporter.exportZip()">
+          <div>
+            <div class="modal-row-title-wrap">
+              <i data-lucide="file-archive" style="width: 20px; height: 20px; color: var(--color-primary-navy);"></i>
+              <strong>Colección PNG en archivo ZIP</strong>
+            </div>
+            <div class="modal-row-desc">
+              Descarga un archivo .zip con las 8 láminas individuales en PNG estático a 1920×1080.
+            </div>
+          </div>
+          <button id="btn-export-zip" class="btn-orthogonal-primary" onclick="event.stopPropagation(); window.exporter.exportZip();">
+            Descargar ZIP
+          </button>
+        </div>
+
+        <!-- Opción 2: Documento PDF Directo -->
+        <div class="modal-interactive-row" style="cursor: pointer;" onclick="window.exporter.exportPdf()">
+          <div>
+            <div class="modal-row-title-wrap">
+              <i data-lucide="file-text" style="width: 20px; height: 20px; color: var(--color-primary-navy);"></i>
+              <strong>Documento PDF de Presentación (1 Clic)</strong>
+            </div>
+            <div class="modal-row-desc">
+              Compila y descarga automáticamente un documento PDF horizontal de 8 páginas en formato 16:9.
+            </div>
+          </div>
+          <button id="btn-export-pdf" class="btn-orthogonal-primary" onclick="event.stopPropagation(); window.exporter.exportPdf();">
+            Descargar PDF
+          </button>
+        </div>
+
+        <!-- Opción 3: Imprimir / Guardar PDF Vectorial Nativo -->
+        <div class="modal-interactive-row" style="cursor: pointer;" onclick="window.exporter.printNative()">
+          <div>
+            <div class="modal-row-title-wrap">
+              <i data-lucide="printer" style="width: 20px; height: 20px; color: var(--color-primary-navy);"></i>
+              <strong>Imprimir / Guardar PDF Vectorial Nativo</strong>
+            </div>
+            <div class="modal-row-desc">
+              Abre el diálogo nativo del navegador con maquetación 16:9 exacta para texto y vectores 100% nítidos.
+            </div>
+          </div>
+          <button class="btn-orthogonal-primary" onclick="event.stopPropagation(); window.exporter.printNative();">
+            Imprimir
+          </button>
+        </div>
+
+        <!-- Opción 4: Análisis de Caso Oficial (PDF) -->
+        <div class="modal-interactive-row" style="cursor: pointer;" onclick="window.open('../../../Ensayos/Teorias-de-la-Administracion/Slides-1/caso-fuso.pdf', '_blank')">
+          <div>
+            <div class="modal-row-title-wrap">
+              <i data-lucide="book-open" style="width: 20px; height: 20px; color: var(--color-primary-navy);"></i>
+              <strong>Análisis de Caso Oficial — Caso FUSÓ (PDF)</strong>
+            </div>
+            <div class="modal-row-desc">
+              Descarga directa del informe sistemático completo (7 páginas) con tablas de auditoría y referencias bibliográficas.
+            </div>
+          </div>
+          <a href="../../../Ensayos/Teorias-de-la-Administracion/Slides-1/caso-fuso.pdf" download="Analisis-Caso-FUSO-Julio-Vera-Mabri-Herrera.pdf" class="btn-orthogonal-primary" style="text-decoration: none;" onclick="event.stopPropagation();">
+            Descargar PDF
+          </a>
+        </div>
+
+        <!-- Barra de Progreso de Exportación -->
+        <div id="export-progress-box" style="display: none; margin-top: 1rem; padding: 1rem; border: 1px solid var(--color-border-subtle); border-radius: 5px; background: #f8fafc;">
+          <div id="export-progress-text" style="font-size: 0.88rem; font-weight: 700; color: var(--color-primary-navy); margin-bottom: 8px;">
+            Iniciando exportación...
+          </div>
+          <div style="height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+            <div id="export-progress-bar" style="width: 0%; height: 100%; background: var(--color-primary-navy); transition: width 0.2s ease;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="editorial-modal-footer">
+        <span>Resolución canónica 1920×1080 • Método VERA</span>
+        <button class="btn-orthogonal-primary" onclick="closeModal('modal-download')">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra de Controles (Discreta y Minimalista) -->
   <nav class="presentation-controls">
-    <a href="../../../index.html" class="ctrl-btn" title="Volver al Hub de Presentaciones">
-      <i data-lucide="arrow-left"></i>
+    <a href="../../../index.html" class="ctrl-btn" title="Volver al Catálogo">
+      <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
     </a>
     <div class="ctrl-separator"></div>
 
-    <button id="prev-slide" class="ctrl-btn" title="Anterior">
-      <i data-lucide="chevron-left"></i>
+    <button id="prev-slide" class="ctrl-btn" title="Anterior (← / Espacio)">
+      <i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i>
     </button>
-    <div class="slide-counter-badge" id="slide-counter">1 / 6</div>
-    <button id="next-slide" class="ctrl-btn" title="Siguiente">
-      <i data-lucide="chevron-right"></i>
+    <button id="next-slide" class="ctrl-btn" title="Siguiente (→ / Espacio)">
+      <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i>
     </button>
 
     <div class="ctrl-separator"></div>
 
-    <button id="toggle-overview" class="ctrl-btn" title="Vista de Mosaico (O / Esc)">
-      <i data-lucide="grid"></i>
+    <button id="open-download-btn" class="ctrl-btn" title="Descargas y Material (PNG ZIP / PDF / Caso FUSÓ)" onclick="openModal('modal-download')">
+      <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+    </button>
+    <button id="toggle-rotate" class="ctrl-btn" title="Girar 16:9 (Móvil)">
+      <i data-lucide="rotate-cw" style="width: 16px; height: 16px;"></i>
     </button>
     <button id="toggle-fullscreen" class="ctrl-btn" title="Pantalla Completa (F)">
-      <i data-lucide="maximize"></i>
-    </button>
-    <button id="toggle-help" class="ctrl-btn" title="Atajos de Teclado (?)">
-      <i data-lucide="help-circle"></i>
+      <i data-lucide="maximize" style="width: 16px; height: 16px;"></i>
     </button>
   </nav>
 
-  <!-- Modal de Atajos de Teclado -->
-  <div id="help-modal" class="slide-modal hidden">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Atajos de Teclado</h3>
-        <button class="modal-close-btn" onclick="engine.toggleHelp(false)">&times;</button>
-      </div>
-      <table class="shortcuts-table">
-        <tr>
-          <td><kbd>&rarr;</kbd> / <kbd>Espacio</kbd> / <kbd>AvPág</kbd></td>
-          <td>Avanzar a la siguiente diapositiva</td>
-        </tr>
-        <tr>
-          <td><kbd>&larr;</kbd> / <kbd>RePág</kbd></td>
-          <td>Retroceder a la diapositiva anterior</td>
-        </tr>
-        <tr>
-          <td><kbd>Home</kbd> / <kbd>End</kbd></td>
-          <td>Ir a la primera / última diapositiva</td>
-        </tr>
-        <tr>
-          <td><kbd>F</kbd></td>
-          <td>Alternar pantalla completa</td>
-        </tr>
-        <tr>
-          <td><kbd>O</kbd> / <kbd>Esc</kbd></td>
-          <td>Alternar vista de cuadrícula (resumen)</td>
-        </tr>
-        <tr>
-          <td><kbd>?</kbd></td>
-          <td>Abrir / cerrar esta ayuda</td>
-        </tr>
-      </table>
-    </div>
+  <!-- Píldora de Giro para Móvil (Opcional en Vertical) -->
+  <div id="mobile-rotate-pill" class="mobile-rotate-pill" onclick="window.engine.toggleMobileRotate()">
+    <i data-lucide="smartphone" style="width: 16px; height: 16px;"></i>
+    <span>Ver en 16:9 Completo</span>
   </div>
 
-  <!-- Modal de Vista Resumen (Overview) -->
-  <div id="overview-grid" class="slide-modal hidden">
-    <div class="modal-content" style="max-width: 900px;">
-      <div class="modal-header">
-        <h3 class="modal-title">Navegación de Diapositivas</h3>
-        <button class="modal-close-btn" onclick="engine.toggleOverview(false)">&times;</button>
-      </div>
-      <div class="overview-grid-layout" id="overview-grid-content"></div>
-    </div>
-  </div>
+  <!-- Librerías de Exportación Estática (PNG ZIP & PDF) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-  <!-- Scripts -->
-  <script src="../../../Assets/js/slide-engine.js"></script>
+  <!-- Sistema Gráfico Canónico VERA y Motor de Diapositivas -->
+  <script src="../../../Assets/js/vera-background.js?v=11"></script>
+  <script src="../../../Assets/js/slide-engine.js?v=11"></script>
   <script>
-    let engine;
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      engine = new SlideEngine({ container: '#slides-container' });
+
+      // Inicializar Sistema Gráfico Generativo Canónico VERA
+      window.veraBg = new VeraBackgroundEngine({
+        container: '#vera-ambient-container',
+        viewWidth: 1920,
+        viewHeight: 1080,
+        isDark: true // Slide 1 inicia en portada azul institucional
+      });
+
+      // Inicializar Motor de Diapositivas
+      window.engine = new SlideEngine({
+        container: '#slides-container',
+        scaler: '#slide-stage-scaler'
+      });
+
+      // Inicializar Exportador de Diapositivas Estáticas
+      window.exporter = new SlideExporter(window.engine);
     });
   </script>
 </body>

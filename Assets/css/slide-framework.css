@@ -1077,7 +1077,9 @@ body.export-mode .schema-step-5 {
 .slide.active .orthogonal-box:has(> .trimpath-border-svg),
 .slide.active .stat-orthogonal-card:has(> .trimpath-border-svg),
 .slide.active .funnel-container:has(> .trimpath-border-svg),
-.slide.active .closing-outline-box:has(> .trimpath-border-svg) {
+.slide.active .closing-outline-box:has(> .trimpath-border-svg),
+.slide.active .acronym-card:has(> .trimpath-border-svg),
+.slide.active .audit-table-box:has(> .trimpath-border-svg) {
   border-color: transparent !important;
 }
 
@@ -1414,6 +1416,163 @@ body.export-mode .animated-border-card {
   margin-bottom: 0;
   font-weight: 800;
   color: var(--color-primary-navy);
+}
+
+/* ==========================================================================
+   SISTEMAS VUCA / BANI (TARJETAS DE SIGLAS) Y TABLAS DE AUDITORÍA ORTOGONALES
+   ========================================================================== */
+.acronym-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 36px;
+  width: 100%;
+}
+
+.acronym-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid var(--color-primary-navy);
+  border-radius: 5px;
+  padding: 28px 34px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  box-shadow: 0 4px 18px rgba(15, 46, 90, 0.04);
+  min-height: 205px;
+}
+
+.acronym-letter-badge {
+  width: 72px;
+  height: 72px;
+  background: var(--color-primary-navy);
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 38px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+
+.acronym-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.acronym-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--color-primary-navy);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.acronym-title em {
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--color-text-light);
+  font-style: italic;
+}
+
+.acronym-desc {
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.grid-orthogonal-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+.grid-orthogonal-3 .card-orthogonal {
+  min-height: 310px;
+  padding: 30px 32px;
+}
+
+/* Tablas Editoriales Ortogonales de Auditoría */
+.audit-table-box {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--color-primary-navy);
+  border-radius: 5px;
+  overflow: visible;
+  box-shadow: 0 4px 18px rgba(15, 46, 90, 0.04);
+}
+
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.audit-table thead th {
+  background: var(--color-primary-navy);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 18px 24px;
+  text-align: left;
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.audit-table thead th:last-child {
+  border-right: none;
+}
+
+.audit-table tbody td {
+  padding: 20px 24px;
+  font-size: 18px;
+  line-height: 1.48;
+  color: var(--color-text-muted);
+  border-top: 1px solid #cbd5e1;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+.audit-table tbody td:last-child {
+  border-right: none;
+}
+
+.audit-table tbody td.audit-col-key {
+  font-weight: 700;
+  color: var(--color-primary-navy);
+  font-size: 19px;
+}
+
+.audit-table tbody td.audit-col-key span {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-light);
+  margin-top: 4px;
+}
+
+.audit-table.compact tbody td {
+  padding: 14px 20px;
+  font-size: 16.5px;
+  line-height: 1.42;
+}
+
+.audit-table.compact tbody td.audit-col-key {
+  font-size: 17.5px;
+}
+
+.audit-table.compact thead th {
+  padding: 14px 20px;
+  font-size: 15px;
 }
 
 /* ==========================================================================

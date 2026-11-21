@@ -26,25 +26,26 @@ const PRESENTATIONS = [
     summary: "Análisis crítico sobre la nostalgia laboral, el reduccionismo técnico y los dilemas algorítmicos (ATS, BPE, Bossware) en la gestión moderna del talento humano."
   },
   {
-    id: "teorias-administracion-slides-1",
-    title: "Teorías de la Administración: Fundamentos y Evolución",
-    subtitle: "De la administración clásica al enfoque sistémico y contingencial",
+    id: "teorias-administracion-caso-fuso",
+    title: "Análisis de Caso Sistemático: Caso FUSÓ",
+    subtitle: "Reestructuración organizacional y adaptación contingencial en entornos VUCA/BANI",
     subject: "Teorías de la Administración",
     degree: "Maestría en Ciencias Administrativas: Gerencia del Talento Humano",
-    institution: "UNESR — Decanato de Postgrado y Educación Avanzada",
-    author: "Julio Vera",
-    idNumber: "V-26.889.534",
-    facilitator: "Cátedra de Administración",
+    institution: "UNESR — Decanato de Postgrado y Educación Avanzada (Núcleo Apure)",
+    author: "Julio Vera & Mabri Herrera",
+    idNumber: "V-26.889.534 / V-14.694.959",
+    facilitator: "Dra. Maira Ruíz",
     date: "Noviembre 2026",
     location: "Biruaca, Venezuela",
-    tags: ["Administración Clásica", "Taylor & Fayol", "Enfoque Humanista", "Sistemas"],
+    tags: ["VUCA", "BANI", "Entropía", "Neguentropía", "Bertalanffy", "Caso FUSÓ", "Contingencia"],
     url: "Proyectos/Teorias-de-la-Administracion/Slides-1/index.html",
-    pdfUrl: null,
-    slidesCount: 6,
+    pdfUrl: "Ensayos/Teorias-de-la-Administracion/Slides-1/caso-fuso.pdf",
+    essayUrl: "Ensayos/Teorias-de-la-Administracion/Slides-1/caso-fuso.pdf",
+    slidesCount: 8,
     status: "Disponible",
-    featured: false,
-    accentColor: "#059669",
-    summary: "Recorrido dinámico por las principales escuelas del pensamiento administrativo, destacando sus aportes a la comprensión moderna de las organizaciones."
+    featured: true,
+    accentColor: "#0f2e5a",
+    summary: "Auditoría organizacional y reestructuración de FlyAds Agency hacia FUSÓ bajo la Teoría General de Sistemas, el Enfoque Contingencial y el cruce de entornos VUCA/BANI."
   }
 ];
 

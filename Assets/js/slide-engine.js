@@ -346,7 +346,9 @@ class SlideEngine {
       '.orthogonal-box',
       '.stat-orthogonal-card',
       '.funnel-container',
-      '.closing-outline-box'
+      '.closing-outline-box',
+      '.acronym-card',
+      '.audit-table-box'
     ];
     const boxes = slide.querySelectorAll(selectors.join(', '));
     boxes.forEach((box, idx) => {
@@ -871,9 +873,10 @@ class SlideExporter {
       if (progressText) progressText.textContent = 'Comprimiendo archivo ZIP de alta resolución...';
       const content = await zip.generateAsync({ type: 'blob' });
 
+      const baseName = (document.title || 'Presentacion').split('|')[0].trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '') || 'Presentacion';
       const link = document.createElement('a');
       link.href = URL.createObjectURL(content);
-      link.download = 'Diapositivas-Etica-Julio-Vera.zip';
+      link.download = `Diapositivas-${baseName}.zip`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -946,7 +949,8 @@ class SlideExporter {
       }
 
       if (progressText) progressText.textContent = 'Guardando documento PDF en resolución 16:9...';
-      pdf.save('Diapositivas-Etica-Julio-Vera.pdf');
+      const baseName = (document.title || 'Presentacion').split('|')[0].trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '') || 'Presentacion';
+      pdf.save(`Diapositivas-${baseName}.pdf`);
 
       if (progressText) progressText.textContent = '¡Documento PDF descargado!';
       setTimeout(() => {
